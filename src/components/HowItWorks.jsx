@@ -76,7 +76,7 @@ const HowItWorks = () => {
     return (
         <section className="how-it-works" id="how-it-works" ref={sectionRef}>
             <div className="container">
-                <div className="how-it-works__head fade-up">
+                <div className="how-it-works__head">
                     <span className="label">Process</span>
                     <h2 className="section-title">How it works</h2>
                     <p className="section-sub">From upload to withdrawal in four simple steps.</p>

@@ -61,33 +61,30 @@ const FeatureBlock = ({ feature, index }) => {
         const el = blockRef.current;
         if (!el) return;
 
-        // Refresh ScrollTrigger to ensure correct offsets
-        ScrollTrigger.refresh();
-
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: el,
-                start: 'top 80%',
+                start: 'top 85%',
                 toggleActions: 'play none none none',
                 once: true
             },
         });
 
         tl.fromTo(mediaRef.current,
-            { opacity: 0, x: feature.flip ? 60 : -60, scale: 0.95 },
-            { opacity: 1, x: 0, scale: 1, duration: 1, ease: 'power4.out' }
+            { opacity: 0, x: feature.flip ? 40 : -40, scale: 0.98 },
+            { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: 'power3.out' }
         ).fromTo(textRef.current,
-            { opacity: 0, x: feature.flip ? -60 : 60 },
-            { opacity: 1, x: 0, duration: 1, ease: 'power4.out' },
-            '-=0.8'
-        ).fromTo(el.querySelectorAll('.feat-bullet'),
-            { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out' },
+            { opacity: 0, x: feature.flip ? -40 : 40 },
+            { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' },
             '-=0.6'
-        ).fromTo(el.querySelectorAll('.feat-widget'),
-            { opacity: 0, scale: 0.8 },
-            { opacity: 1, scale: 1, stagger: 0.2, duration: 0.7, ease: 'back.out(1.7)' },
+        ).fromTo(el.querySelectorAll('.feat-bullet'),
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, stagger: 0.08, duration: 0.5, ease: 'power2.out' },
             '-=0.4'
+        ).fromTo(el.querySelectorAll('.feat-widget'),
+            { opacity: 0, scale: 0.85 },
+            { opacity: 1, scale: 1, stagger: 0.15, duration: 0.6, ease: 'back.out(1.5)' },
+            '-=0.3'
         );
 
         return () => tl.kill();
@@ -100,7 +97,6 @@ const FeatureBlock = ({ feature, index }) => {
             id={`feature-${feature.id}`}
         >
             <div className="container feat-block__inner">
-                {/* Media */}
                 <div className="feat-block__media" ref={mediaRef}>
                     <div className="feat-block__video-container">
                         <div className="feat-block__video-wrapper card">
@@ -109,11 +105,8 @@ const FeatureBlock = ({ feature, index }) => {
                                 autoPlay muted loop playsInline
                                 className="feat-block__video"
                             />
-                            {/* Overlay Vignette for premium feel */}
                             <div className="feat-block__video-overlay" />
                         </div>
-
-                        {/* Floating Widgets */}
                         {feature.widgets.map((w, i) => (
                             <div
                                 key={i}
@@ -130,7 +123,6 @@ const FeatureBlock = ({ feature, index }) => {
                     </div>
                 </div>
 
-                {/* Text */}
                 <div className="feat-block__text" ref={textRef}>
                     <div className="feat-block__label-wrap">
                         <span className="label-icon">{feature.icon}</span>
@@ -147,8 +139,7 @@ const FeatureBlock = ({ feature, index }) => {
                         ))}
                     </ul>
                     <a href="#download" className="btn-secondary feat-block__cta" id={`feat-cta-${feature.id}`}>
-                        Get Started Free
-                        <Sparkles size={14} />
+                        Get Started Free <Sparkles size={14} />
                     </a>
                 </div>
             </div>
@@ -173,11 +164,11 @@ const Features = () => {
     useEffect(() => {
         if (!catRef.current) return;
         const tl = gsap.timeline({
-            scrollTrigger: { trigger: catRef.current, start: 'top 85%' },
+            scrollTrigger: { trigger: catRef.current, start: 'top 92%' },
         });
         tl.fromTo(catRef.current.querySelectorAll('.cat-chip'),
-            { opacity: 0, y: 20, scale: 0.95 },
-            { opacity: 1, y: 0, scale: 1, stagger: 0.05, duration: 0.6, ease: 'power2.out' }
+            { opacity: 0, y: 15, scale: 0.98 },
+            { opacity: 1, y: 0, scale: 1, stagger: 0.04, duration: 0.6, ease: 'power2.out' }
         );
         return () => tl.kill();
     }, []);

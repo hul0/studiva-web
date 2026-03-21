@@ -51,15 +51,12 @@ const Testimonials = () => {
         const el = gridRef.current;
         if (!el) return;
         const tl = gsap.timeline({
-            scrollTrigger: { trigger: el, start: 'top 78%', toggleActions: 'play none none none' },
+            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
         });
-        tl.from(el.querySelectorAll('.tcard'), {
-            opacity: 0,
-            y: 36,
-            stagger: 0.1,
-            duration: 0.65,
-            ease: 'power3.out',
-        });
+        tl.fromTo(el.querySelectorAll('.tcard'),
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, stagger: 0.08, duration: 0.7, ease: 'power3.out' }
+        );
         return () => tl.kill();
     }, []);
 

@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding: 140px 0 80px;
+    padding: 80px 0;
     perspective: 1000px;
     overflow: hidden;
 }
