@@ -11,27 +11,29 @@ import CreatorEconomy from './components/CreatorEconomy';
 import Testimonials from './components/Testimonials';
 import Comparison from './components/Comparison';
 import FAQ from './components/FAQ';
-import FinalCTA, { Footer } from './components/FinalCTA';
+import FinalCTA from './components/FinalCTA';
+import Footer from './components/Footer';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
-    // Force a scroll trigger refresh when everything is mounted
-    setTimeout(() => {
+    // Delay refresh to ensure all dynamic heights are calculated
+    const timer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 100);
+    }, 1000);
 
     const handleResize = () => ScrollTrigger.refresh();
     window.addEventListener('resize', handleResize);
 
-    // Smooth scroll native (just refreshing triggers)
+    // Ensure ScrollTrigger updates on native scroll
     window.addEventListener('scroll', () => {
       ScrollTrigger.update();
     }, { passive: true });
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('resize', handleResize);
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
@@ -39,7 +41,7 @@ function App() {
 
   return (
     <>
-      {/* Noise overlay for premium texture */}
+      {/* Premium Texture Noise */}
       <div className="noise" aria-hidden="true" />
 
       <Navbar />
@@ -52,7 +54,7 @@ function App() {
         <CreatorEconomy />
         <Testimonials />
 
-        {/* Fill some more stuffs: Comparison & FAQ */}
+        {/* Support & Community additions */}
         <Comparison />
         <FAQ />
 
