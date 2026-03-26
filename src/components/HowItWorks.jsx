@@ -7,48 +7,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
     {
-        num: '01',
+        pos: 'top-left',
         title: 'Upload your notes',
-        desc: 'Scan, photograph, or export your notes as PDF. Our AI automatically categorises and tags them by subject and topic.',
-        icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="17 8 12 3 7 8" />
-                <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-        ),
+        desc: 'Quickly upload your PDFs in high resolution. Our <span class="text-gradient">advanced AI</span> instantly tags and categorizes your content for <span class="text-highlight">global reach</span> across the marketplace.',
+        image: '/images/upload.svg',
     },
     {
-        num: '02',
+        pos: 'top-right',
         title: 'Set your price',
-        desc: 'Choose free, paid, or ad-supported access. Set your own rate. No one tells you what your knowledge is worth.',
-        icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="1" x2="12" y2="23" />
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg>
-        ),
+        desc: 'Choose free, paid, or ad-supported access with <span class="text-gradient">total pricing control</span>. Monetize your expertise and set <span class="text-highlight">competitive rates</span> that reward your hard work.',
+        image: '/images/price.svg',
     },
     {
-        num: '03',
+        pos: 'bottom-left',
         title: 'Students unlock it',
-        desc: 'Learners pay directly or watch a short rewarded ad to access your notes. They choose — no forced interruptions.',
-        icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-        ),
+        desc: 'Learners pay or watch ads to access your <span class="text-gradient">exclusive notes</span>. Instantly reach a massive audience seeking <span class="text-highlight">unique insights</span> only you can provide.',
+        image: '/images/unlock.svg',
     },
     {
-        num: '04',
-        title: 'Earn & withdraw',
-        desc: 'Revenue appears in your dashboard instantly. Withdraw any amount to UPI or bank account — same day.',
-        icon: (
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-        ),
+        pos: 'bottom-right',
+        title: 'Instant Withdrawals',
+        desc: 'Revenue appears instantly in your <span class="text-gradient">dedicated dashboard</span>. Withdraw total earnings same-day directly to UPI or any bank account with <span class="text-highlight">zero hidden fees</span>.',
+        image: '/images/withdraw.svg',
     },
 ];
 
@@ -56,41 +36,81 @@ const HowItWorks = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
-        const el = sectionRef.current;
-        if (!el) return;
+        const ctx = gsap.context(() => {
+            const headerTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".how-it-works__head",
+                    start: "top 90%",
+                    toggleActions: "play none none reverse"
+                }
+            });
 
-        const tl = gsap.timeline({
-            scrollTrigger: { trigger: el, start: 'top 75%', toggleActions: 'play none none none' },
-        });
-        tl.from(el.querySelectorAll('.step-card'), {
-            opacity: 0,
-            y: 40,
-            stagger: 0.12,
-            duration: 0.65,
-            ease: 'power3.out',
-        });
+            headerTl
+                .from(".how-it-works__badge", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" })
+                .from(".how-it-works__title", { y: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.4");
 
-        return () => tl.kill();
+            // Central Core & Cross Beams
+            const coreTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".how-it-works__hub-container",
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            coreTl
+                .from(".how-it-works__core", { scale: 0, opacity: 0, duration: 1.2, ease: "elastic.out(1, 0.5)" })
+                .from(".how-it-works__core-img", { scale: 1.5, opacity: 0, duration: 1, ease: "power2.out" }, "-=0.8")
+                .from(".how-it-works__cross-line", { scaleX: 0, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power2.inOut" }, "-=1");
+
+            // Card Animations (Simultaneous from corners)
+            const triggerSettings = {
+                trigger: ".how-it-works__hub-container",
+                start: "top 70%",
+                toggleActions: "play none none reverse"
+            };
+
+            gsap.fromTo(".step-card-node--top-left", { x: -250, y: -180, opacity: 0, rotation: -10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+            gsap.fromTo(".step-card-node--top-right", { x: 250, y: -180, opacity: 0, rotation: 10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+            gsap.fromTo(".step-card-node--bottom-left", { x: -250, y: 180, opacity: 0, rotation: -10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+            gsap.fromTo(".step-card-node--bottom-right", { x: 250, y: 180, opacity: 0, rotation: 10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+
+        }, sectionRef);
+
+        return () => ctx.revert();
     }, []);
 
     return (
         <section className="how-it-works" id="how-it-works" ref={sectionRef}>
             <div className="container">
                 <div className="how-it-works__head">
-                    <span className="label">Process</span>
-                    <h2 className="section-title">How it works</h2>
-                    <p className="section-sub">From upload to withdrawal in four simple steps.</p>
+                    <span className="how-it-works__badge">The Roadmap</span>
+                    <h2 className="how-it-works__title">Simplicity<br />that scales.</h2>
                 </div>
-                <div className="how-it-works__grid">
+
+                <div className="how-it-works__hub-container">
+                    <div className="how-it-works__cross">
+                        <div className="how-it-works__cross-line" />
+                        <div className="how-it-works__cross-line how-it-works__cross-line--alt" />
+                    </div>
+
+                    <div className="how-it-works__core">
+                        <img 
+                            src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop" 
+                            alt="Marketplace Core" 
+                            className="how-it-works__core-img"
+                        />
+                    </div>
+
                     {steps.map((step, i) => (
-                        <div className="step-card card" key={i} id={`step-${i + 1}`}>
-                            <div className="step-card__num">{step.num}</div>
-                            <div className="step-card__icon">{step.icon}</div>
-                            <h3 className="step-card__title">{step.title}</h3>
-                            <p className="step-card__desc">{step.desc}</p>
-                            {i < steps.length - 1 && (
-                                <div className="step-card__connector" aria-hidden="true" />
-                            )}
+                        <div key={i} className={`step-card-node step-card-node--${step.pos}`}>
+                            <div className={`step-card-node__ill-box step-card-node__ill-box--${step.pos}`}>
+                                <img src={step.image} alt={step.title} className="step-card-node__image" />
+                            </div>
+                            <div className="step-card-node__text">
+                                <h3 className="step-card-node__title">{step.title}</h3>
+                                <p className="step-card-node__desc" dangerouslySetInnerHTML={{ __html: step.desc }} />
+                            </div>
                         </div>
                     ))}
                 </div>

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Shield, Sparkles, TrendingUp, BookOpen, Layers, CheckCircle2 } from 'lucide-react';
+import { Shield, Sparkles, TrendingUp, BookOpen, Layers, CheckCircle2, GraduationCap, School, Microscope, Book, Scale, Briefcase, Award } from 'lucide-react';
 import './Features.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -147,56 +147,60 @@ const FeatureBlock = ({ feature, index }) => {
     );
 };
 
-const categories = [
-    { name: 'JEE Mains', count: '12K+ notes' },
-    { name: 'JEE Advanced', count: '8K+ notes' },
-    { name: 'NEET UG', count: '15K+ notes' },
-    { name: 'CBSE Class 12', count: '20K+ notes' },
-    { name: 'Engineering', count: '11K+ notes' },
-    { name: 'UPSC / IAS', count: '9K+ notes' },
-    { name: 'CA Foundation', count: '6K+ notes' },
-    { name: 'Law / CLAT', count: '4K+ notes' },
+const catRow1 = [
+    { name: 'JEE Mains', count: '12K+ notes', icon: <School size={20} /> },
+    { name: 'NEET UG', count: '15K+ notes', icon: <Microscope size={20} /> },
+    { name: 'CBSE Class 12', count: '20K+ notes', icon: <Book size={20} /> },
+    { name: 'Engineering', count: '11K+ notes', icon: <GraduationCap size={20} /> },
+    { name: 'UPSC / IAS', count: '9K+ notes', icon: <Scale size={20} /> },
+    { name: 'IBDP / IGCSE', count: '5K+ notes', icon: <Award size={20} /> },
 ];
+
+const catRow2 = [
+    { name: 'JEE Advanced', count: '8K+ notes', icon: <Award size={20} /> },
+    { name: 'CA Foundation', count: '6K+ notes', icon: <Briefcase size={20} /> },
+    { name: 'Law / CLAT', count: '4K+ notes', icon: <Scale size={20} /> },
+    { name: 'SSC CGL', count: '10K+ notes', icon: <Award size={20} /> },
+    { name: 'Medical / PG', count: '7K+ notes', icon: <Microscope size={20} /> },
+    { name: 'MBA Entrance', count: '12K+ notes', icon: <GraduationCap size={20} /> },
+    { name: 'GATE / PSU', count: '9K+ notes', icon: <Award size={20} /> },
+    { name: 'Class 10', count: '18K+ notes', icon: <Book size={20} /> },
+];
+
 
 const Features = () => {
     const catRef = useRef(null);
-
-    useEffect(() => {
-        if (!catRef.current) return;
-        const tl = gsap.timeline({
-            scrollTrigger: { trigger: catRef.current, start: 'top 92%' },
-        });
-        tl.fromTo(catRef.current.querySelectorAll('.cat-chip'),
-            { opacity: 0, y: 15, scale: 0.98 },
-            { opacity: 1, y: 0, scale: 1, stagger: 0.04, duration: 0.6, ease: 'power2.out' }
-        );
-        return () => tl.kill();
-    }, []);
 
     return (
         <section id="features" className="features">
             {features.map((f, i) => <FeatureBlock key={f.id} feature={f} index={i} />)}
 
             <div className="feat-cats" ref={catRef}>
-                <div className="container">
-                    <div className="feat-cats__head">
-                        <span className="label">Ecosystem</span>
-                        <h2 className="section-title">Supporting Every Aspirant.</h2>
+                <div className="feat-cats__head container">
+                    <h2 className="feat-cats__title">Supporting Every Aspirant.</h2>
+                    <p className="feat-cats__sub">Our ever-growing ecosystem for school, competitive, and degree exams.</p>
+                </div>
+
+                <div className="feat-belt">
+                    {/* Row 1: Leftward (Unique Content) */}
+                    <div className="feat-belt__track feat-belt__track--left">
+                        {[...catRow1, ...catRow1, ...catRow1].map((c, i) => (
+                            <div key={`c1-${i}`} className="belt-chip">
+                                <span className="belt-chip__icon">{c.icon}</span>
+                                <span className="belt-chip__name">{c.name}</span>
+                                <span className="belt-chip__count">{c.count}</span>
+                            </div>
+                        ))}
                     </div>
-                    <div className="feat-cats__grid">
-                        {categories.map((c, i) => (
-                            <motion.div
-                                key={i}
-                                className="cat-chip card"
-                                id={`cat-${c.name.toLowerCase().replace(/\s+/g, '-')}`}
-                                whileHover={{ y: -4, borderColor: 'var(--accent-light)' }}
-                            >
-                                <div className="cat-chip__dot" />
-                                <div className="cat-chip__content">
-                                    <span className="cat-chip__name">{c.name}</span>
-                                    <span className="cat-chip__count">{c.count}</span>
-                                </div>
-                            </motion.div>
+
+                    {/* Row 2: Rightward (Unique Content) */}
+                    <div className="feat-belt__track feat-belt__track--right">
+                        {[...catRow2, ...catRow2, ...catRow2].map((c, i) => (
+                            <div key={`c2-${i}`} className="belt-chip">
+                                <span className="belt-chip__icon">{c.icon}</span>
+                                <span className="belt-chip__name">{c.name}</span>
+                                <span className="belt-chip__count">{c.count}</span>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -204,5 +208,6 @@ const Features = () => {
         </section>
     );
 };
+
 
 export default Features;

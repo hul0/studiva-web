@@ -1,267 +1,334 @@
 .features {
-    background: var(--bg);
-    overflow: hidden;
+  background: var(--bg);
+  overflow: hidden;
 }
 
 /* Feature Block */
 .feat-block {
-    padding: 120px 0;
-    position: relative;
+  padding: 80px 0;
+  position: relative;
 }
 
 .feat-block__inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
 }
 
 .feat-block--flip .feat-block__inner {
-    direction: rtl;
+  direction: rtl;
 }
 
-.feat-block--flip .feat-block__inner>* {
-    direction: ltr;
+.feat-block--flip .feat-block__inner > * {
+  direction: ltr;
 }
 
 /* Media & Video */
 .feat-block__media {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .feat-block__video-container {
-    position: relative;
-    padding: 20px;
+  position: relative;
+  padding: 20px;
 }
 
 .feat-block__video-wrapper {
-    aspect-ratio: 16/10;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-    background: var(--surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border-strong);
-    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+  aspect-ratio: 16/10;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
 }
 
 .feat-block__video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.9);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9);
 }
 
 .feat-block__video-overlay {
-    position: absolute;
-    inset: 0;
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }
 
 /* 🎥 Feature Widgets (The requested "Video Widgets") */
 .feat-widget {
-    position: absolute;
-    z-index: 2;
-    padding: 10px 16px;
-    background: var(--surface-2);
-    border: 1px solid var(--border-strong);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 100px;
-    pointer-events: none;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: transform 0.3s ease-out;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  position: absolute;
+  z-index: 2;
+  padding: 10px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 100px;
+  pointer-events: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.3s ease-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .feat-widget__label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--text-3);
-    font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-3);
+  font-weight: 600;
 }
 
 .feat-widget__val {
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--text-1);
-    letter-spacing: -0.2px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-1);
+  letter-spacing: -0.2px;
 }
 
 /* Text */
 .feat-block__text {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .feat-block__label-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .label-icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--surface-2);
-    border: 1px solid var(--border-strong);
-    border-radius: 8px;
-    color: var(--accent-light);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  color: var(--accent-light);
 }
 
 .label-text {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--accent-light);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-light);
 }
 
 .feat-block__title {
-    font-size: clamp(36px, 5vw, 48px);
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    color: var(--text-1);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  color: var(--text-1);
 }
 
 .feat-block__desc {
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--text-2);
-    max-width: 480px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 480px;
 }
 
 /* Bullets */
 .feat-block__bullets {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    list-style: none;
-    margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  list-style: none;
+  margin-top: 8px;
 }
 
 @media (max-width: 640px) {
-    .feat-block__bullets {
-        grid-template-columns: 1fr;
-    }
+  .feat-block__bullets {
+    grid-template-columns: 1fr;
+  }
 }
 
 .feat-bullet {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
 }
 
 .feat-bullet__icon {
-    color: var(--accent-light);
-    flex-shrink: 0;
+  color: var(--accent-light);
+  flex-shrink: 0;
 }
 
 .feat-block__cta {
-    align-self: flex-start;
-    margin-top: 12px;
+  align-self: flex-start;
+  margin-top: 12px;
 }
 
-/* Categories Section */
+/* ── 💠 ECOSYSTEM (FEAT BELT) ── */
 .feat-cats {
-    padding: 120px 0;
-    border-top: 1px solid var(--border);
+  padding: 60px 0;
+  position: relative;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  overflow: hidden;
 }
+
 
 .feat-cats__head {
-    margin-bottom: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  margin-bottom: 48px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
-.feat-cats__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+.feat-cats__title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  color: var(--text-1);
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+
+.feat-cats__sub {
+  font-size: 16px;
+  color: var(--text-3);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 🎢 Continuous Belt System */
+.feat-belt {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  padding: 20px 0;
+}
+
+/* Faded edge masking */
+.feat-belt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--bg),
+    transparent 15%,
+    transparent 85%,
+    var(--bg)
+  );
+}
+
+
+.feat-belt__track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Variable speed animations */
+.feat-belt__track--left {
+  animation: beltScrollLeft 60s linear infinite;
+}
+
+.feat-belt__track--right {
+  animation: beltScrollRight 80s linear infinite;
+}
+
+@keyframes beltScrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); }
+}
+
+@keyframes beltScrollRight {
+  0% { transform: translateX(-33.33%); }
+  100% { transform: translateX(0); }
+}
+
+/* 💎 Belt Chips (Refined, small, glassmorphic) */
+.belt-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+
+.belt-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.belt-chip__icon {
+  color: var(--accent-light);
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.belt-chip__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-1);
+  letter-spacing: -0.3px;
+}
+
+.belt-chip__count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
 }
 
 @media (max-width: 1024px) {
-    .feat-cats__grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .feat-block__inner {
-        grid-template-columns: 1fr;
-        gap: 60px;
-    }
-
-    .feat-block--flip .feat-block__inner {
-        direction: ltr;
-    }
-
-    .feat-block__media {
-        order: -1;
-    }
+  .feat-block__inner {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .feat-block--flip .feat-block__inner {
+    direction: ltr;
+  }
+  .feat-block__media {
+    order: -1;
+  }
 }
 
 @media (max-width: 640px) {
-    .feat-cats__grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.cat-chip {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 24px;
-    border-radius: 16px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    transition: transform 0.2s, border-color 0.2s, background 0.2s;
-}
-
-.cat-chip:hover {
-    background: var(--surface-3);
-    transform: translateY(-4px);
-}
-
-.cat-chip__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-light);
-    flex-shrink: 0;
-}
-
-.cat-chip__content {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.cat-chip__name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-1);
-    letter-spacing: -0.3px;
-}
-
-.cat-chip__count {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-3);
+  .feat-cats {
+    padding: 60px 0;
+  }
+  .feat-cats__title {
+    font-size: 28px;
+  }
+  .feat-cats__sub {
+    font-size: 14px;
+  }
+  .belt-chip {
+    padding: 10px 16px;
+  }
 }

@@ -36,9 +36,9 @@ const Navbar = () => {
                     }}
                 >
                     <div className="nav__logo-icon">
-                        <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
-                            <rect width="28" height="28" rx="7" fill="var(--accent)" />
-                            <path d="M7 9h14M7 14h9M7 19h12" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 2v20M2 12h20" className="opacity-40" />
+                            <path d="M7 7l10 10M17 7L7 17" />
                         </svg>
                     </div>
                     <span>Studiva</span>
@@ -54,7 +54,7 @@ const Navbar = () => {
                             id={`nav-link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                         >
                             <span className="nav__link-icon">{link.icon}</span>
-                            {link.label}
+                            <span>{link.label}</span>
                         </a>
                     ))}
                 </div>
@@ -62,7 +62,7 @@ const Navbar = () => {
                 {/* Actions */}
                 <div className="nav__actions">
                     <a href="#download" className="btn-primary" id="nav-cta-download">
-                        Get the App
+                        Get App
                         <ArrowRight size={14} />
                     </a>
                     <button
@@ -70,14 +70,14 @@ const Navbar = () => {
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle menu"
                     >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
             </div>
 
             {/* Mobile Menu */}
             <div className={`nav__mobile-menu ${isOpen ? 'is-open' : ''}`}>
-                <div className="container">
+                <div className="nav__mobile-inner">
                     {links.map((link) => (
                         <a
                             key={link.label}
@@ -85,14 +85,21 @@ const Navbar = () => {
                             onClick={() => setIsOpen(false)}
                             className="nav__mobile-link"
                         >
-                            {link.label}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                {link.icon}
+                                {link.label}
+                            </div>
+                            <ArrowRight size={14} style={{ opacity: 0.3 }} />
                         </a>
                     ))}
-                    <a href="#download" className="btn-primary" style={{ width: '100%', marginTop: '20px' }}>
-                        Download Studiva
-                    </a>
+                    <div style={{ padding: '8px 4px 0' }}>
+                        <a href="#download" className="btn-primary" style={{ display: 'flex', width: '100%', justifyContent: 'center', height: '48px', alignItems: 'center' }}>
+                            Join 200,000+ Learners
+                        </a>
+                    </div>
                 </div>
             </div>
+
         </nav>
     );
 };

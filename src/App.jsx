@@ -3,7 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Navbar from './components/Navbar';
+import Lenis from '@studio-freight/lenis';
 import Hero from './components/Hero';
+
 import Marquee from './components/Marquee';
 import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
@@ -27,6 +29,26 @@ function App() {
   const [path, setPath] = useState(window.location.pathname);
 
   useEffect(() => {
+    // Initialize Lenis Smooth Scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
     // Listen for back/forward browser buttons
     const handleLocationChange = () => {
       setPath(window.location.pathname);
@@ -34,8 +56,6 @@ function App() {
     };
 
     window.addEventListener('popstate', handleLocationChange);
-    
-    // Custom event for internal navigation
     window.addEventListener('navigate', handleLocationChange);
 
     // Initial ScrollTrigger setup
@@ -43,7 +63,11 @@ function App() {
       ScrollTrigger.refresh();
     }, 1000);
 
-    const handleResize = () => ScrollTrigger.refresh();
+    const handleResize = () => {
+        ScrollTrigger.refresh();
+        lenis.resize();
+    };
+
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -51,9 +75,11 @@ function App() {
       window.removeEventListener('navigate', handleLocationChange);
       clearTimeout(timer);
       window.removeEventListener('resize', handleResize);
+      lenis.destroy();
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
+
 
   // Simple Router
   const renderContent = () => {

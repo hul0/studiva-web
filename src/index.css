@@ -8,10 +8,11 @@
 
 :root {
   /* Background */
-  --bg: #060606;
-  --surface: #0f0f0f;
-  --surface-2: #161616;
-  --surface-3: #1c1c1c;
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface-2: #181818;
+  --surface-3: #222222;
+
 
   /* Borders */
   --border: rgba(255, 255, 255, 0.07);
@@ -32,7 +33,9 @@
 
   /* Spacing */
   --container: 1200px;
-  --section-py: 110px;
+  --section-py: 80px;
+  --section-gap: 50px;
+
 
   /* Transitions */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);

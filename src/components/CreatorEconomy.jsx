@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
+import { CreditCard, PlayCircle, Rocket, Sparkles, TrendingUp, Users, FileText, Wallet } from 'lucide-react';
 import './CreatorEconomy.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,47 +10,38 @@ gsap.registerPlugin(ScrollTrigger);
 const modes = [
     {
         id: 'paid',
-        icon: (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <rect x="1" y="4" width="22" height="16" rx="2" />
-                <line x1="1" y1="10" x2="23" y2="10" />
-            </svg>
-        ),
-        title: 'Paid notes',
-        badge: 'Highest earnings',
-        desc: 'Set a one-time price. Learners pay to access your full notes. You earn 70% of every sale.',
+        icon: <CreditCard size={32} strokeWidth={1.5} />,
+        title: 'Paid Access',
+        badge: 'Highest earners',
+        desc: 'Set a one-time price for your academic mastery. Learners pay to access your full notes. You earn 70% of every sale.',
         earn: '₹15,000 / month avg.',
     },
     {
         id: 'rewarded',
-        icon: (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <polygon points="23 7 16 12 23 17 23 7" />
-                <rect x="1" y="5" width="15" height="14" rx="2" />
-            </svg>
-        ),
-        title: 'Rewarded ads',
+        icon: <PlayCircle size={32} strokeWidth={1.5} />,
+        title: 'Rewarded Ads',
         badge: 'Best reach',
-        desc: 'Notes are free — learners watch a 30-second ad to unlock. You earn from ad revenue automatically.',
+        desc: 'Notes are free — learners watch a 30-second ad to unlock. You earn from ad revenue automatically with zero friction.',
         earn: '₹6,000 / month avg.',
     },
     {
         id: 'free',
-        icon: (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                <polyline points="16 6 12 2 8 6" />
-                <line x1="12" y1="2" x2="12" y2="15" />
-            </svg>
-        ),
-        title: 'Free notes',
+        icon: <Rocket size={32} strokeWidth={1.5} />,
+        title: 'Lead Magnet',
         badge: 'Build reputation',
-        desc: 'Share freely to grow your follower base and rank in search. Leads to higher paid note conversions.',
+        desc: 'Share freely to grow your follower base and rank in search. Lead Magnet notes drive higher conversion for your paid content.',
         earn: 'Reputation + discovery',
     },
 ];
 
-function useCounter(target, duration = 1.5, start = false) {
+const stats = [
+    { label: 'Creator payouts', value: 24, prefix: '₹', suffix: 'L+' },
+    { label: 'Active creators', value: 4200, prefix: '', suffix: '+' },
+    { label: 'Notes monetised', value: 32, prefix: '', suffix: 'K+' },
+    { label: 'Avg monthly earn', value: 8400, prefix: '₹', suffix: '' },
+];
+
+function useCounter(target, duration = 1.0, start = false) {
     const [count, setCount] = useState(0);
     useEffect(() => {
         if (!start) return;
@@ -66,84 +58,112 @@ function useCounter(target, duration = 1.5, start = false) {
     return count;
 }
 
-const stats = [
-    { label: 'Creator payouts', value: 20000000, prefix: '₹', suffix: '+' },
-    { label: 'Active creators', value: 4200, prefix: '', suffix: '+' },
-    { label: 'Notes monetised', value: 32000, prefix: '', suffix: '+' },
-    { label: 'Avg monthly earn', value: 8400, prefix: '₹', suffix: '' },
-];
-
 const StatItem = ({ stat, animate }) => {
-    const count = useCounter(stat.value, 1.8, animate);
-    const display = count >= 1000000
-        ? `${stat.prefix}${(count / 1000000).toFixed(1)}Cr${stat.suffix}`
-        : count >= 1000
-            ? `${stat.prefix}${(count / 1000).toFixed(1)}K${stat.suffix}`
-            : `${stat.prefix}${count}${stat.suffix}`;
-
+    const count = useCounter(stat.value, 1.2, animate);
     return (
         <div className="creator-stat">
-            <span className="creator-stat__val">{display}</span>
+            <span className="creator-stat__val">{stat.prefix}{count}{stat.suffix}</span>
             <span className="creator-stat__label">{stat.label}</span>
         </div>
     );
 };
 
 const CreatorEconomy = () => {
-    const statsRef = useRef(null);
+    const sectionRef = useRef(null);
     const [animateStats, setAnimateStats] = useState(false);
 
     useEffect(() => {
-        if (!statsRef.current) return;
-        const trigger = ScrollTrigger.create({
-            trigger: statsRef.current,
-            start: 'top 80%',
-            onEnter: () => setAnimateStats(true),
-        });
-        return () => trigger.kill();
+        const ctx = gsap.context(() => {
+            // Header Animation (Ultra Fast)
+            gsap.fromTo(".creator__head > *", {
+                y: 20,
+                opacity: 0,
+            }, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.05,
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".creator__head",
+                    start: "top 95%",
+                }
+            });
+
+            // Plates Animation (Force Visible Stack)
+            gsap.fromTo(".mode-plate", {
+                x: -30,
+                opacity: 0,
+            }, {
+                x: 0,
+                opacity: 1,
+                stagger: 0.1,
+                duration: 0.8,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".creator__modes",
+                    start: "top 90%",
+                    once: true,
+                    onEnter: () => ScrollTrigger.refresh()
+                }
+            });
+
+            // Stats row reveal
+            gsap.fromTo(".creator__stats", {
+                opacity: 0,
+                y: 20,
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".creator__stats",
+                    start: "top 100%",
+                    onEnter: () => setAnimateStats(true),
+                }
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
     }, []);
 
     return (
-        <section className="creator" id="creators">
+        <section className="creator" id="creators" ref={sectionRef}>
             <div className="container">
-                {/* Header */}
+                {/* Header Section */}
                 <div className="creator__head">
-                    <span className="label">Creator Economy</span>
-                    <h2 className="section-title">Earn from what<br />you already know.</h2>
-                    <p className="section-sub">
-                        Your study notes are more valuable than you think. Thousands of students need exactly what you've already written.
+                    <span className="creator__badge">Monetization Engine</span>
+                    <h2 className="creator__title">Earn from what<br />you already know.</h2>
+                    <p className="creator__desc">
+                        Our marketplace transforms your academic hard work into a sustainable income stream through unique monetization paths.
                     </p>
                 </div>
 
-                {/* Mode cards */}
+                {/* 💠 Modes: Horizontal Stack Plates (NON-GRID) */}
                 <div className="creator__modes">
                     {modes.map((m, i) => (
-                        <motion.div
-                            key={m.id}
-                            className="mode-card card"
-                            id={`mode-${m.id}`}
-                            initial={{ opacity: 0, y: 32 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-80px' }}
-                            transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            whileHover={{ y: -6, transition: { type: 'spring', stiffness: 400 } }}
-                        >
-                            <div className="mode-card__top">
-                                <div className="mode-card__icon">{m.icon}</div>
-                                <span className="mode-card__badge">{m.badge}</span>
+                        <div key={m.id} className="mode-plate">
+                            <div className="mode-plate__icon-box">
+                                {m.icon}
                             </div>
-                            <h3 className="mode-card__title">{m.title}</h3>
-                            <p className="mode-card__desc">{m.desc}</p>
-                            <div className="mode-card__earn">
-                                <span className="mode-card__earn-label">Average earnings</span>
-                                <span className="mode-card__earn-val">{m.earn}</span>
+                            <div className="mode-plate__content">
+                                <div className="mode-plate__title">
+                                    {m.title}
+                                    <span className="mode-plate__badge">{m.badge}</span>
+                                </div>
+                                <p className="mode-plate__desc">{m.desc}</p>
                             </div>
-                        </motion.div>
+                            <div className="mode-plate__earn-block">
+                                <span className="mode-plate__earn-label">Expected Earnings</span>
+                                <div className="mode-plate__earn-val">{m.earn}</div>
+                            </div>
+                        </div>
                     ))}
                 </div>
 
-                {/* Animated stats */}
-                <div className="creator__stats" ref={statsRef}>
+                {/* 📊 Animated Analytics Grid */}
+                <div className="creator__stats">
                     {stats.map((s, i) => (
                         <StatItem key={i} stat={s} animate={animateStats} />
                     ))}
