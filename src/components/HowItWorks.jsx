@@ -96,7 +96,7 @@ const HowItWorks = () => {
 
                     <div className="how-it-works__core">
                         <img 
-                            src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop" 
+                            src="/images/studying.svg" 
                             alt="Marketplace Core" 
                             className="how-it-works__core-img"
                         />

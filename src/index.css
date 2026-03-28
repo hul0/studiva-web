@@ -13,7 +13,6 @@
   --surface-2: #181818;
   --surface-3: #222222;
 
-
   /* Borders */
   --border: rgba(255, 255, 255, 0.07);
   --border-strong: rgba(255, 255, 255, 0.14);
@@ -29,13 +28,12 @@
   --accent-dim: rgba(124, 58, 237, 0.1);
 
   /* Typography */
-  --font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Spacing */
   --container: 1200px;
   --section-py: 80px;
   --section-gap: 50px;
-
 
   /* Transitions */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -76,7 +74,7 @@ body {
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 /* ── TYPOGRAPHY HELPERS ──────────────────────── */
@@ -127,7 +125,10 @@ body {
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  transition:
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
   white-space: nowrap;
 }
 
@@ -155,7 +156,10 @@ body {
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
+  transition:
+    background 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    transform 0.2s var(--ease);
   white-space: nowrap;
 }
 
@@ -170,7 +174,10 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
-  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  transition:
+    border-color 0.25s var(--ease),
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
 }
 
 .card:hover {
@@ -204,7 +211,11 @@ section {
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 0%, black 20%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 0%,
+    black 20%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
@@ -226,7 +237,6 @@ section {
 
 /* ── KEYFRAMES ───────────────────────────────── */
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);

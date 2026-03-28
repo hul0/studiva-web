@@ -9,22 +9,21 @@
   z-index: 1000;
   display: flex;
   align-items: center;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  background: rgba(15, 15, 15, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Removed CSS transition: all to avoid conflict with sequenced GSAP */
+  background: rgba(15, 15, 15, 0.45);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  border-radius: 22px;
   padding: 0;
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
 }
 
 .nav--scrolled {
-  top: 12px;
-  height: 60px;
-  max-width: 1100px;
-  background: rgba(10, 10, 10, 0.85);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  /* Properties managed by GSAP, adding extra shadow here */
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .nav__inner {
@@ -53,56 +52,102 @@
 }
 
 .nav__logo-icon {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  border-radius: 11px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.nav__logo:hover .nav__logo-icon {
+  transform: rotate(10deg) scale(1.05);
+}
+
+.nav__logo-icon::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.1) 55%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--ease);
+}
+
+.nav__logo:hover .nav__logo-icon::after {
+  transform: translateX(100%);
 }
 
 /* Links Wrapper */
 .nav__links {
   display: flex;
-  gap: 8px;
+  gap: 0;
   background: rgba(255, 255, 255, 0.04);
   padding: 4px;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+/* Sliding Indicator */
+.nav__indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  z-index: 0;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
 .nav__link {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  font-size: 13px;
+  gap: 8px;
+  padding: 8px 18px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text-2);
   text-decoration: none;
   border-radius: 10px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.3s var(--ease);
   position: relative;
+  z-index: 1;
 }
 
-.nav__link:hover {
+.nav__link:hover,
+.nav__link--active {
   color: var(--text-1);
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
 }
 
 .nav__link-icon {
   display: flex;
   align-items: center;
   color: var(--accent-light);
-  opacity: 0.7;
-  transition: transform 0.3s;
+  opacity: 0.5;
+  transition: all 0.3s var(--ease);
 }
 
-.nav__link:hover .nav__link-icon {
+.nav__link:hover .nav__link-icon,
+.nav__link--active .nav__link-icon {
   opacity: 1;
+  transform: scale(1.1); /* Removed the rotate/-5deg tilt as requested */
 }
 
 .nav__actions {
@@ -111,32 +156,40 @@
   gap: 12px;
 }
 
-.btn-primary {
-  padding: 10px 20px;
+.nav__actions .btn-primary {
+  padding: 10px 22px;
   font-size: 13px;
   border-radius: 12px;
   background: #fff;
   color: #000;
   font-weight: 700;
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav__actions .btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
 }
 
 .nav__mobile-toggle {
   display: none;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-1);
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  transition: background 0.2s;
+  border-radius: 14px;
+  transition: all 0.3s var(--ease);
 }
 
 .nav__mobile-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.05);
 }
 
 /* Mobile Menu */
@@ -144,25 +197,42 @@
   position: fixed;
   top: 96px;
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-50%) translateY(20px) scale(0.95);
   width: 95%;
-  max-width: 400px;
-  background: rgba(15, 15, 15, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
+  max-width: 440px;
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
   padding: 12px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  z-index: 1001;
 }
 
 .nav__mobile-menu.is-open {
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0) scale(1);
   opacity: 1;
   visibility: visible;
+}
+
+.nav__mobile-backdrop {
+  position: fixed;
+  inset: -100vh -100vw;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .nav__mobile-inner {
