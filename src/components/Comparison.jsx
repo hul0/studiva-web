@@ -113,18 +113,21 @@ const Comparison = () => {
       });
 
       /* Footer */
-      gsap.to('.compare__foot', {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.compare__foot',
-          start: 'top 94%',
-          once: true,
-        },
-        delay: 0.1,
-      });
+      const footer = document.querySelector('.compare__foot');
+      if (footer) {
+        gsap.to(footer, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: footer,
+            start: 'top 94%',
+            once: true,
+          },
+          delay: 0.1,
+        });
+      }
 
     }, sectionRef);
 
@@ -178,6 +181,16 @@ const Comparison = () => {
               </div>
             );
           })}
+          {/* Footer CTA */}
+          <div className="compare__foot">
+            <div className="compare__foot-td">
+              <a href="#features" className="compare__cta">View detailed features</a>
+            </div>
+            <div className="compare__foot-td compare__foot-td--studiva">
+              <a href="#download" className="compare__cta" style={{ color: 'var(--accent-light)' }}>Start earning today</a>
+            </div>
+            <div className="compare__foot-td"></div>
+          </div>
         </div>
       </div>
     </section>

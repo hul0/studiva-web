@@ -1,7 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, ArrowRight, BookOpen, UserCircle, Layout, LayoutDashboard } from 'lucide-react';
 import './Navbar.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -10,12 +13,9 @@ const Navbar = () => {
     const [activeSection, setActiveSection] = useState('');
     const navRef = useRef(null);
     const indicatorRef = useRef(null);
+    const isNavClickScrolling = useRef(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 40);
-        };
-
         // Active Section Observer
         const observerOptions = {
             root: null,
@@ -24,6 +24,7 @@ const Navbar = () => {
         };
 
         const observerCallback = (entries) => {
+            if (isNavClickScrolling.current) return;
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     setActiveSection(entry.target.id);
@@ -38,10 +39,30 @@ const Navbar = () => {
             if (el) observer.observe(el);
         });
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        // High Performance Scroll Animation
+        let scrollTrig;
+        if (navRef.current) {
+            const nav = navRef.current;
+            scrollTrig = ScrollTrigger.create({
+                start: 'top -40',
+                onEnter: () => {
+                    setScrolled(true);
+                    gsap.timeline({ overwrite: 'auto' })
+                        .to(nav, { maxWidth: '1100px', duration: 0.35, ease: 'power3.out' })
+                        .to(nav, { top: '12px', height: '60px', background: 'rgba(10, 10, 10, 0.85)', borderColor: 'rgba(255, 255, 255, 0.15)', duration: 0.35, ease: 'power3.out' }, '-=0.15');
+                },
+                onLeaveBack: () => {
+                    setScrolled(false);
+                    gsap.timeline({ overwrite: 'auto' })
+                        .to(nav, { top: '24px', height: '64px', background: 'rgba(15, 15, 15, 0.45)', borderColor: 'rgba(255, 255, 255, 0.08)', duration: 0.35, ease: 'power3.out' })
+                        .to(nav, { maxWidth: '1200px', duration: 0.35, ease: 'power3.out' }, '-=0.15');
+                }
+            });
+        }
+
         return () => {
-            window.removeEventListener('scroll', handleScroll);
             observer.disconnect();
+            if (scrollTrig) scrollTrig.kill();
         };
     }, []);
 
@@ -50,19 +71,29 @@ const Navbar = () => {
         const activeLink = document.querySelector(`.nav__link--active`);
         if (activeLink && indicatorRef.current) {
             const { offsetLeft, offsetWidth } = activeLink;
-            indicatorRef.current.style.width = `${offsetWidth}px`;
-            indicatorRef.current.style.transform = `translateX(${offsetLeft - 4}px)`;
-            indicatorRef.current.style.opacity = '1';
+            gsap.to(indicatorRef.current, {
+                width: offsetWidth,
+                x: offsetLeft - 4,
+                opacity: 1,
+                duration: 0.4,
+                ease: 'power3.out',
+                overwrite: 'auto'
+            });
         } else if (indicatorRef.current) {
-            indicatorRef.current.style.opacity = '0';
+            gsap.to(indicatorRef.current, { opacity: 0, duration: 0.3 });
         }
     }, [activeSection]);
 
     const scrollToSection = (e, id) => {
         e.preventDefault();
-        const el = document.getElementById(id.replace('#', ''));
+        const sectionId = id.replace('#', '');
+        const el = document.getElementById(sectionId);
+        
         if (el) {
-            const offset = 80; // Adjust for navbar height
+            isNavClickScrolling.current = true;
+            setActiveSection(sectionId);
+            
+            const offset = 80;
             const bodyRect = document.body.getBoundingClientRect().top;
             const elementRect = el.getBoundingClientRect().top;
             const elementPosition = elementRect - bodyRect;
@@ -72,47 +103,15 @@ const Navbar = () => {
                 top: offsetPosition,
                 behavior: 'smooth'
             });
+
+            // Re-enable observer after scroll finishes (longer timeout for smooth scroll)
+            setTimeout(() => {
+                isNavClickScrolling.current = false;
+            }, 1800);
         }
         setIsOpen(false);
     };
 
-    useEffect(() => {
-        if (!navRef.current) return;
-
-        if (scrolled) {
-            // Sequence: Shrink Width first, then Top/Height
-            gsap.timeline({ overwrite: 'auto' })
-                .to(navRef.current, { 
-                    maxWidth: '1100px', 
-                    duration: 0.35, 
-                    ease: 'power3.out' 
-                })
-                .to(navRef.current, { 
-                    top: '12px', 
-                    height: '60px', 
-                    background: 'rgba(10, 10, 10, 0.85)',
-                    borderColor: 'rgba(255, 255, 255, 0.15)',
-                    duration: 0.35, 
-                    ease: 'power3.out' 
-                }, '-=0.1'); // slight overlap
-        } else {
-            // Reverse: Move Down first, then Expand Width
-            gsap.timeline({ overwrite: 'auto' })
-                .to(navRef.current, { 
-                    top: '24px', 
-                    height: '64px',
-                    background: 'rgba(15, 15, 15, 0.5)',
-                    borderColor: 'rgba(255, 255, 255, 0.08)',
-                    duration: 0.35, 
-                    ease: 'power3.out' 
-                })
-                .to(navRef.current, { 
-                    maxWidth: '1200px', 
-                    duration: 0.35, 
-                    ease: 'power3.out' 
-                }, '-=0.1');
-        }
-    }, [scrolled]);
 
     const links = [
         { label: 'Features', href: '#features', icon: <Layout size={14} /> },
@@ -136,10 +135,11 @@ const Navbar = () => {
                     }}
                 >
                     <div className="nav__logo-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M12 2v20M2 12h20" className="opacity-40" />
-                            <path d="M7 7l10 10M17 7L7 17" />
-                        </svg>
+                        <img 
+                            src="/images/studiva-app-logo-black-white.svg" 
+                            alt="Studiva Logo" 
+                            className="nav__logo-img" 
+                        />
                     </div>
                     <span>Studiva</span>
                 </a>
