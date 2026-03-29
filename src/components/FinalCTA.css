@@ -1,131 +1,108 @@
 .final-cta {
-    padding: 160px 0;
-    border-top: 1px solid var(--border);
+    padding: 40px 0;
     position: relative;
     overflow: hidden;
-    text-align: center;
-    background: var(--bg);
-}
-
-.final-cta__grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(ellipse 65% 85% at 50% 50%, black 30%, transparent 100%);
-    pointer-events: none;
-    opacity: 0.4;
+    background: transparent;
+    color: #171717;
 }
 
 .final-cta__inner {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 32px;
+    justify-content: space-between;
+    gap: 40px;
     position: relative;
     z-index: 10;
 }
 
+.final-cta__content {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
 .final-cta__title {
-    font-size: clamp(42px, 7vw, 78px);
-    font-weight: 900;
-    line-height: 1.0;
-    letter-spacing: -3.5px;
-    color: var(--text-1);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin: 0;
 }
 
 .final-cta__sub {
-    max-width: 520px;
-    margin: 0 auto;
-}
-
-/* Store buttons */
-.final-cta__btns {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.cta-store-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    padding: 14px 28px;
-    background: var(--surface-2);
-    border: 1px solid var(--border-strong);
-    border-radius: 16px;
-    text-decoration: none;
-    color: var(--text-1);
-    transition: background 0.2s, border-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    min-width: 200px;
-}
-
-.cta-store-btn:hover {
-    background: var(--surface-3);
-    border-color: var(--accent-light);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px -10px rgba(124, 58, 237, 0.4);
-}
-
-.cta-store-btn__sub {
-    display: block;
-    font-size: 10px;
-    color: var(--text-3);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.cta-store-btn__name {
-    display: block;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-}
-
-/* Feature tags */
-.final-cta__feature-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-}
-
-.final-cta__tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 13px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 18px;
     font-weight: 500;
-    color: var(--text-2);
-    transition: background 0.2s;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.95;
+    max-width: 400px;
 }
 
-.final-cta__tag:hover {
-    background: rgba(255, 255, 255, 0.08);
+/* Black Download Button with 3D shadow for Light BG */
+.btn-primary-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 14px 32px;
+    background: #171717;
+    color: #ffffff;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition: transform 0.1s, box-shadow 0.1s;
+    /* Solid grey shadow offset */
+    box-shadow: 0px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary-white:hover {
+    transform: translateY(2px);
+    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary-white:active {
+    transform: translateY(6px);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* Graphic Side */
+.final-cta__graphic {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-width: 50vw;
+}
+
+.dino-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    user-select: none;
+    pointer-events: none;
 }
 
 @media (max-width: 1024px) {
     .final-cta {
-        padding: 120px 0;
+        padding: 80px 0;
     }
-}
-
-@media (max-width: 640px) {
-    .final-cta__btns {
+    .final-cta__inner {
         flex-direction: column;
+        text-align: center;
+        gap: 60px;
+    }
+    .final-cta__content {
         align-items: center;
     }
-
-    .cta-store-btn {
-        width: 100%;
-        max-width: 260px;
+    .dino-image {
+        max-width: 300px;
     }
 }

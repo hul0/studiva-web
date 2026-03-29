@@ -99,13 +99,14 @@ const HowItWorks = () => {
                             src="/images/studying.svg" 
                             alt="Marketplace Core" 
                             className="how-it-works__core-img"
+                            loading="lazy"
                         />
                     </div>
 
                     {steps.map((step, i) => (
                         <div key={i} className={`step-card-node step-card-node--${step.pos}`}>
                             <div className={`step-card-node__ill-box step-card-node__ill-box--${step.pos}`}>
-                                <img src={step.image} alt={step.title} className="step-card-node__image" />
+                                <img src={step.image} alt={step.title} className="step-card-node__image" loading="lazy" />
                             </div>
                             <div className="step-card-node__text">
                                 <h3 className="step-card-node__title">{step.title}</h3>

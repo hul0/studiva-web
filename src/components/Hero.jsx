@@ -1,64 +1,80 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Apple, Smartphone, ArrowRight, Play, Star, TrendingUp, Users } from 'lucide-react';
+import { useState, lazy, Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Apple, Smartphone, TrendingUp, Users } from 'lucide-react';
+const SplineScene = lazy(() => import('./SplineScene'));
+import SplinePlaceholder from './SplinePlaceholder';
 import './Hero.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Hero = () => {
-    const containerRef = useRef(null);
-    const phoneRef = useRef(null);
-
-    useEffect(() => {
-        // Parallax effect on phone
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true,
-            },
-        });
-
-        tl.to(phoneRef.current, { y: 100, rotateX: 20, ease: 'none' });
-
-        return () => tl.kill();
-    }, []);
+    const [isSplineLoaded, setIsSplineLoaded] = useState(false);
 
     return (
-        <section className="hero" ref={containerRef}>
-            <div className="grid-bg" />
-            <div className="hero__glow" />
+        <section className="hero">
 
+            {/* Background Spline Animation */}
+            <div className="hero__spline-wrapper">
+                <div className="hero__spline-container">
+                    <AnimatePresence>
+                        {!isSplineLoaded && (
+                            <motion.div
+                                key="placeholder"
+                                initial={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.6 }}
+                                style={{ position: 'absolute', inset: 0, zIndex: 2 }}
+                            >
+                                <SplinePlaceholder />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    <Suspense fallback={null}>
+                        <SplineScene onLoad={() => setIsSplineLoaded(true)} />
+                    </Suspense>
+                </div>
+            </div>
+
+            <div className="grid-bg" />
+
+            {/* Main Content Container */}
             <div className="container hero__inner">
-                {/* Left: Content */}
+                {/* Text Content */}
                 <div className="hero__content">
-                    <motion.div
+                    {/* <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
                     >
-                        <span className="label">Community-Powered Knowledge</span>
-                    </motion.div>
+                        <span className="label">COMMUNITY-POWERED KNOWLEDGE</span>
+                    </motion.div> */}
 
                     <h1 className="hero__title">
                         <motion.span
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2, duration: 0.8 }}
+                            transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+                            style={{ display: 'inline-block' }}
                         >
                             Turn Your Notes
                         </motion.span>
                         <br />
                         <motion.span
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 0.8 }}
+                            transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
                             className="accent-text"
+                            style={{ display: 'inline-block' }}
                         >
-                            Into Income.
+                            Int<span className="super-o">o</span>
+                        </motion.span>
+                        {' '}
+                        <motion.span
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+                            className="accent-text"
+                            style={{ display: 'inline-block' }}
+                        >
+                            Inc<span className="super-o">o</span>me.
                         </motion.span>
                     </h1>
 
@@ -66,7 +82,7 @@ const Hero = () => {
                         className="hero__sub section-sub"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: 0.7 }}
+                        transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
                     >
                         The world's first note marketplace that respects your time.
                         Earn through paid sales and rewarded ads — <strong>no forced ads, ever.</strong>
@@ -76,15 +92,21 @@ const Hero = () => {
                         className="hero__cta"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.7 }}
+                        transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
                     >
-                        <a href="#download" className="btn-primary">
-                            <Apple size={18} fill="currentColor" />
-                            Download for iOS
+                        <a href="#download" className="brutalist-button">
+                            <Apple className="brutalist-icon" size={24} fill="currentColor" />
+                            <div className="button-text">
+                                <span>Download for</span>
+                                <span>IOS</span>
+                            </div>
                         </a>
-                        <a href="#download" className="btn-secondary">
-                            <Smartphone size={18} />
-                            Android App
+                        <a className="fancy" href="#download">
+                            <span className="top-key"></span>
+                            <Smartphone className="fancy-icon" size={20} />
+                            <span className="text">Android app</span>
+                            <span className="bottom-key-1"></span>
+                            <span className="bottom-key-2"></span>
                         </a>
                     </motion.div>
 
@@ -92,75 +114,18 @@ const Hero = () => {
                         className="hero__stats"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 1, duration: 1 }}
+                        transition={{ delay: 1.1, duration: 1 }}
                     >
                         <div className="hero__stat">
-                            <Users size={16} />
+                            <Users size={18} />
                             <span><strong>200K+</strong> Learners</span>
                         </div>
                         <div className="hero__stat">
-                            <TrendingUp size={16} />
+                            <TrendingUp size={18} />
                             <span><strong>₹2Cr+</strong> Paid</span>
                         </div>
                     </motion.div>
                 </div>
-
-                {/* Right: Visual with "Video Widgets" */}
-                <div className="hero__visual">
-                    <div className="hero__visual-container" ref={phoneRef}>
-                        <div className="hero__phone-wrapper card">
-                            <img src="/images/hero-phone.png" alt="StudivaApp" className="hero__phone-img" />
-                            <div className="hero__phone-overlay" />
-                        </div>
-
-                        {/* Floating Widgets (The "Video Widgets" feel) */}
-                        <motion.div
-                            className="hero-widget card"
-                            initial={{ opacity: 0, x: -40, y: 40 }}
-                            animate={{ opacity: 1, x: 0, y: 0 }}
-                            transition={{ delay: 1.2, duration: 0.8, type: 'spring' }}
-                            style={{ top: '20%', left: '-80px' }}
-                        >
-                            <div className="hero-widget__icon"><Star size={14} fill="#fbbf24" stroke="none" /></div>
-                            <div className="hero-widget__info">
-                                <span className="hero-widget__label">Rating</span>
-                                <span className="hero-widget__val">4.9/5</span>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            className="hero-widget card"
-                            initial={{ opacity: 0, x: 40, y: -40 }}
-                            animate={{ opacity: 1, x: 0, y: 0 }}
-                            transition={{ delay: 1.4, duration: 0.8, type: 'spring' }}
-                            style={{ bottom: '25%', right: '-60px' }}
-                        >
-                            <div className="hero-widget__icon"><Play size={14} fill="#fff" stroke="none" /></div>
-                            <div className="hero-widget__info">
-                                <span className="hero-widget__label">Ad Unlocks</span>
-                                <span className="hero-widget__val">+12.4K</span>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            className="hero-widget hero-widget--green card"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 1.6, duration: 0.8, type: 'spring' }}
-                            style={{ top: '65%', left: '-40px' }}
-                        >
-                            <div className="hero-widget__info">
-                                <span className="hero-widget__label">Earnings</span>
-                                <span className="hero-widget__val">₹1,240</span>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="hero__scroll">
-                <div className="hero__scroll-line" />
-                <span>Scroll to Explore</span>
             </div>
         </section>
     );

@@ -1,72 +1,76 @@
-import { Twitter, Instagram, Linkedin, Youtube, Zap } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
-    const handleNavigate = (e, href) => {
-        if (href.startsWith('/')) {
-            e.preventDefault();
-            window.history.pushState({}, '', href);
-            window.dispatchEvent(new Event('navigate'));
-        }
+    const [openDropdown, setOpenDropdown] = useState(null);
+
+    const toggleDropdown = (id) => {
+        setOpenDropdown(openDropdown === id ? null : id);
     };
 
-    const cols = [
-        { title: 'Product', links: [{ label: 'Features', href: '#' }, { label: 'How it works', href: '#' }, { label: 'Creator Tools', href: '#' }, { label: 'Pricing', href: '#' }, { label: 'Release Notes', href: '#' }] },
-        { title: 'Subjects', links: [{ label: 'JEE Mains', href: '#' }, { label: 'NEET UG', href: '#' }, { label: 'CBSE Class 12', href: '#' }, { label: 'UPSC Prelims', href: '#' }, { label: 'Engineering', href: '#' }] },
-        { title: 'Company', links: [{ label: 'About Studyvia', href: '#' }, { label: 'Career', href: '#' }, { label: 'Newsroom', href: '#' }, { label: 'Contact Us', href: '#' }] },
-        { title: 'Legal', links: [{ label: 'Privacy Policy', href: '/privacy' }, { label: 'Terms of Service', href: '/tos' }, { label: 'Account Deletion', href: '/delete-account' }] },
+    const categories = [
+        { id: 'product', title: 'PRODUCT', links: ['Features', 'How it works', 'Creator Tools', 'Pricing', 'Release Notes'] },
+        { id: 'subjects', title: 'SUBJECTS', links: ['JEE Mains', 'NEET UG', 'CBSE Class 12', 'UPSC Prelims', 'Engineering'] },
+        { id: 'company', title: 'COMPANY', links: ['About Studyvia', 'Career', 'Newsroom', 'Contact Us'] },
+        { id: 'legal', title: 'LEGAL', links: ['Privacy Policy', 'Terms of Service', 'Account Deletion'] },
     ];
 
-    return (
-        <footer className="footer" id="footer">
-            <div className="container footer__inner">
-                <div className="footer__brand">
-                    <div className="footer__logo">
-                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                            <rect width="28" height="28" rx="7" fill="var(--accent)" />
-                            <path d="M7 9h14M7 14h9M7 19h12" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-                        </svg>
-                        <span>Studyvia</span>
-                    </div>
-                    <p className="footer__tagline">The world's premium note-sharing marketplace. Built for students, by students.</p>
-                    <div className="footer__social">
-                        {[Twitter, Instagram, Linkedin, Youtube].map((Icon, i) => (
-                            <a key={i} href="#" className="footer__social-link" aria-label="Social link">
-                                <Icon size={16} />
-                            </a>
-                        ))}
-                    </div>
-                </div>
+    const socials = ['INSTAGRAM', 'FACEBOOK', 'TWITTER', 'LINKEDIN'];
 
-                <div className="footer__nav">
-                    {cols.map(col => (
-                        <div key={col.title} className="footer__col">
-                            <span className="footer__col-title">{col.title}</span>
-                            <ul>
-                                {col.links.map(l => (
-                                    <li key={l.label}>
-                                        <a 
-                                            href={l.href} 
-                                            id={`footer-link-${l.label.toLowerCase().replace(/\s+/g, '-')}`}
-                                            onClick={(e) => handleNavigate(e, l.href)}
-                                        >
-                                            {l.label}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+    return (
+        <footer className="footer-brutalist" id="footer">
+            <div className="footer-b__top-area">
+                <div className="container">
+                    <div className="footer-b__grid">
+                        {/* Column 1: Dropdowns */}
+                        <div className="footer-b__col footer-b__dropdowns">
+                            {categories.map(cat => (
+                                <div key={cat.id} className="footer-b__dropdown">
+                                    <button 
+                                        className="footer-b__dropdown-btn" 
+                                        onClick={() => toggleDropdown(cat.id)}
+                                    >
+                                        {cat.title} 
+                                        <span className={`footer-b__arrow ${openDropdown === cat.id ? 'open' : ''}`}>↘</span>
+                                    </button>
+                                    <div className={`footer-b__dropdown-content ${openDropdown === cat.id ? 'open' : ''}`}>
+                                        {cat.links.map(link => (
+                                            <a href="#" key={link} className="footer-b__link">{link}</a>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+
+                        {/* Column 2: Newsletter */}
+                        <div className="footer-b__col footer-b__newsletter">
+                            <p className="footer-b__text-block">
+                                SIGN UP FOR THE LATEST RESOURCES,<br />
+                                NOTES & INSIGHTS
+                            </p>
+                            <form className="footer-b__form">
+                                <input type="email" placeholder="EMAIL ADDRESS" className="footer-b__input" />
+                                <button type="button" className="footer-b__submit">
+                                    <ArrowRight size={16} color="#171717" strokeWidth={2.5} />
+                                </button>
+                            </form>
+                        </div>
+
+                        {/* Column 3: Socials */}
+                        <div className="footer-b__col footer-b__socials">
+                            {socials.map(social => (
+                                <a href="#" key={social} className="footer-b__social-btn">
+                                    {social} <ArrowUpRight size={14} color="#171717" strokeWidth={2.5} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="footer__bottom">
-                <div className="container footer__bottom-inner">
-                    <span>© 2025 Studyvia Platform. All rights reserved.</span>
-                    <span className="footer__location">
-                        <Zap size={12} fill="var(--accent-light)" stroke="none" />
-                        Made in India
-                    </span>
-                </div>
+
+            <div className="footer-b__bottom-area">
+                <h1 className="footer-b__massive-text">STUDIVA</h1>
             </div>
         </footer>
     );

@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Navbar from './components/Navbar';
 import Lenis from '@studio-freight/lenis';
 import Hero from './components/Hero';
-
 import Marquee from './components/Marquee';
-import Features from './components/Features';
-import HowItWorks from './components/HowItWorks';
-import CreatorEconomy from './components/CreatorEconomy';
-import Testimonials from './components/Testimonials';
-import Comparison from './components/Comparison';
-import FAQ from './components/FAQ';
-import FinalCTA from './components/FinalCTA';
-import Footer from './components/Footer';
+
+const Features = lazy(() => import('./components/Features'));
+const HowItWorks = lazy(() => import('./components/HowItWorks'));
+const CreatorEconomy = lazy(() => import('./components/CreatorEconomy'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Comparison = lazy(() => import('./components/Comparison'));
+const FAQ = lazy(() => import('./components/FAQ'));
+const FinalCTA = lazy(() => import('./components/FinalCTA'));
+const Footer = lazy(() => import('./components/Footer'));
 
 // Legal Pages
 import Privacy from './pages/legal/Privacy';
@@ -32,22 +32,22 @@ function App() {
     // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      smoothWheel: true,
+      wheelMultiplier: 1,
       smoothTouch: false,
-      touchMultiplier: 2,
+      touchMultiplier: 1.5,
       infinite: false,
     });
+
+    ScrollTrigger.config({ limitCallbacks: true });
 
     // Sync ScrollTrigger with Lenis
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(0); // Disable lag smoothing to prevent 'jumpy' resets with Lenis sync
 
     // Listen for back/forward browser buttons
     const handleLocationChange = () => {
@@ -97,15 +97,19 @@ function App() {
             <main>
               <Hero />
               <Marquee />
-              <Features />
-              <HowItWorks />
-              <CreatorEconomy />
-              <Testimonials />
-              <Comparison />
-              <FAQ />
-              <FinalCTA />
+              <Suspense fallback={<div style={{ height: '400px' }} />}>
+                <Features />
+                <HowItWorks />
+                <CreatorEconomy />
+                <Testimonials />
+                <Comparison />
+                <FAQ />
+                <FinalCTA />
+              </Suspense>
             </main>
-            <Footer />
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
           </>
         );
     }

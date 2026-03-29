@@ -49,12 +49,12 @@ const Navbar = () => {
                     setScrolled(true);
                     gsap.timeline({ overwrite: 'auto' })
                         .to(nav, { maxWidth: '1100px', duration: 0.35, ease: 'power3.out' })
-                        .to(nav, { top: '12px', height: '60px', background: 'rgba(10, 10, 10, 0.85)', borderColor: 'rgba(255, 255, 255, 0.15)', duration: 0.35, ease: 'power3.out' }, '-=0.15');
+                        .to(nav, { top: '12px', height: '60px', background: 'rgba(255, 255, 255, 0.85)', borderColor: 'rgba(23, 23, 23, 0.15)', duration: 0.35, ease: 'power3.out' }, '-=0.15');
                 },
                 onLeaveBack: () => {
                     setScrolled(false);
                     gsap.timeline({ overwrite: 'auto' })
-                        .to(nav, { top: '24px', height: '64px', background: 'rgba(15, 15, 15, 0.45)', borderColor: 'rgba(255, 255, 255, 0.08)', duration: 0.35, ease: 'power3.out' })
+                        .to(nav, { top: '24px', height: '64px', background: 'rgba(255, 255, 255, 0.6)', borderColor: 'rgba(23, 23, 23, 0.08)', duration: 0.35, ease: 'power3.out' })
                         .to(nav, { maxWidth: '1200px', duration: 0.35, ease: 'power3.out' }, '-=0.15');
                 }
             });
@@ -136,7 +136,7 @@ const Navbar = () => {
                 >
                     <div className="nav__logo-icon">
                         <img 
-                            src="/images/studiva-app-logo-black-white.svg" 
+                            src="/images/studiva-quill-icon.svg" 
                             alt="Studiva Logo" 
                             className="nav__logo-img" 
                         />

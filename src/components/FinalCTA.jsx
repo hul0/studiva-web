@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Apple, Smartphone, CheckCircle2 } from 'lucide-react';
 import './FinalCTA.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -32,47 +31,28 @@ const FinalCTA = () => {
 
     return (
         <section className="final-cta" id="download" ref={sectionRef}>
-            <div className="final-cta__grid-bg" />
             <div className="container final-cta__inner">
-                <span className="label cta-animate">Ready to Begin?</span>
-                <h2 className="final-cta__title cta-animate">
-                    Join 200,000 students <br />
-                    growing on <span className="accent-text">Studiva.</span>
-                </h2>
-                <p className="section-sub final-cta__sub cta-animate">
-                    Start monetising your notes today. Instant setup,
-                    70% earnings, and same-day withdrawals.
-                </p>
+                <div className="final-cta__content">
+                    <h2 className="final-cta__title cta-animate">
+                        You're still here!
+                    </h2>
+                    <p className="final-cta__sub cta-animate">
+                        Don't let your study goals go the way of the dinosaurs. Get started now.
+                    </p>
 
-                <div className="final-cta__btns cta-animate">
-                    <a href="#" className="cta-store-btn" id="final-cta-appstore">
-                        <Apple size={22} fill="currentColor" stroke="none" />
-                        <div>
-                            <span className="cta-store-btn__sub">Download on the</span>
-                            <span className="cta-store-btn__name">App Store</span>
-                        </div>
-                    </a>
-                    <a href="#" className="cta-store-btn" id="final-cta-playstore">
-                        <Smartphone size={22} />
-                        <div>
-                            <span className="cta-store-btn__sub">Get it on</span>
-                            <span className="cta-store-btn__name">Google Play</span>
-                        </div>
+                    <a href="#" className="btn-primary-white cta-animate" id="final-cta-btn">
+                        Download Now
                     </a>
                 </div>
 
-                <div className="final-cta__feature-tags cta-animate">
-                    {[
-                        'No forced ads — ever',
-                        'Earn from Day 1',
-                        'Secure payments',
-                        'Verified content'
-                    ].map(t => (
-                        <span key={t} className="final-cta__tag">
-                            <CheckCircle2 size={12} color="var(--accent-light)" />
-                            {t}
-                        </span>
-                    ))}
+                <div className="final-cta__graphic cta-animate">
+                    <img 
+                        src="/images/funny_guy.png" 
+                        alt="Funny guy sipping from cup illustration" 
+                        className="dino-image"
+                        draggable="false"
+                        loading="lazy"
+                    />
                 </div>
             </div>
         </section>

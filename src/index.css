@@ -1,4 +1,69 @@
-*,
+@font-face {
+  font-family: 'Getaway';
+  src: url('/fonts/getaway.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ID Grotesk';
+  src: url('/fonts/ID Grotesk Font Family/IDGrotesk-Thin-BF652cb1b461e9c.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ID Grotesk';
+  src: url('/fonts/ID Grotesk Font Family/IDGrotesk-Light-BF652cb1b459bdf.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ID Grotesk';
+  src: url('/fonts/ID Grotesk Font Family/IDGrotesk-Book-BF652cb1b45dae8.ttf') format('truetype');
+  font-weight: 350;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ID Grotesk';
+  src: url('/fonts/ID Grotesk Font Family/IDGrotesk-Regular-BF652cb1b4787d7.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ID Grotesk';
+  src: url('/fonts/ID Grotesk Font Family/IDGrotesk-Medium-BF652cb1b4765e1.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ID Grotesk';
+  src: url('/fonts/ID Grotesk Font Family/IDGrotesk-Semibold-BF652cb1b467d9d.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ID Grotesk';
+  src: url('/fonts/ID Grotesk Font Family/IDGrotesk-Bold-BF652cb1b4740d2.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Super Kindly';
+  src: url('/fonts/super-kindly-font/SuperKindly-drE8E.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 *::before,
 *::after {
   margin: 0;
@@ -8,24 +73,24 @@
 
 :root {
   /* Background */
-  --bg: #0a0a0a;
-  --surface: #111111;
-  --surface-2: #181818;
-  --surface-3: #222222;
+  --bg: #DEDEDE;
+  --surface: #ffffff;
+  --surface-2: #f5f5f5;
+  --surface-3: #e8e8e8;
 
   /* Borders */
-  --border: rgba(255, 255, 255, 0.07);
-  --border-strong: rgba(255, 255, 255, 0.14);
+  --border: rgba(23, 23, 23, 0.08);
+  --border-strong: rgba(23, 23, 23, 0.16);
 
   /* Text */
-  --text-1: #f0f0f0;
-  --text-2: #a1a1a1;
-  --text-3: #555555;
+  --text-1: #171717;
+  --text-2: #4D4D4D;
+  --text-3: #7D7D7D;
 
-  /* Accent — solid violet, used sparingly */
-  --accent: #7c3aed;
-  --accent-light: #a78bfa;
-  --accent-dim: rgba(124, 58, 237, 0.1);
+  /* Accent — solid orange, used sparingly */
+  --accent: #F25623;
+  --accent-light: #FF7B4D;
+  --accent-dim: rgba(242, 86, 35, 0.15);
 
   /* Typography */
   --font: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -42,6 +107,7 @@
 
 html {
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -67,7 +133,7 @@ body {
 }
 
 ::selection {
-  background: rgba(124, 58, 237, 0.25);
+  background: rgba(242, 86, 35, 0.25);
 }
 
 /* ── CONTAINER ───────────────────────────────── */
@@ -82,7 +148,7 @@ body {
   display: inline-block;
   padding: 5px 14px;
   background: var(--accent-dim);
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  border: 1px solid rgba(242, 86, 35, 0.25);
   border-radius: 100px;
   font-size: 11px;
   font-weight: 600;
@@ -116,8 +182,8 @@ body {
   align-items: center;
   gap: 8px;
   padding: 13px 26px;
-  background: #ffffff;
-  color: #000000;
+  background: var(--accent);
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   font-family: var(--font);
@@ -133,9 +199,9 @@ body {
 }
 
 .btn-primary:hover {
-  background: #e8e8e8;
+  background: #171717;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 32px rgba(242, 86, 35, 0.4);
 }
 
 .btn-primary:active {
@@ -164,8 +230,8 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(23, 23, 23, 0.04);
+  border-color: rgba(23, 23, 23, 0.28);
   transform: translateY(-1px);
 }
 
@@ -183,13 +249,14 @@ body {
 .card:hover {
   border-color: var(--border-strong);
   transform: translateY(-3px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 48px rgba(23, 23, 23, 0.15);
 }
 
 /* ── SECTION BASE ────────────────────────────── */
 section {
   position: relative;
-  overflow: hidden;
+  /* NOTE: overflow: hidden removed — it creates stacking contexts that force
+     full-page repaint on scroll. Add overflow: hidden only where explicitly needed. */
 }
 
 /* ── NOISE OVERLAY ───────────────────────────── */
@@ -198,9 +265,11 @@ section {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.032;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ── GRID BACKGROUND ─────────────────────────── */
@@ -237,23 +306,17 @@ section {
 
 /* ── KEYFRAMES ───────────────────────────────── */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-14px);
-  }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%       { transform: translate3d(0, -14px, 0); }
 }
 
 @keyframes marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
