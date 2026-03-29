@@ -106,14 +106,14 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
                     >
-                        <a href="#download" className="brutalist-button">
+                        <a href="https://youtu.be/Aq5WXmQQooo?si=qEvsWn-25Jdy6xje" className="brutalist-button">
                             <Apple className="brutalist-icon" size={24} fill="currentColor" />
                             <div className="button-text">
                                 <span>Download for</span>
                                 <span>IOS</span>
                             </div>
                         </a>
-                        <a className="fancy" href="#download">
+                        <a className="fancy" href="https://play.google.com/store/apps/details?id=com.studiva.app">
                             <span className="top-key"></span>
                             <Smartphone className="fancy-icon" size={20} />
                             <span className="text">Android app</span>

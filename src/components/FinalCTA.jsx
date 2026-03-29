@@ -40,15 +40,15 @@ const FinalCTA = () => {
                         Don't let your study goals go the way of the dinosaurs. Get started now.
                     </p>
 
-                    <a href="#" className="btn-primary-white cta-animate" id="final-cta-btn">
+                    <a href="https://play.google.com/store/apps/details?id=com.studiva.app" className="btn-primary-white cta-animate" id="final-cta-btn">
                         Download Now
                     </a>
                 </div>
 
                 <div className="final-cta__graphic cta-animate">
-                    <img 
-                        src="/images/funny_guy.png" 
-                        alt="Funny guy sipping from cup illustration" 
+                    <img
+                        src="/images/funny_guy.png"
+                        alt="Funny guy sipping from cup illustration"
                         className="dino-image"
                         draggable="false"
                         loading="lazy"
