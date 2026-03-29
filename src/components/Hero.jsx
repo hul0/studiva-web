@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Apple, Smartphone, TrendingUp, Users } from 'lucide-react';
 const SplineScene = lazy(() => import('./SplineScene'));
@@ -7,31 +7,43 @@ import './Hero.css';
 
 const Hero = () => {
     const [isSplineLoaded, setIsSplineLoaded] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 1024);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     return (
         <section className="hero">
 
-            {/* Background Spline Animation */}
-            <div className="hero__spline-wrapper">
-                <div className="hero__spline-container">
-                    <AnimatePresence>
-                        {!isSplineLoaded && (
-                            <motion.div
-                                key="placeholder"
-                                initial={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.6 }}
-                                style={{ position: 'absolute', inset: 0, zIndex: 2 }}
-                            >
-                                <SplinePlaceholder />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                    <Suspense fallback={null}>
-                        <SplineScene onLoad={() => setIsSplineLoaded(true)} />
-                    </Suspense>
+            {/* Background Spline Animation - Only Render on Desktop for Performance */}
+            {!isMobile && (
+                <div className="hero__spline-wrapper">
+                    <div className="hero__spline-container">
+                        <AnimatePresence>
+                            {!isSplineLoaded && (
+                                <motion.div
+                                    key="placeholder"
+                                    initial={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.6 }}
+                                    style={{ position: 'absolute', inset: 0, zIndex: 2 }}
+                                >
+                                    <SplinePlaceholder />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                        <Suspense fallback={null}>
+                            <SplineScene onLoad={() => setIsSplineLoaded(true)} />
+                        </Suspense>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="grid-bg" />
 
