@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   TrendingUp, Zap, Shield, Clock, Search, Banknote,
@@ -7,7 +8,7 @@ import {
 } from 'lucide-react';
 import './Comparison.css';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const rows = [
   {
@@ -67,72 +68,67 @@ const Cell = ({ val }) => {
 const Comparison = () => {
   const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(() => {
+    /* Head items */
+    gsap.to('.compare__eyebrow, .compare__title, .compare__sub', {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.compare__head',
+        start: 'top 82%',
+        once: true,
+      },
+    });
 
-      /* Head items */
-      gsap.to('.compare__eyebrow, .compare__title, .compare__sub', {
+    /* Table wrapper fades up */
+    gsap.to('.compare__wrap', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.compare__wrap',
+        start: 'top 82%',
+        once: true,
+      },
+    });
+
+    /* Rows slide in staggered */
+    gsap.to('.compare__row', {
+      opacity: 1,
+      x: 0,
+      duration: 0.5,
+      stagger: 0.07,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.compare__wrap',
+        start: 'top 80%',
+        once: true,
+      },
+      delay: 0.2,
+    });
+
+    /* Footer */
+    const footer = document.querySelector('.compare__foot');
+    if (footer) {
+      gsap.to(footer, {
         opacity: 1,
         y: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.compare__head',
-          start: 'top 82%',
-          once: true,
-        },
-      });
-
-      /* Table wrapper fades up */
-      gsap.to('.compare__wrap', {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.compare__wrap',
-          start: 'top 82%',
-          once: true,
-        },
-      });
-
-      /* Rows slide in staggered */
-      gsap.to('.compare__row', {
-        opacity: 1,
-        x: 0,
         duration: 0.5,
-        stagger: 0.07,
         ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.compare__wrap',
-          start: 'top 80%',
+          trigger: footer,
+          start: 'top 94%',
           once: true,
         },
-        delay: 0.2,
+        delay: 0.1,
       });
+    }
 
-      /* Footer */
-      const footer = document.querySelector('.compare__foot');
-      if (footer) {
-        gsap.to(footer, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: footer,
-            start: 'top 94%',
-            once: true,
-          },
-          delay: 0.1,
-        });
-      }
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     <section className="compare" id="compare" ref={sectionRef}>

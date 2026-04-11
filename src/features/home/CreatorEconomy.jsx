@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
 import { CreditCard, PlayCircle, Rocket, Sparkles, TrendingUp, Users, FileText, Wallet } from 'lucide-react';
 import './CreatorEconomy.css';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const modes = [
     {
@@ -73,61 +73,57 @@ const CreatorEconomy = () => {
     const sectionRef = useRef(null);
     const [animateStats, setAnimateStats] = useState(false);
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Header Animation (Ultra Fast)
-            gsap.fromTo(".creator__head > *", {
-                y: 20,
-                opacity: 0,
-            }, {
-                y: 0,
-                opacity: 1,
-                stagger: 0.05,
-                duration: 0.6,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".creator__head",
-                    start: "top 95%",
-                }
-            });
+    useGSAP(() => {
+        // Header Animation (Ultra Fast)
+        gsap.fromTo(".creator__head > *", {
+            y: 20,
+            opacity: 0,
+        }, {
+            y: 0,
+            opacity: 1,
+            stagger: 0.05,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".creator__head",
+                start: "top 95%",
+            }
+        });
 
-            // Plates Animation (Force Visible Stack)
-            gsap.fromTo(".mode-plate", {
-                x: -30,
-                opacity: 0,
-            }, {
-                x: 0,
-                opacity: 1,
-                stagger: 0.1,
-                duration: 0.8,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".creator__modes",
-                    start: "top 90%",
-                    once: true,
-                    onEnter: () => ScrollTrigger.refresh()
-                }
-            });
+        // Plates Animation (Force Visible Stack)
+        gsap.fromTo(".mode-plate", {
+            x: -30,
+            opacity: 0,
+        }, {
+            x: 0,
+            opacity: 1,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".creator__modes",
+                start: "top 90%",
+                once: true,
+                onEnter: () => ScrollTrigger.refresh()
+            }
+        });
 
-            // Stats row reveal
-            gsap.fromTo(".creator__stats", {
-                opacity: 0,
-                y: 20,
-            }, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".creator__stats",
-                    start: "top 100%",
-                    onEnter: () => setAnimateStats(true),
-                }
-            });
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
+        // Stats row reveal
+        gsap.fromTo(".creator__stats", {
+            opacity: 0,
+            y: 20,
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".creator__stats",
+                start: "top 100%",
+                onEnter: () => setAnimateStats(true),
+            }
+        });
+    }, { scope: sectionRef });
 
     return (
         <section className="creator" id="creators" ref={sectionRef}>

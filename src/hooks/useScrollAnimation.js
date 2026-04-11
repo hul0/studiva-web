@@ -1,13 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export const useScrollAnimation = (options = {}) => {
   const ref = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const el = ref.current;
     if (!el) return;
 
@@ -21,24 +22,18 @@ export const useScrollAnimation = (options = {}) => {
       once = true,
     } = options;
 
-    const tl = gsap.timeline({
+    gsap.fromTo(el, from, { 
+      ...to, 
+      duration, 
+      ease, 
+      delay,
       scrollTrigger: {
         trigger: el,
         start,
         toggleActions: once ? 'play none none none' : 'play none none reverse',
-      },
+      }
     });
-
-    tl.fromTo(el, from, { ...to, duration, ease, delay });
-
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach(st => {
-        if (st.trigger === el) st.kill();
-      });
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, { scope: ref });
 
   return ref;
 };
@@ -46,7 +41,7 @@ export const useScrollAnimation = (options = {}) => {
 export const useStaggerAnimation = (options = {}) => {
   const ref = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const el = ref.current;
     if (!el) return;
 
@@ -63,21 +58,19 @@ export const useStaggerAnimation = (options = {}) => {
     const children = el.querySelectorAll(childSelector);
     if (!children.length) return;
 
-    const tl = gsap.timeline({
+    gsap.fromTo(children, from, { 
+      ...to, 
+      duration, 
+      ease, 
+      stagger,
       scrollTrigger: {
         trigger: el,
         start,
         toggleActions: 'play none none none',
-      },
+      }
     });
 
-    tl.fromTo(children, from, { ...to, duration, ease, stagger });
-
-    return () => {
-      tl.kill();
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, { scope: ref });
 
   return ref;
 };
@@ -85,11 +78,11 @@ export const useStaggerAnimation = (options = {}) => {
 export const useParallax = (speed = 0.5) => {
   const ref = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const el = ref.current;
     if (!el) return;
 
-    const tl = gsap.to(el, {
+    gsap.to(el, {
       yPercent: -30 * speed,
       ease: 'none',
       scrollTrigger: {
@@ -99,9 +92,7 @@ export const useParallax = (speed = 0.5) => {
         scrub: true,
       },
     });
-
-    return () => tl.kill();
-  }, [speed]);
+  }, { scope: ref, dependencies: [speed] });
 
   return ref;
 };

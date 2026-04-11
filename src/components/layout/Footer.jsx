@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Footer.css';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Footer = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -17,9 +22,43 @@ const Footer = () => {
     ];
 
     const socials = ['INSTAGRAM', 'FACEBOOK', 'TWITTER', 'LINKEDIN'];
+    const footerRef = useRef(null);
+
+    useGSAP(() => {
+        // Massive text scrubbing effect
+        gsap.fromTo('.footer-b__massive-text', 
+            { scale: 0.7, opacity: 0.5, y: 50 },
+            { 
+               scale: 1,
+               opacity: 1,
+               y: 0,
+               scrollTrigger: {
+                   trigger: footerRef.current,
+                   start: 'top bottom',
+                   end: 'bottom bottom',
+                   scrub: true
+               }
+            }
+        );
+
+        // Magnetic links for social buttons
+        const socialBtns = document.querySelectorAll('.footer-b__social-btn');
+        socialBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
+            });
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+            });
+        });
+
+    }, { scope: footerRef });
 
     return (
-        <footer className="footer-brutalist" id="footer">
+        <footer className="footer-brutalist" id="footer" ref={footerRef}>
             <div className="footer-b__top-area">
                 <div className="container">
                     <div className="footer-b__grid">

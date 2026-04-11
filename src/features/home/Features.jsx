@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Layers, TrendingUp, BookOpen, CheckCircle2,
@@ -7,7 +8,7 @@ import {
 } from 'lucide-react';
 import './Features.css';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const features = [
   {
@@ -16,7 +17,7 @@ const features = [
     title: 'Share your notes.\nEffortlessly.',
     desc: 'Drop handwritten scans, PDFs, or typed notes. Our engine auto-tags and categorises everything for instant discoverability.',
     bullets: ['PDF & handwritten scan support', 'Batch upload up to 100 pages', 'Auto-tagging for JEE, NEET & more', 'Secure cloud storage included'],
-    video: '/videos/Video_Ready_After_Agreement.mp4',
+    video: '/videos/Video_Ready_After_Agreement.webm',
     icon: Layers,
     flip: false,
     stat: { label: 'Auto-tagged', value: 'Physics · Wave Optics' },
@@ -28,7 +29,7 @@ const features = [
     title: 'Turn effort\ninto income.',
     desc: 'Set your own price or use rewarded ads. Every unlock earns you real money, deposited instantly to UPI.',
     bullets: ['70% creator revenue share', 'Rewarded ads payouts', 'Instant UPI withdrawals', 'Earnings analytics dashboard'],
-    video: '/videos/Video_Generation_Request_Fulfilled.mp4',
+    video: '/videos/Video_Generation_Request_Fulfilled.webm',
     icon: TrendingUp,
     flip: true,
     stat: { label: 'This month', value: '₹24,500' },
@@ -40,7 +41,7 @@ const features = [
     title: 'Study smarter\nwith toppers.',
     desc: "Access verified notes from rank-holders. Filter by exam, study offline, and track what you've covered.",
     bullets: ['Topper-verified notes only', 'Filter by exam & subject', 'Offline reading mode', 'Study progress tracking'],
-    video: '/videos/Flat_Illustration_Animation_Enhancement_Request.mp4',
+    video: '/videos/Flat_Illustration_Animation_Enhancement_Request.webm',
     icon: BookOpen,
     flip: false,
     stat: { label: 'Verified by', value: 'IIT Delhi, AIR 7' },
@@ -71,8 +72,9 @@ const catRow2 = [
 const FeatureBlock = ({ feature }) => {
   const blockRef = useRef(null);
   const lineRef = useRef(null);
+  const mediaRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const el = blockRef.current;
     if (!el) return;
 
@@ -102,8 +104,31 @@ const FeatureBlock = ({ feature }) => {
       ease: 'power3.out',
     }, lineRef.current ? '-=0.3' : '0');
 
-    return () => tl.kill();
-  }, []);
+    // Tilt Effect
+    const media = mediaRef.current;
+    if (media) {
+      const frame = media.querySelector('.feat-block__frame');
+      if (frame) {
+        media.addEventListener('mousemove', (e) => {
+          const rect = media.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(frame, {
+            rotationY: x * 0.04,
+            rotationX: -y * 0.04,
+            transformPerspective: 1000,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        });
+
+        media.addEventListener('mouseleave', () => {
+          gsap.to(frame, { rotationY: 0, rotationX: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
+        });
+      }
+    }
+
+  }, { scope: blockRef });
 
   const Icon = feature.icon;
 
@@ -118,7 +143,7 @@ const FeatureBlock = ({ feature }) => {
       <div className="container feat-block__inner">
 
         {/* ── Media side ── */}
-        <div className="feat-block__media" data-anim>
+        <div className="feat-block__media" data-anim ref={mediaRef}>
           <div className="feat-block__frame">
             <video
               src={feature.video}
@@ -177,16 +202,20 @@ const FeatureBlock = ({ feature }) => {
 const Features = () => {
   const headRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const el = headRef.current;
     if (!el) return;
     const items = el.querySelectorAll('[data-anim]');
     gsap.set(items, { opacity: 0, y: 20 });
     gsap.to(items, {
-      opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+      opacity: 1, 
+      y: 0, 
+      duration: 0.7, 
+      stagger: 0.1, 
+      ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 80%', once: true },
     });
-  }, []);
+  }, { scope: headRef });
 
   return (
     <section id="features" className="features">

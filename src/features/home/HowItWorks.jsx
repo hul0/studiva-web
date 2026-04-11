@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './HowItWorks.css';
 import uploadIcon from '../../assets/icons/upload.svg';
@@ -40,50 +41,46 @@ const steps = [
 const HowItWorks = () => {
     const sectionRef = useRef(null);
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            const headerTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".how-it-works__head",
-                    start: "top 90%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            headerTl
-                .from(".how-it-works__badge", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" })
-                .from(".how-it-works__title", { y: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.4");
-
-            // Central Core & Cross Beams
-            const coreTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".how-it-works__hub-container",
-                    start: "top 75%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            coreTl
-                .from(".how-it-works__core", { scale: 0, opacity: 0, duration: 1.2, ease: "elastic.out(1, 0.5)" })
-                .from(".how-it-works__core-img", { scale: 1.5, opacity: 0, duration: 1, ease: "power2.out" }, "-=0.8")
-                .from(".how-it-works__cross-line", { scaleX: 0, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power2.inOut" }, "-=1");
-
-            // Card Animations (Simultaneous from corners)
-            const triggerSettings = {
-                trigger: ".how-it-works__hub-container",
-                start: "top 70%",
+    useGSAP(() => {
+        const headerTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".how-it-works__head",
+                start: "top 90%",
                 toggleActions: "play none none reverse"
-            };
+            }
+        });
 
-            gsap.fromTo(".step-card-node--top-left", { x: -250, y: -180, opacity: 0, rotation: -10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
-            gsap.fromTo(".step-card-node--top-right", { x: 250, y: -180, opacity: 0, rotation: 10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
-            gsap.fromTo(".step-card-node--bottom-left", { x: -250, y: 180, opacity: 0, rotation: -10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
-            gsap.fromTo(".step-card-node--bottom-right", { x: 250, y: 180, opacity: 0, rotation: 10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+        headerTl
+            .from(".how-it-works__badge", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" })
+            .from(".how-it-works__title", { y: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.4");
 
-        }, sectionRef);
+        // Central Core & Cross Beams
+        const coreTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".how-it-works__hub-container",
+                start: "top 75%",
+                toggleActions: "play none none reverse"
+            }
+        });
 
-        return () => ctx.revert();
-    }, []);
+        coreTl
+            .from(".how-it-works__core", { scale: 0, opacity: 0, duration: 1.2, ease: "elastic.out(1, 0.5)" })
+            .from(".how-it-works__core-img", { scale: 1.5, opacity: 0, duration: 1, ease: "power2.out" }, "-=0.8")
+            .from(".how-it-works__cross-line", { scaleX: 0, opacity: 0, duration: 1.2, stagger: 0.15, ease: "power2.inOut" }, "-=1");
+
+        // Card Animations (Simultaneous from corners)
+        const triggerSettings = {
+            trigger: ".how-it-works__hub-container",
+            start: "top 70%",
+            toggleActions: "play none none reverse"
+        };
+
+        gsap.fromTo(".step-card-node--top-left", { x: -250, y: -180, opacity: 0, rotation: -10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+        gsap.fromTo(".step-card-node--top-right", { x: 250, y: -180, opacity: 0, rotation: 10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+        gsap.fromTo(".step-card-node--bottom-left", { x: -250, y: 180, opacity: 0, rotation: -10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+        gsap.fromTo(".step-card-node--bottom-right", { x: 250, y: 180, opacity: 0, rotation: 10 }, { x: 0, y: 0, opacity: 1, rotation: 0, duration: 1.5, ease: "power4.out", scrollTrigger: triggerSettings });
+
+    }, { scope: sectionRef });
 
     return (
         <section className="how-it-works" id="how-it-works" ref={sectionRef}>

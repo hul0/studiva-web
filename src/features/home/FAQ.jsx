@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-// eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef } from 'react';
 import { Plus, Minus, MessageCircle, HelpCircle, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './FAQ.css';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const faqs = [
   {
@@ -37,6 +36,15 @@ const faqs = [
 
 const FAQItem = ({ faq, index }) => {
   const [isOpen, setIsOpen] = useState(index === 0);
+  const contentRef = useRef(null);
+
+  useGSAP(() => {
+    if (isOpen) {
+      gsap.to(contentRef.current, { height: 'auto', opacity: 1, duration: 0.35, ease: 'power3.out' });
+    } else {
+      gsap.to(contentRef.current, { height: 0, opacity: 0, duration: 0.35, ease: 'power3.out' });
+    }
+  }, [isOpen]);
 
   return (
     <div
@@ -50,19 +58,13 @@ const FAQItem = ({ faq, index }) => {
         </span>
       </div>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            className="faq-item__body"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-          >
-            <p className="faq-item__a">{faq.a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className="faq-item__body"
+        ref={contentRef}
+        style={{ height: index === 0 ? 'auto' : 0, overflow: 'hidden', opacity: index === 0 ? 1 : 0 }}
+      >
+        <p className="faq-item__a">{faq.a}</p>
+      </div>
     </div>
   );
 };
@@ -70,61 +72,55 @@ const FAQItem = ({ faq, index }) => {
 const FAQ = () => {
   const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(() => {
+    /* Head */
+    const headItems = document.querySelectorAll('.faq__head [data-anim]');
+    gsap.set(headItems, { opacity: 0, y: 20 });
+    gsap.to(headItems, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.faq__head',
+        start: 'top 82%',
+        once: true,
+      },
+    });
 
-      /* Head */
-      const headItems = document.querySelectorAll('.faq__head [data-anim]');
-      gsap.set(headItems, { opacity: 0, y: 20 });
-      gsap.to(headItems, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.faq__head',
-          start: 'top 82%',
-          once: true,
-        },
-      });
+    /* Grid items stagger */
+    const items = document.querySelectorAll('.faq-item');
+    gsap.set(items, { opacity: 0, y: 20 });
+    gsap.to(items, {
+      opacity: 1,
+      y: 0,
+      duration: 0.55,
+      stagger: 0.07,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.faq__grid',
+        start: 'top 82%',
+        once: true,
+      },
+      delay: 0.1,
+    });
 
-      /* Grid items stagger */
-      const items = document.querySelectorAll('.faq-item');
-      gsap.set(items, { opacity: 0, y: 20 });
-      gsap.to(items, {
-        opacity: 1,
-        y: 0,
-        duration: 0.55,
-        stagger: 0.07,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.faq__grid',
-          start: 'top 82%',
-          once: true,
-        },
-        delay: 0.1,
-      });
-
-      /* Footer */
-      const footer = document.querySelector('.faq__footer');
-      gsap.set(footer, { opacity: 0, y: 12 });
-      gsap.to(footer, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.faq__footer',
-          start: 'top 94%',
-          once: true,
-        },
-      });
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    /* Footer */
+    const footer = document.querySelector('.faq__footer');
+    gsap.set(footer, { opacity: 0, y: 12 });
+    gsap.to(footer, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.faq__footer',
+        start: 'top 94%',
+        once: true,
+      },
+    });
+  }, { scope: sectionRef });
 
   return (
     <section className="faq" id="faq" ref={sectionRef}>
