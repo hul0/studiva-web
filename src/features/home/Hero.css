@@ -13,6 +13,7 @@
   color: var(--text-1);
   padding: 120px 0 60px;
   isolation: isolate;
+  contain: layout style;
 }
 
 .hero__spline-container {
@@ -25,6 +26,8 @@
   pointer-events: none;
   user-select: none;
   transform: translate(-50%, -50%) scale(0.6);
+  will-change: transform;
+  contain: strict;
 }
 
 @media (max-width: 1024px) {
@@ -401,6 +404,7 @@
   border-radius: 100px;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  will-change: transform;
 }
 
 .hero__stat:hover {
@@ -464,24 +468,66 @@
 }
 
 @media (max-width: 640px) {
+  .hero {
+    padding: 110px 5% 48px;
+    min-height: calc(100vh - 20px);
+  }
+
   .hero__text-layer {
     top: 0;
   }
 
-  .hero__bottom-row {
-    gap: 24px;
-    /* Make the gap smaller across the bottom row */
+  .hero__title {
+    font-size: clamp(40px, 12vw, 72px);
+    letter-spacing: -2px;
   }
 
-  /* For mobile: stack buttons vertically by default */
+  .hero__bottom-row {
+    gap: 20px;
+  }
+
+  /* Stack buttons vertically and fill width */
   .hero__bottom-right {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
-    gap: 16px;
+    gap: 12px;
+  }
+
+  .brutalist-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fancy {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fancy .text {
+    text-align: center;
   }
 
   .hero__stats {
-    gap: 16px;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .hero__stat {
+    font-size: 13px;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero__title {
+    font-size: 36px;
+    letter-spacing: -1.5px;
+  }
+
+  .hero__stat {
+    font-size: 12px;
+    padding: 7px 12px;
   }
 }

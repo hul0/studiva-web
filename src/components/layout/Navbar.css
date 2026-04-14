@@ -283,4 +283,21 @@
   .nav__logo span {
     display: none;
   }
+
+  .nav__actions .btn-primary {
+    display: none;
+  }
+
+  .nav {
+    width: 92%;
+    height: 56px;
+    border-radius: 18px;
+    top: 16px;
+  }
+
+  .nav__mobile-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
 }

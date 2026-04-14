@@ -314,6 +314,7 @@ body {
 /* ── SECTION BASE ────────────────────────────── */
 section {
   position: relative;
+  contain: layout style;
   /* NOTE: overflow: hidden removed — it creates stacking contexts that force
      full-page repaint on scroll. Add overflow: hidden only where explicitly needed. */
 }

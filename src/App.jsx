@@ -13,6 +13,8 @@ const DeleteAccount = lazy(() => import('./pages/legal/DeleteAccount'));
 // Main Pages (Lazy Loaded)
 const Team = lazy(() => import('./pages/Team'));
 const ComingSoon = lazy(() => import('./pages/ComingSoon'));
+const ShareRedirect = lazy(() => import('./pages/ShareRedirect'));
+const VerifiedCreator = lazy(() => import('./pages/VerifiedCreator'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Dashboard (Lazy Loaded)
@@ -83,6 +85,11 @@ function App() {
 
   // Simple Router
   const renderContent = () => {
+    // Share/deeplink redirect — matches /share/* paths
+    if (path.startsWith('/share')) {
+      return <ShareRedirect />;
+    }
+
     switch (path) {
       case '/privacy':
         return <Privacy />;
@@ -94,6 +101,8 @@ function App() {
         return <Team />;
       case '/coming-soon':
         return <ComingSoon />;
+      case '/verified-creator':
+        return <VerifiedCreator />;
       case '/dashboard':
         return (
           <DashboardLayout 

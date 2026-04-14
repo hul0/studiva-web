@@ -12,21 +12,31 @@
 }
 
 .spline-placeholder__orb {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle at 30% 30%, rgba(168, 144, 254, 0.35), rgba(168, 144, 254, 0.08));
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(168, 144, 254, 0.4), 
+    rgba(242, 86, 35, 0.15) 50%,
+    rgba(168, 144, 254, 0.05) 100%
+  );
   border-radius: 50%;
-  box-shadow: 0 0 80px 40px rgba(168, 144, 254, 0.18), 0 0 160px 80px rgba(168, 144, 254, 0.08);
-  animation: float 6s ease-in-out infinite;
+  box-shadow: 
+    0 0 60px rgba(168, 144, 254, 0.3),
+    inset 0 0 40px rgba(255, 255, 255, 0.2);
+  animation: float 8s ease-in-out infinite;
   position: relative;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .spline-placeholder__orb::after {
   content: '';
   position: absolute;
-  inset: -20px;
+  inset: -30px;
   border-radius: 50%;
-  background: radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.15), transparent);
+  background: radial-gradient(circle at 60% 40%, rgba(168, 144, 254, 0.2), transparent 70%);
+  filter: blur(20px);
+  z-index: -1;
 }
 
 .spline-placeholder__content {
