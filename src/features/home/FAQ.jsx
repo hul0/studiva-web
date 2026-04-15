@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'Can I upload notes for any exam or subject?',
-    a: 'Yes! While we are most popular for JEE, NEET, and CBSE, we support 50+ categories including UPSC, CA Foundation, CLAT, Engineering subjects, and more.',
+    a: 'Yes! We support multiple categories including Engineering, JEE, NEET, CBSE, UPSC, CA Foundation, CLAT, and more — with new categories being added as we grow.',
   },
   {
     q: 'Is it safe to share my notes? What about piracy?',
@@ -152,7 +152,7 @@ const FAQ = () => {
             <MessageCircle size={16} strokeWidth={2} className="faq__support-icon" />
             <span>
               Still have questions?{' '}
-              <a href="mailto:support@studiva.com">Chat with our support team</a>.
+              <a href="mailto:support@crine.in">Chat with our support team</a>.
               We're here to help.
             </span>
           </div>

@@ -1,7 +1,7 @@
 import { Suspense, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { TrendingUp, Users } from 'lucide-react';
+import { Rocket, Users } from 'lucide-react';
 import SplineScene from '../../components/ui/SplineScene';
 import SplinePlaceholder from '../../components/ui/SplinePlaceholder';
 import './Hero.css';
@@ -93,17 +93,17 @@ const Hero = () => {
                 <div className="hero__bottom-row">
                     <div className="hero__bottom-left gsap-sub">
                         <p className="hero__sub section-sub">
-                            The world's first note marketplace that respects your time.
+                            A note marketplace that respects your time.
                             Earn through paid sales and rewarded ads — <strong>no forced ads, ever.</strong>
                         </p>
                         <div className="hero__stats gsap-stats">
                             <div className="hero__stat">
                                 <Users size={18} />
-                                <span><strong>200K+</strong> Learners</span>
+                                <span><strong>150+</strong> Early Adopters</span>
                             </div>
                             <div className="hero__stat">
-                                <TrendingUp size={18} />
-                                <span><strong>₹2Cr+</strong> Paid</span>
+                                <Rocket size={18} />
+                                <span><strong>Just Launched</strong> & Growing</span>
                             </div>
                         </div>
                     </div>

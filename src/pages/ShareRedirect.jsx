@@ -175,7 +175,7 @@ const ShareRedirect = () => {
         {/* Branding footer */}
         <div className="share-card__footer">
           <p className="share-card__branding">
-            Powered by <strong>Studiva</strong> — Your Study Buddy
+            Powered by <strong>CRINE</strong>
           </p>
         </div>
       </div>

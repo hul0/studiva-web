@@ -112,7 +112,7 @@ const TOS = () => {
                 </section>
 
                 <footer className="legal-footer">
-                    <p>&copy; 2026 Studiva. All rights reserved.</p>
+                    <p>&copy; 2026 CRINE. All rights reserved.</p>
                 </footer>
             </div>
         </div>

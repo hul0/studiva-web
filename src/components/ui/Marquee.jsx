@@ -14,7 +14,7 @@ const items = [
     'No subscription needed',
     'Withdraw via UPI',
     'Real student content',
-    '200K+ learners',
+    'Growing community',
     'Handwritten & PDF support',
     'Creator dashboard',
 ];

@@ -14,8 +14,8 @@ const rows = [
   {
     icon: TrendingUp,
     feature: 'Creator Revenue Share',
-    studiva: '70%',
-    others: '30–50%',
+    studiva: '60%',
+    others: '30–40%',
   },
   {
     icon: Zap,
@@ -26,26 +26,26 @@ const rows = [
   {
     icon: Banknote,
     feature: 'Withdrawal Threshold',
-    studiva: '₹100',
+    studiva: '₹200',
     others: '₹1,000+',
   },
   {
     icon: Shield,
     feature: 'Content Security',
-    studiva: 'Watermarked & DRM',
+    studiva: 'Watermarked & Moderated',
     others: 'Basic PDF',
   },
   {
     icon: Search,
     feature: 'Note Discoverability',
-    studiva: 'AI-Powered SEO',
+    studiva: 'Powerful SEO',
     others: 'Manual search',
   },
   {
     icon: Clock,
-    feature: 'Withdrawal Speed',
-    studiva: 'Instant / Same-day',
-    others: '7–14 days',
+    feature: 'Partner Creator Approval',
+    studiva: 'Couple of weeks',
+    others: 'Years to reach the threshold',
   },
 ];
 
@@ -180,7 +180,7 @@ const Comparison = () => {
           {/* Footer CTA */}
           <div className="compare__foot">
             <div className="compare__foot-td">
-              <a href="#features" className="compare__cta">View detailed features</a>
+              <a href="/verified-creator" className="compare__cta">Become a verified creator</a>
             </div>
             <div className="compare__foot-td compare__foot-td--studiva">
               <a href="#download" className="compare__cta" style={{ color: 'var(--accent-light)' }}>Start earning today</a>

@@ -14,7 +14,7 @@ const modes = [
         title: 'Paid Access',
         badge: 'Highest earners',
         desc: 'Set a one-time price for your academic mastery. Learners pay to access your full notes. You earn 70% of every sale.',
-        earn: '₹15,000 / month avg.',
+        earn: 'Potential top earner',
     },
     {
         id: 'rewarded',
@@ -22,7 +22,7 @@ const modes = [
         title: 'Rewarded Ads',
         badge: 'Best reach',
         desc: 'Notes are free — learners watch a 30-second ad to unlock. You earn from ad revenue automatically with zero friction.',
-        earn: '₹6,000 / month avg.',
+        earn: 'Passive income stream',
     },
     {
         id: 'free',
@@ -35,10 +35,10 @@ const modes = [
 ];
 
 const stats = [
-    { label: 'Creator payouts', value: 24, prefix: '₹', suffix: 'L+' },
-    { label: 'Active creators', value: 4200, prefix: '', suffix: '+' },
-    { label: 'Notes monetised', value: 32, prefix: '', suffix: 'K+' },
-    { label: 'Avg monthly earn', value: 8400, prefix: '₹', suffix: '' },
+    { label: 'Creator revenue share', value: 60, prefix: '', suffix: '%' },
+    { label: 'Monetization modes', value: 3, prefix: '', suffix: '' },
+    { label: 'Content types supported', value: 3, prefix: '', suffix: '+' },
+    { label: 'Withdrawal threshold', value: 100, prefix: '₹', suffix: '' },
 ];
 
 function useCounter(target, duration = 1.0, start = false) {
@@ -151,7 +151,7 @@ const CreatorEconomy = () => {
                                 <p className="mode-plate__desc">{m.desc}</p>
                             </div>
                             <div className="mode-plate__earn-block">
-                                <span className="mode-plate__earn-label">Expected Earnings</span>
+                                <span className="mode-plate__earn-label">Earning Potential</span>
                                 <div className="mode-plate__earn-val">{m.earn}</div>
                             </div>
                         </div>

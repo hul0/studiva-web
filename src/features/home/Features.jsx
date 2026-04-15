@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
-  Layers, TrendingUp, BookOpen, CheckCircle2,
+  Search, Layers, TrendingUp, BookOpen, CheckCircle2,
   GraduationCap, School, Microscope, Book, Scale, Briefcase, Award
 } from 'lucide-react';
 import './Features.css';
@@ -12,61 +12,61 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const features = [
   {
+    id: 'discover',
+    tag: 'Discover',
+    title: 'Find what you need.\nInstantly.',
+    desc: 'Stop scrolling through cluttered Telegram groups and WhatsApp chats. Studiva organises study resources with tags so you can search and find exactly what you need.',
+    bullets: ['Search by subject, topic & exam', 'Tagged & organised content', 'No buried messages or clutter', 'Notes, lab reports, assignments & more'],
+    video: '/videos/Flat_Illustration_Animation_Enhancement_Request.webm',
+    icon: Search,
+    flip: false,
+    stat: { label: 'Content', value: 'Organised & Tagged' },
+    stat2: { label: 'Access', value: 'Search-based' },
+  },
+  {
     id: 'upload',
     tag: 'Upload',
     title: 'Share your notes.\nEffortlessly.',
-    desc: 'Drop handwritten scans, PDFs, or typed notes. Our engine auto-tags and categorises everything for instant discoverability.',
-    bullets: ['PDF & handwritten scan support', 'Batch upload up to 100 pages', 'Auto-tagging for JEE, NEET & more', 'Secure cloud storage included'],
+    desc: 'Upload your handwritten scans, PDFs, or typed notes. Tag them with subject codes and topics so students can discover your content easily.',
+    bullets: ['PDF & handwritten scan support', 'Tag by subject code & topic', 'Secure cloud storage included', 'Your content, your control'],
     video: '/videos/Video_Ready_After_Agreement.webm',
     icon: Layers,
-    flip: false,
-    stat: { label: 'Auto-tagged', value: 'Physics · Wave Optics' },
-    stat2: { label: 'Status', value: 'Optimised ✓' },
+    flip: true,
+    stat: { label: 'Formats', value: 'PDF · Scans · Typed' },
+    stat2: { label: 'Storage', value: 'Cloud-hosted' },
   },
   {
     id: 'earn',
-    tag: 'Revenue',
-    title: 'Turn effort\ninto income.',
-    desc: 'Set your own price or use rewarded ads. Every unlock earns you real money, deposited instantly to UPI.',
-    bullets: ['70% creator revenue share', 'Rewarded ads payouts', 'Instant UPI withdrawals', 'Earnings analytics dashboard'],
+    tag: 'Monetize',
+    title: 'Your notes can\nearn for you.',
+    desc: 'Set a price for premium content or let students access it via rewarded ads. You keep 60% of every sale — no hidden fees.',
+    bullets: ['60% creator revenue share', 'Paid access or rewarded ads', 'Withdraw earnings via UPI', 'Creator analytics dashboard'],
     video: '/videos/Video_Generation_Request_Fulfilled.webm',
     icon: TrendingUp,
-    flip: true,
-    stat: { label: 'This month', value: '₹24,500' },
-    stat2: { label: 'Unlocks', value: '1,240' },
-  },
-  {
-    id: 'learn',
-    tag: 'Knowledge',
-    title: 'Study smarter\nwith toppers.',
-    desc: "Access verified notes from rank-holders. Filter by exam, study offline, and track what you've covered.",
-    bullets: ['Topper-verified notes only', 'Filter by exam & subject', 'Offline reading mode', 'Study progress tracking'],
-    video: '/videos/Flat_Illustration_Animation_Enhancement_Request.webm',
-    icon: BookOpen,
     flip: false,
-    stat: { label: 'Verified by', value: 'IIT Delhi, AIR 7' },
-    stat2: { label: 'Rating', value: '4.8 / 5.0' },
+    stat: { label: 'Revenue share', value: '60%' },
+    stat2: { label: 'Modes', value: 'Paid · Ads · Free' },
   },
 ];
 
 const catRow1 = [
-  { name: 'JEE Mains', count: '12K+ notes', icon: School },
-  { name: 'NEET UG', count: '15K+ notes', icon: Microscope },
-  { name: 'CBSE Class 12', count: '20K+ notes', icon: Book },
-  { name: 'Engineering', count: '11K+ notes', icon: GraduationCap },
-  { name: 'UPSC / IAS', count: '9K+ notes', icon: Scale },
-  { name: 'IBDP / IGCSE', count: '5K+ notes', icon: Award },
+  { name: 'JEE Mains', count: 'New', icon: School },
+  { name: 'NEET UG', count: 'New', icon: Microscope },
+  { name: 'CBSE Class 12', count: 'New', icon: Book },
+  { name: 'Engineering', count: 'New', icon: GraduationCap },
+  { name: 'UPSC / IAS', count: 'New', icon: Scale },
+  { name: 'IBDP / IGCSE', count: 'New', icon: Award },
 ];
 
 const catRow2 = [
-  { name: 'JEE Advanced', count: '8K+ notes', icon: Award },
-  { name: 'CA Foundation', count: '6K+ notes', icon: Briefcase },
-  { name: 'Law / CLAT', count: '4K+ notes', icon: Scale },
-  { name: 'SSC CGL', count: '10K+ notes', icon: Award },
-  { name: 'Medical PG', count: '7K+ notes', icon: Microscope },
-  { name: 'MBA Entrance', count: '12K+ notes', icon: GraduationCap },
-  { name: 'GATE / PSU', count: '9K+ notes', icon: Award },
-  { name: 'Class 10', count: '18K+ notes', icon: Book },
+  { name: 'JEE Advanced', count: 'New', icon: Award },
+  { name: 'CA Foundation', count: 'New', icon: Briefcase },
+  { name: 'Law / CLAT', count: 'New', icon: Scale },
+  { name: 'SSC CGL', count: 'New', icon: Award },
+  { name: 'Medical PG', count: 'New', icon: Microscope },
+  { name: 'MBA Entrance', count: 'New', icon: GraduationCap },
+  { name: 'GATE / PSU', count: 'New', icon: Award },
+  { name: 'Class 10', count: 'New', icon: Book },
 ];
 
 const FeatureBlock = memo(({ feature }) => {
@@ -202,16 +202,16 @@ const FeatureBlock = memo(({ feature }) => {
 const Features = () => {
   const headRef = useRef(null);
 
-    useGSAP(() => {
+  useGSAP(() => {
     const el = headRef.current;
     if (!el) return;
     const items = el.querySelectorAll('[data-anim]');
     gsap.set(items, { opacity: 0, y: 20 });
     gsap.to(items, {
-      opacity: 1, 
-      y: 0, 
-      duration: 0.7, 
-      stagger: 0.1, 
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      stagger: 0.1,
       ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 80%', once: true },
     });
