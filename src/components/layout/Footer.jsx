@@ -32,7 +32,7 @@ const Footer = () => {
         mm.add("(min-width: 641px)", () => {
             const letters = massiveTextRef.current?.querySelectorAll('.footer-letter');
             if (!letters || letters.length === 0) return;
-            
+
             // Letters start at y:120 scale:0.5 (set in CSS)
             // Animate each letter bouncing up into place — replays every time footer enters viewport
             gsap.to(letters, {
@@ -57,7 +57,7 @@ const Footer = () => {
         // Magnetic links for social buttons (scoped to footer)
         const socialBtns = footerRef.current?.querySelectorAll('.footer-b__social-btn');
         if (!socialBtns) return;
-        
+
         socialBtns.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
@@ -83,11 +83,11 @@ const Footer = () => {
                         <div className="footer-b__col footer-b__dropdowns">
                             {categories.map(cat => (
                                 <div key={cat.id} className="footer-b__dropdown">
-                                    <button 
-                                        className="footer-b__dropdown-btn" 
+                                    <button
+                                        className="footer-b__dropdown-btn"
                                         onClick={() => toggleDropdown(cat.id)}
                                     >
-                                        {cat.title} 
+                                        {cat.title}
                                         <span className={`footer-b__arrow ${openDropdown === cat.id ? 'open' : ''}`}>↘</span>
                                     </button>
                                     <div className={`footer-b__dropdown-content ${openDropdown === cat.id ? 'open' : ''}`}>
@@ -130,6 +130,7 @@ const Footer = () => {
                     {FooterText.split('').map((char, index) => (
                         <span key={index} className="footer-letter">{char}</span>
                     ))}
+
                 </h1>
             </div>
         </footer>

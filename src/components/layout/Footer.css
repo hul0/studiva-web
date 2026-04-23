@@ -169,12 +169,13 @@
     margin: 0;
     text-align: center;
     white-space: nowrap;
-    
+
     /* Center letters */
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 0.04em; /* Spacing between letters */
+    gap: 0.04em;
+    /* Spacing between letters */
 }
 
 .footer-letter {
@@ -186,7 +187,7 @@
     background-clip: text;
     color: transparent;
     /* Initial state: hidden below, GSAP will animate to visible */
-    transform: translateY(120px) scale(0.5);
+    transform: translateY(240px) scale(0.5);
     transform-origin: center bottom;
 }
 
@@ -224,8 +225,9 @@
         letter-spacing: -2px;
         font-size: clamp(100px, 100vw, 100px);
     }
-    
+
     .footer-letter {
-        transform: none; /* Make letters visible immediately since bounce animation is disabled on mobile */
+        transform: none;
+        /* Make letters visible immediately since bounce animation is disabled on mobile */
     }
 }

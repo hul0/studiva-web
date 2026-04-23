@@ -12,6 +12,7 @@ const DeleteAccount = lazy(() => import('./pages/legal/DeleteAccount'));
 
 // Main Pages (Lazy Loaded)
 const Team = lazy(() => import('./pages/Team'));
+const CampusRepresentative = lazy(() => import('./pages/CampusRepresentative'));
 const ComingSoon = lazy(() => import('./pages/ComingSoon'));
 const ShareRedirect = lazy(() => import('./pages/ShareRedirect'));
 const VerifiedCreator = lazy(() => import('./pages/VerifiedCreator'));
@@ -99,6 +100,8 @@ function App() {
         return <DeleteAccount />;
       case '/team':
         return <Team />;
+      case '/campus-representative':
+        return <CampusRepresentative />;
       case '/coming-soon':
         return <ComingSoon />;
       case '/verified-creator':

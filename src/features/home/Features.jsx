@@ -14,7 +14,7 @@ const features = [
   {
     id: 'discover',
     tag: 'Discover',
-    title: 'Find what you need.\nInstantly.',
+    title: 'Find what you need-\nInstantly.',
     desc: 'Stop scrolling through cluttered Telegram groups and WhatsApp chats. Studiva organises study resources with tags so you can search and find exactly what you need.',
     bullets: ['Search by subject, topic & exam', 'Tagged & organised content', 'No buried messages or clutter', 'Notes, lab reports, assignments & more'],
     video: '/videos/Flat_Illustration_Animation_Enhancement_Request.webm',
@@ -26,7 +26,7 @@ const features = [
   {
     id: 'upload',
     tag: 'Upload',
-    title: 'Share your notes.\nEffortlessly.',
+    title: 'Share your notes-\nEffortlessly.',
     desc: 'Upload your handwritten scans, PDFs, or typed notes. Tag them with subject codes and topics so students can discover your content easily.',
     bullets: ['PDF & handwritten scan support', 'Tag by subject code & topic', 'Secure cloud storage included', 'Your content, your control'],
     video: '/videos/Video_Ready_After_Agreement.webm',
@@ -38,7 +38,7 @@ const features = [
   {
     id: 'earn',
     tag: 'Monetize',
-    title: 'Your notes can\nearn for you.',
+    title: 'Your notes can-\nearn for you.',
     desc: 'Set a price for premium content or let students access it via rewarded ads. You keep 60% of every sale — no hidden fees.',
     bullets: ['60% creator revenue share', 'Paid access or rewarded ads', 'Withdraw earnings via UPI', 'Creator analytics dashboard'],
     video: '/videos/Video_Generation_Request_Fulfilled.webm',
@@ -142,6 +142,7 @@ const FeatureBlock = memo(({ feature }) => {
 
       <div className="container feat-block__inner">
 
+
         {/* ── Media side ── */}
         <div className="feat-block__media" data-anim ref={mediaRef}>
           <div className="feat-block__frame">
@@ -153,7 +154,9 @@ const FeatureBlock = memo(({ feature }) => {
             <div className="feat-block__scrim" />
 
             {/* Stat pills */}
+
             <div className="feat-pill feat-pill--tl">
+
               <span className="feat-pill__label">{feature.stat.label}</span>
               <span className="feat-pill__val">{feature.stat.value}</span>
             </div>
@@ -167,8 +170,8 @@ const FeatureBlock = memo(({ feature }) => {
         {/* ── Text side ── */}
         <div className="feat-block__text">
           <div className="feat-tag" data-anim>
-            <Icon size={13} strokeWidth={2.5} />
-            <span>{feature.tag}</span>
+            <Icon size={32} strokeWidth={2.5} />
+            <span className='iconText'>{feature.tag}</span>
           </div>
 
           <h2 className="feat-title" data-anim>
@@ -177,13 +180,13 @@ const FeatureBlock = memo(({ feature }) => {
             ))}
           </h2>
 
-          <p className="feat-desc" data-anim>{feature.desc}</p>
+          {/* <p className="feat-desc" data-anim>{feature.desc}</p> */}
 
           <ul className="feat-bullets" data-anim>
             {feature.bullets.map((b, i) => (
               <li key={i} className="feat-bullet">
-                <CheckCircle2 size={14} strokeWidth={2.5} />
-                <span>{b}</span>
+                <CheckCircle2 size={24} strokeWidth={2.5} />
+                <span className='bulletText'>{b}</span>
               </li>
             ))}
           </ul>

@@ -12,9 +12,10 @@
 .feat-block__inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: fit-content;
   align-items: stretch;
   background: var(--surface);
-  border: 1px solid var(--border-strong);
+  background-color: transparent;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -106,6 +107,9 @@
 /* ── Text Panel ────────────────────────────── */
 .feat-block__text {
   display: flex;
+  background-color: white;
+  border-radius: 16px;
+  margin: 16px;
   flex-direction: column;
   justify-content: center;
   gap: 20px;
@@ -121,6 +125,10 @@
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--accent-light);
+}
+
+.iconText {
+  font-size: 16px;
 }
 
 .feat-title {
@@ -158,6 +166,11 @@
   line-height: 1.4;
 }
 
+.bulletText {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .feat-bullet svg {
   color: var(--accent-light);
   flex-shrink: 0;
@@ -167,7 +180,7 @@
 /* ── CTA ───────────────────────────────────── */
 .feat-cta {
   display: inline-block;
-  font-size: 13px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--text-1);
   text-decoration: none;

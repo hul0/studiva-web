@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ── Helper: DiceBear Lorelei avatar URL ─────────────── */
 const avatar = (seed) =>
-  `https://api.dicebear.com/9.x/lorelei/svg?seed=${encodeURIComponent(seed)}&size=128`;
+  `https://api.dicebear.com/7.x/lorelei/svg?seed=${encodeURIComponent(seed)}&size=128`;
 
 /* ── Team data ───────────────────────────────────────── */
 const leadership = [
@@ -28,10 +28,10 @@ const creative = [
 ];
 
 const prTeam = [
-  { name: 'Md. Shadman Shahnawaz', role: 'PR Lead', tag: 'PR Lead', seed: 'Jack' },
+  { name: 'Md. Shadman Shahnawaz', role: 'PR Lead', tag: 'PR Lead', seed: 'Jack', image: '/team_figures/shadman.jpeg' },
   { name: 'Soham Singh', role: 'Outreach', seed: 'Alexander' },
   { name: 'Freja Chandni', role: 'Outreach', seed: 'Adrian' },
-  { name: 'Sk. Aqib', role: 'Outreach', seed: 'Alexander' },
+  { name: 'Sk. Aqib', role: 'Outreach', seed: 'Alexander', image: '/team_figures/aqib.jpeg' },
   { name: 'Rohit Jha', role: 'Outreach', seed: 'Alexander' },
   { name: 'Anubhav Bishwakarma', role: 'Outreach', seed: 'Alexander' },
   { name: 'Swastika Das', role: 'Outreach', seed: 'Adrian' },
@@ -55,13 +55,13 @@ const TeamSection = ({ label, title, members, variant = 'default' }) => (
             <div className="tm-card__avatar-wrap">
               <img
                 className="tm-card__avatar"
-                src={avatar(m.seed || m.name)}
+                src={m.image || avatar(m.seed || m.name)}
                 alt={m.name}
-                loading="lazy"
               />
               {m.tag && <span className="tm-card__tag">{m.tag}</span>}
             </div>
             <div className="tm-card__info">
+
               <h3 className="tm-card__name">{m.name}</h3>
               <p className="tm-card__role">{m.role}</p>
             </div>
