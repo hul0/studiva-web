@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase';
+import { api } from '../services/api';
 import { LogOut, Search, Filter, Download, Database } from 'lucide-react';
 import './Admin.css';
 
@@ -92,12 +93,18 @@ const Admin = () => {
   const fetchData = async (tableName) => {
     setTableLoading(true);
     try {
-      const { data: records, error: fetchError } = await supabase
-        .from(tableName)
-        .select('*')
-        .order('created_at', { ascending: false });
+      let records = [];
+      if (tableName === 'campus_representative_applications') {
+        records = await api.campusReps.getAll();
+      } else if (tableName === 'verified_creator_applications') {
+        records = await api.creators.getAll();
+      } else if (tableName === 'feature_suggestions') {
+        records = await api.suggestions.getAll();
+      } else if (tableName === 'support_tickets') {
+        records = await api.support.getAll();
+      }
 
-      if (fetchError) throw fetchError;
+      if (records.error) throw new Error(records.error);
       setData(records || []);
     } catch (err) {
       console.error(`Error fetching ${tableName}:`, err);

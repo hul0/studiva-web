@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import { supabase } from '../utils/supabase';
+import { api } from '../services/api';
 import './VerifiedCreator.css';
 
 /* ─── Benefit card data ───────────────────────────── */
@@ -145,19 +145,17 @@ const VerifiedCreator = () => {
     setSubmitting(true);
 
     try {
-      const { error: dbError } = await supabase
-        .from('verified_creator_applications')
-        .insert({
-          full_name: form.full_name.trim(),
-          email: form.email.trim().toLowerCase(),
-          phone: form.phone.trim(),
-          weekly_uploads: uploads,
-          social_links: form.social_links.trim() || null,
-          has_team: form.has_team,
-          team_size: form.has_team ? (parseInt(form.team_size, 10) || 0) : 0,
-        });
+      const { error: dbError } = await api.creators.create({
+        full_name: form.full_name.trim(),
+        email: form.email.trim().toLowerCase(),
+        phone: form.phone.trim(),
+        weekly_uploads: uploads,
+        social_links: form.social_links.trim() || null,
+        has_team: form.has_team,
+        team_size: form.has_team ? (parseInt(form.team_size, 10) || 0) : 0,
+      });
 
-      if (dbError) throw dbError;
+      if (dbError) throw new Error(dbError);
 
       setSubmitted(true);
     } catch (err) {

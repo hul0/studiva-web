@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import { HelpCircle, Mail, Shield, MessageCircle, Send, CheckCircle, LifeBuoy } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import { supabase } from '../utils/supabase';
+import { api } from '../services/api';
 import './Support.css';
 
 const Support = () => {
@@ -40,11 +40,8 @@ const Support = () => {
     setError(null);
 
     try {
-      const { error: dbError } = await supabase
-        .from('support_tickets')
-        .insert([form]);
-
-      if (dbError) throw dbError;
+      const { error: dbError } = await api.support.create(form);
+      if (dbError) throw new Error(dbError);
 
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });

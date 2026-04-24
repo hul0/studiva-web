@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import { supabase } from '../utils/supabase';
+import { api } from '../services/api';
 import './CampusRepresentative.css';
 
 /* ─── Benefit card data ───────────────────────────── */
@@ -125,20 +125,16 @@ const CampusRepresentative = () => {
     setSubmitting(true);
 
     try {
-      const { error: dbError } = await supabase
-        .from('campus_representative_applications')
-        .insert([
-          {
-            full_name: form.full_name,
-            email: form.email,
-            phone: form.phone,
-            college_name: form.college_name,
-            year_of_study: form.year_of_study,
-            why_join: form.why_join
-          }
-        ]);
+      const { error: dbError } = await api.campusReps.create({
+        full_name: form.full_name,
+        email: form.email,
+        phone: form.phone,
+        college_name: form.college_name,
+        year_of_study: form.year_of_study,
+        why_join: form.why_join
+      });
 
-      if (dbError) throw dbError;
+      if (dbError) throw new Error(dbError);
 
       setSubmitted(true);
       console.log('Campus Representative Application Submitted:', form);

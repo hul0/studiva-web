@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import { Sparkles, Heart, Users, MessageSquare, Send, CheckCircle, ArrowLeft } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import { supabase } from '../utils/supabase';
+import { api } from '../services/api';
 import './SuggestFeature.css';
 
 const SuggestFeature = () => {
@@ -40,11 +40,8 @@ const SuggestFeature = () => {
     setError(null);
 
     try {
-      const { error: dbError } = await supabase
-        .from('feature_suggestions')
-        .insert([form]);
-
-      if (dbError) throw dbError;
+      const { error: dbError } = await api.suggestions.create(form);
+      if (dbError) throw new Error(dbError);
 
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
