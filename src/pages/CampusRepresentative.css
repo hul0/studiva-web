@@ -287,9 +287,9 @@
   color: var(--btn-bg);
 }
 
-.cr-form__submit:active:not(:disabled) {
-  /* GSAP handles movement */
-}
+/* .cr-form__submit:active:not(:disabled) {
+  GSAP handles movement
+} */
 
 .cr-form__submit:disabled {
   opacity: 0.6;
