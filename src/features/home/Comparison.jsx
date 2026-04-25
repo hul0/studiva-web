@@ -2,192 +2,96 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-  TrendingUp, Zap, Shield, Clock, Search, Banknote,
-  CheckCircle2, XCircle, Sparkles,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import './Comparison.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const rows = [
-  {
-    icon: TrendingUp,
-    feature: 'Creator Revenue Share',
-    studiva: '60%',
-    others: '30–40%',
-  },
-  {
-    icon: Zap,
-    feature: 'Rewarded Ad Support',
-    studiva: true,
-    others: false,
-  },
-  {
-    icon: Banknote,
-    feature: 'Withdrawal Threshold',
-    studiva: '₹200',
-    others: '₹1,000+',
-  },
-  {
-    icon: Shield,
-    feature: 'Content Security',
-    studiva: 'Watermarked & Moderated',
-    others: 'Basic PDF',
-  },
-  {
-    icon: Search,
-    feature: 'Note Discoverability',
-    studiva: 'Powerful SEO',
-    others: 'Manual search',
-  },
-  {
-    icon: Clock,
-    feature: 'Partner Creator Approval',
-    studiva: 'Couple of weeks',
-    others: 'Years to reach the threshold',
-  },
+const features = [
+  { text: '60% Creator Revenue Share', color: 'accent' },
+  { text: 'Rewarded Ad Support', color: 'light' },
+  { text: '₹200 Withdrawal Threshold', color: 'light' },
+  { text: 'Watermarked Content Security', color: 'accent' },
+  { text: 'Powerful SEO Discoverability', color: 'accent' },
+  { text: 'Fast Partner Approval', color: 'light' }
 ];
-
-const Cell = ({ val }) => {
-  if (val === true)
-    return (
-      <span className="cmp-bool cmp-bool--yes">
-        <CheckCircle2 size={13} strokeWidth={2.5} />
-      </span>
-    );
-  if (val === false)
-    return (
-      <span className="cmp-bool cmp-bool--no">
-        <XCircle size={13} strokeWidth={2} />
-      </span>
-    );
-  return <>{val}</>;
-};
 
 const Comparison = () => {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
-    /* Head items */
-    gsap.to('.compare__eyebrow, .compare__title, .compare__sub', {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
+    const el = sectionRef.current;
+    
+    // Animate question mark
+    gsap.to('.why-question-mark', {
+      y: -10,
+      rotation: 25,
+      duration: 2.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut'
+    });
+
+    // Animate texts in
+    gsap.from('.why-title-line', {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 75%',
+        once: true
+      },
+      x: -50,
+      opacity: 0,
+      duration: 0.8,
       stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.compare__head',
-        start: 'top 82%',
-        once: true,
-      },
+      ease: 'power3.out'
     });
 
-    /* Table wrapper fades up */
-    gsap.to('.compare__wrap', {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power3.out',
+    // Animate pills
+    gsap.from('.why-pill', {
       scrollTrigger: {
-        trigger: '.compare__wrap',
-        start: 'top 82%',
-        once: true,
+        trigger: el,
+        start: 'top 70%',
+        once: true
       },
-    });
-
-    /* Rows slide in staggered */
-    gsap.to('.compare__row', {
-      opacity: 1,
-      x: 0,
+      scale: 0.8,
+      y: 20,
+      opacity: 0,
       duration: 0.5,
-      stagger: 0.07,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.compare__wrap',
-        start: 'top 80%',
-        once: true,
-      },
-      delay: 0.2,
+      stagger: 0.1,
+      ease: 'back.out(1.5)'
     });
-
-    /* Footer */
-    const footer = document.querySelector('.compare__foot');
-    if (footer) {
-      gsap.to(footer, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: footer,
-          start: 'top 94%',
-          once: true,
-        },
-        delay: 0.1,
-      });
-    }
 
   }, { scope: sectionRef });
 
   return (
-    <section className="compare" id="compare" ref={sectionRef}>
-      <div className="container">
-
-        {/* Head */}
-        <div className="compare__head">
-          <p className="compare__eyebrow">
-            Comparison
-          </p>
-          <h2 className="compare__title">
-            Why creators choose Studiva.
-          </h2>
-          <p className="compare__sub">
-            More earnings, faster payouts, smarter reach — built for serious note-sellers.
-          </p>
+    <section className="why-section" id="compare" ref={sectionRef}>
+      <div className="why-container">
+        
+        {/* Top Text Area */}
+        <div className="why-header">
+          <div className="why-text-block">
+            <div className="why-title-line why-white">WHY</div>
+            <div className="why-title-line why-accent">CHOOSE</div>
+            <div className="why-title-line why-us-line">
+              <span className="why-arrow-circle">
+                <ArrowRight size={36} strokeWidth={3} color="#000" />
+              </span> 
+              <span className="why-white">US</span>
+            </div>
+          </div>
+          <div className="why-question-mark">?</div>
         </div>
 
-        {/* Table */}
-        <div className="compare__wrap">
-
-          {/* Column headers */}
-          <div className="compare__thead">
-            <div className="compare__th">Feature</div>
-            <div className="compare__th compare__th--studiva">
-              Studiva
+        {/* Pills Grid */}
+        <div className="why-pills-grid">
+          {features.map((f, i) => (
+            <div key={i} className={`why-pill why-pill--${f.color}`}>
+              <div className="why-pill-dot"></div>
+              <span className="why-pill-text">{f.text}</span>
             </div>
-            <div className="compare__th">Others</div>
-          </div>
-
-          {/* Rows */}
-          {rows.map((row, i) => {
-            const Icon = row.icon;
-            return (
-              <div key={i} className="compare__row">
-                <div className="compare__td compare__td--feature">
-                  <Icon size={14} strokeWidth={2} />
-                  {row.feature}
-                </div>
-                <div className="compare__td compare__td--studiva">
-                  <Cell val={row.studiva} />
-                </div>
-                <div className="compare__td compare__td--others">
-                  <Cell val={row.others} />
-                </div>
-              </div>
-            );
-          })}
-          {/* Footer CTA */}
-          <div className="compare__foot">
-            <div className="compare__foot-td">
-              <a href="/verified-creator" className="compare__cta">Become a verified creator</a>
-            </div>
-            <div className="compare__foot-td compare__foot-td--studiva">
-              <a href="#download" className="compare__cta" style={{ color: 'var(--accent-light)' }}>Start earning today</a>
-            </div>
-            <div className="compare__foot-td"></div>
-          </div>
+          ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,196 +1,218 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Draggable } from 'gsap/Draggable';
+import { InertiaPlugin } from 'gsap/InertiaPlugin';
 import './Testimonials.css';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin, useGSAP);
 
-const StarIcon = () => (
-  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" stroke="none" style={{ color: '#a78bfa' }}>
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-  </svg>
-);
-
-const testimonials = [
+const testimonialsData = [
   {
-    id: 't1', name: 'Early Creator', role: 'Engineering Student',
-    badge: 'Creator',
+    id: 't1', name: 'Ravi K.', role: 'Engineering',
+    num: '01',
     text: 'Finally a platform where I can share my handwritten notes and actually get discovered. The upload process is super smooth.',
-    earn: 'Building audience',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop&crop=face',
+    color: '#dcfce7', pinColor: '#22c55e'
   },
   {
-    id: 't2', name: 'Beta User', role: 'MAKAUT Student',
-    badge: 'Learner',
-    text: "No more scrolling through cluttered Telegram groups. Studiva lets me search and find exactly what I need for my exams.",
-    earn: 'Saving time daily',
+    id: 't2', name: 'Anjali M.', role: 'Medical',
+    num: '02',
+    text: 'No more scrolling through cluttered Telegram groups. Studiva lets me search and find exactly what I need for my exams.',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face',
+    color: '#fee2e2', pinColor: '#ef4444'
   },
   {
-    id: 't3', name: 'Content Creator', role: 'B.Tech Final Year',
-    badge: 'Creator',
+    id: 't3', name: 'Vikram S.', role: 'B.Tech IT',
+    num: '03',
     text: 'I uploaded my 4 years of lab reports and assignment solutions. The tagging system makes everything instantly discoverable.',
-    earn: 'Growing reach',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
+    color: '#e0f2fe', pinColor: '#3b82f6'
   },
   {
-    id: 't4', name: 'Study Enthusiast', role: 'Exam Prep',
-    badge: 'Learner',
-    text: 'Love that I can either pay a small amount or watch a quick ad to access notes. No forced subscriptions, no hidden fees.',
-    earn: 'Smart savings',
+    id: 't4', name: 'Priya R.', role: 'CBSE Board',
+    num: '04',
+    text: 'Love that I can either pay a small amount or watch a quick ad to access notes. No forced subscriptions!',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face',
+    color: '#dbeafe', pinColor: '#0ea5e9'
   },
   {
-    id: 't5', name: 'Note Seller', role: 'Topper',
-    badge: 'Creator',
-    text: "The 70% revenue share is the best I've seen. Plus the rewarded ads model means my notes reach students who can't pay upfront.",
-    earn: 'Fair monetization',
+    id: 't5', name: 'Aditya V.', role: 'JEE Aspirant',
+    num: '05',
+    text: 'The 70% revenue share is the best I\'ve seen. Plus the rewarded ads model means my notes reach everyone.',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face',
+    color: '#fef3c7', pinColor: '#eab308'
   },
   {
-    id: 't6', name: 'Active Learner', role: 'University Student',
-    badge: 'Learner',
-    text: 'Organized, searchable, and no content gets buried like in WhatsApp groups. This is what academic resources should look like.',
-    earn: 'Better grades',
+    id: 't6', name: 'Megha T.', role: 'UPSC Prep',
+    num: '06',
+    text: 'Organized, searchable, and no content gets buried. This is exactly what academic resources should look like.',
     avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face',
+    color: '#f3e8ff', pinColor: '#a855f7'
   },
 ];
 
-
+const initialPositions = [
+  { top: '10%', left: '5%', rotation: -4 },
+  { top: '8%', left: '42%', rotation: 3 },
+  { top: '12%', left: '75%', rotation: -6 },
+  { top: '60%', left: '8%', rotation: 5 },
+  { top: '65%', left: '45%', rotation: -3 },
+  { top: '55%', left: '72%', rotation: 4 },
+];
 
 const Testimonials = () => {
-  const headRef = useRef(null);
-  const trustRef = useRef(null);
-  const marqueeRef = useRef(null);
-  const trackRef = useRef(null);
-  const animationRef = useRef(null);
+  const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const head = headRef.current;
-    const track = trackRef.current;
-    const trust = trustRef.current;
-    if (!head || !track || !trust) return;
+  useGSAP(() => {
+    const el = sectionRef.current;
+    if (!el) return;
 
-    // ── Header: line wipe then stagger up
-    const headItems = head.querySelectorAll('[data-anim]');
-    gsap.set(headItems, { opacity: 0, y: 20 });
-    gsap.to(headItems, {
-      opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
-      scrollTrigger: { trigger: head, start: 'top 82%', once: true },
+    // 1. REVIEWS word entrance
+    const chars = el.querySelectorAll('.rev-char');
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top top',
+        end: '+=2500',
+        pin: true,
+        scrub: 1,
+      }
     });
 
-    // ── Trust row: fade + slide up with spring
-    const badges = trust.querySelectorAll('.trust-badge');
-    gsap.set(badges, { opacity: 0, y: 16, scale: 0.96 });
-    gsap.to(badges, {
-      opacity: 1, y: 0, scale: 1,
-      duration: 0.5, stagger: 0.06, ease: 'back.out(1.4)',
-      scrollTrigger: { trigger: trust, start: 'top 86%', once: true },
-    });
-
-    // ── Trust values: count up animation
-    badges.forEach((badge) => {
-      const valEl = badge.querySelector('.trust-badge__val');
-      if (!valEl) return;
-      const raw = valEl.textContent;
-      const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
-      if (isNaN(num)) return;
-      const prefix = raw.match(/^[^0-9]*/)?.[0] ?? '';
-      const suffix = raw.match(/[^0-9.]+$/)?.[0] ?? '';
-      const decimals = raw.includes('.') ? 1 : 0;
-      gsap.fromTo({ val: 0 }, { val: num }, {
-        val: num, duration: 1.4, ease: 'power2.out', delay: 0.2,
-        onUpdate: function () { valEl.textContent = prefix + this.targets()[0].val.toFixed(decimals) + suffix; },
-        scrollTrigger: { trigger: trust, start: 'top 86%', once: true },
-      });
-    });
-
-    // ── Marquee Loop Animation
-    const trackWidth = track.scrollWidth;
-    const loopTime = 40; // Total duration for one cycle
-
-    // Create the infinite loop
-    animationRef.current = gsap.to(track, {
-      xPercent: -50,
-      duration: loopTime,
-      ease: 'none',
-      repeat: -1,
-      paused: false
-    });
-
-    // Entrance animation for the whole marquee
-    gsap.fromTo(marqueeRef.current,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: marqueeRef.current, start: 'top 90%' }
+    tl.fromTo(chars,
+      { opacity: 0, scale: 4, rotation: () => gsap.utils.random(-60, 60) },
+      { 
+        opacity: 1, 
+        scale: 1, 
+        rotation: 0, 
+        stagger: 0.1, 
       }
     );
 
-    return () => {
-      if (animationRef.current) animationRef.current.kill();
-    };
-  }, []);
+    // 2. Initial entrance "hanging" swing for cards
+    const cards = el.querySelectorAll('.tcard-physics');
+    
+    // Function to update the rope's bezier curve dynamically
+    const updateRope = function(target, xPos, yPos) {
+      const path = target.querySelector('.rope-path');
+      if (!path) return;
+      
+      // Calculate the top anchor point to stay globally fixed
+      const tx = 400 - xPos;
+      const ty = -yPos;
+      
+      // Control points for a realistic elastic curve (lagging behind the drag)
+      const cx1 = 400 - (xPos * 0.6);
+      const cy1 = ty + 400;
+      
+      const cx2 = 400 - (xPos * 0.15);
+      const cy2 = 800;
 
-  const handleMouseEnter = () => animationRef.current?.pause();
-  const handleMouseLeave = () => animationRef.current?.play();
+      path.setAttribute('d', `M${tx},${ty} C${cx1},${cy1} ${cx2},${cy2} 400,1200`);
+    };
+
+    tl.fromTo(cards, 
+      { opacity: 0, y: -600, rotation: (i) => initialPositions[i].rotation + 30 },
+      {
+        opacity: 1,
+        y: 0,
+        rotation: (i) => initialPositions[i].rotation,
+        stagger: 0.1,
+        ease: "back.out(1.2)",
+        onUpdate: function() {
+          // Update ropes during entrance animation
+          cards.forEach(card => {
+            const yPos = gsap.getProperty(card, "y");
+            const xPos = gsap.getProperty(card, "x");
+            updateRope(card, xPos, yPos);
+          });
+        }
+      },
+      "-=0.2" // slight overlap
+    );
+
+    // 3. Make them draggable with Inertia (bouncing)
+    Draggable.create(cards, {
+      type: "x,y",
+      bounds: ".testimonials-board",
+      inertia: true,
+      edgeResistance: 0.6, /* higher elasticity */
+      bounce: 0.8,
+      onPress: function() {
+        gsap.to(this.target, { scale: 1.05, boxShadow: "0 25px 50px rgba(0,0,0,0.15)", duration: 0.2 });
+        this.target.style.zIndex = 100;
+      },
+      onDrag: function() {
+        updateRope(this.target, this.x, this.y);
+      },
+      onThrowUpdate: function() {
+        updateRope(this.target, this.x, this.y);
+      },
+      onRelease: function() {
+        gsap.to(this.target, { scale: 1, boxShadow: "0 10px 30px rgba(0,0,0,0.08)", duration: 0.4, ease: "elastic.out(1, 0.4)" });
+        this.target.style.zIndex = 10;
+      }
+    });
+
+  }, { scope: sectionRef });
 
   return (
-    <section className="testimonials" id="testimonials">
-      <div className="container">
-
-        {/* Header */}
-        <div className="testimonials__head" ref={headRef}>
-          <p className="testimonials__eyebrow" data-anim>Reviews</p>
-          <h2 className="testimonials__title" data-anim>Real students.<br />Real results.</h2>
-          <p className="testimonials__sub" data-anim>Here's what our early adopters are saying about Studiva.</p>
-        </div>
-
-        {/* Trust stats */}
-        {/* <div className="trust-row" ref={trustRef}>
-          {trustStats.map((b, i) => (
-            <div key={i} className="trust-badge">
-              <span className="trust-badge__icon">{b.icon}</span>
-              <span className="trust-badge__val" style={{ color: b.valColor }}>{b.val}</span>
-              <span className="trust-badge__label">{b.label}</span>
-            </div>
-          ))}
-        </div> */}
-
-        {/* Marquee Wrapper */}
-        <div
-          className="testimonials__marquee"
-          ref={marqueeRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="testimonials__track" ref={trackRef}>
-            {[...testimonials, ...testimonials].map((t, idx) => (
-              <div className="tcard" key={`${t.id}-${idx}`}>
-                <div className="tcard__top">
-                  <img
-                    className="tcard__avatar"
-                    src={t.avatar}
-                    alt={t.name}
-                    loading="lazy"
-                  />
-                  <div className="tcard__meta">
-                    <span className="tcard__name">{t.name}</span>
-                    <span className="tcard__role">{t.role}</span>
-                  </div>
-                  <span className="tcard__badge">{t.badge}</span>
-                </div>
-                <div className="tcard__stars">
-                  {[...Array(5)].map((_, i) => <StarIcon key={i} />)}
-                </div>
-                <p className="tcard__text">"{t.text}"</p>
-                <div className="tcard__earn">{t.earn}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
+    <section className="testimonials-section" id="testimonials" ref={sectionRef}>
+      
+      <div className="testimonials-bg-text">
+        {"REVIEWS".split('').map((char, i) => (
+          <span key={i} className="rev-char">{char}</span>
+        ))}
       </div>
+
+      <div className="testimonials-board">
+        {testimonialsData.map((t, idx) => {
+          const pos = initialPositions[idx];
+          return (
+            <div 
+              key={t.id} 
+              className="tcard-physics"
+              style={{
+                top: pos.top,
+                left: pos.left,
+                transform: `rotate(${pos.rotation}deg)`
+              }}
+            >
+              {/* Curvy Elastic Rope SVG (Counter-rotated to hang straight down) */}
+              <svg 
+                className="tcard-rope-svg" 
+                viewBox="0 0 800 1200" 
+                preserveAspectRatio="xMidYMax slice"
+                style={{ transform: `translateX(-50%) rotate(${-pos.rotation}deg)` }}
+              >
+                <path 
+                  className="rope-path"
+                  d="M400,0 C400,400 400,800 400,1200" 
+                  fill="none" 
+                  stroke="#000000" 
+                  strokeWidth="10" 
+                  strokeLinecap="round"
+                />
+              </svg>
+              
+              {/* Pushpin */}
+              <div className="tcard-pin" style={{ backgroundColor: t.pinColor }}></div>
+
+              <div className="tcard-top">
+                <div className="tcard-num-box" style={{ color: t.pinColor }}>{t.num}</div>
+                <div className="tcard-avatar-box">
+                  <img src={t.avatar} alt={t.name} className="tcard-avatar" />
+                </div>
+              </div>
+              <h3 className="tcard-name" style={{ color: t.pinColor }}>{t.name}</h3>
+              <p className="tcard-text">{t.text}</p>
+            </div>
+          );
+        })}
+      </div>
+
     </section>
   );
 };

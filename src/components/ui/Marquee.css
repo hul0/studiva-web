@@ -1,8 +1,8 @@
 .marquee-strip {
     width: 100%;
     overflow: hidden;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    
+    
     padding: 14px 0;
     background: var(--surface);
     position: relative;

@@ -60,7 +60,7 @@ const Hero = () => {
 
     return (
         <section className="hero" ref={containerRef}>
-            <div className="grid-bg" />
+            
 
 
 
