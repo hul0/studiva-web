@@ -4,7 +4,7 @@ import { LogOut, Search, Filter, Download, Database } from 'lucide-react';
 import './Admin.css';
 
 const Admin = () => {
-  const [user, setUser] = useState(null);
+
   const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +14,7 @@ const Admin = () => {
 
   const [activeTab, setActiveTab] = useState('campus_representative_applications');
   const [data, setData] = useState([]);
-  const [tableLoading, setTableLoading] = useState(false);
+
 
   // Check auth state on mount
   useEffect(() => {
@@ -23,7 +23,6 @@ const Admin = () => {
       if (session) {
         checkAdminStatus(session.user);
       } else {
-        setUser(null);
         setIsAdmin(false);
         setLoading(false);
       }
@@ -52,7 +51,6 @@ const Admin = () => {
       if (profileError) throw profileError;
 
       if (profile?.is_admin) {
-        setUser(currentUser);
         setIsAdmin(true);
       } else {
         await supabase.auth.signOut();
@@ -90,7 +88,6 @@ const Admin = () => {
   };
 
   const fetchData = async (tableName) => {
-    setTableLoading(true);
     try {
       const { data: records, error: fetchError } = await supabase
         .from(tableName)
@@ -101,8 +98,6 @@ const Admin = () => {
       setData(records || []);
     } catch (err) {
       console.error(`Error fetching ${tableName}:`, err);
-    } finally {
-      setTableLoading(false);
     }
   };
 

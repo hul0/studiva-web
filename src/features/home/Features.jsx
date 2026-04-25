@@ -1,284 +1,145 @@
-import { useRef, memo } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-  Search, Layers, TrendingUp, BookOpen, CheckCircle2,
-  GraduationCap, School, Microscope, Book, Scale, Briefcase, Award
-} from 'lucide-react';
+import { Search, Layers, TrendingUp, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
 import './Features.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const features = [
-  {
-    id: 'discover',
-    tag: 'Discover',
-    title: 'Find what you need-\nInstantly.',
-    desc: 'Stop scrolling through cluttered Telegram groups and WhatsApp chats. Studiva organises study resources with tags so you can search and find exactly what you need.',
-    bullets: ['Search by subject, topic & exam', 'Tagged & organised content', 'No buried messages or clutter', 'Notes, lab reports, assignments & more'],
-    video: '/videos/Flat_Illustration_Animation_Enhancement_Request.webm',
-    icon: Search,
-    flip: false,
-    stat: { label: 'Content', value: 'Organised & Tagged' },
-    stat2: { label: 'Access', value: 'Search-based' },
-  },
-  {
-    id: 'upload',
-    tag: 'Upload',
-    title: 'Share your notes-\nEffortlessly.',
-    desc: 'Upload your handwritten scans, PDFs, or typed notes. Tag them with subject codes and topics so students can discover your content easily.',
-    bullets: ['PDF & handwritten scan support', 'Tag by subject code & topic', 'Secure cloud storage included', 'Your content, your control'],
-    video: '/videos/Video_Ready_After_Agreement.webm',
-    icon: Layers,
-    flip: true,
-    stat: { label: 'Formats', value: 'PDF · Scans · Typed' },
-    stat2: { label: 'Storage', value: 'Cloud-hosted' },
-  },
-  {
-    id: 'earn',
-    tag: 'Monetize',
-    title: 'Your notes can-\nearn for you.',
-    desc: 'Set a price for premium content or let students access it via rewarded ads. You keep 60% of every sale — no hidden fees.',
-    bullets: ['60% creator revenue share', 'Paid access or rewarded ads', 'Withdraw earnings via UPI', 'Creator analytics dashboard'],
-    video: '/videos/Video_Generation_Request_Fulfilled.webm',
-    icon: TrendingUp,
-    flip: false,
-    stat: { label: 'Revenue share', value: '60%' },
-    stat2: { label: 'Modes', value: 'Paid · Ads · Free' },
-  },
-];
-
-const catRow1 = [
-  { name: 'JEE Mains', count: 'New', icon: School },
-  { name: 'NEET UG', count: 'New', icon: Microscope },
-  { name: 'CBSE Class 12', count: 'New', icon: Book },
-  { name: 'Engineering', count: 'New', icon: GraduationCap },
-  { name: 'UPSC / IAS', count: 'New', icon: Scale },
-  { name: 'IBDP / IGCSE', count: 'New', icon: Award },
-];
-
-const catRow2 = [
-  { name: 'JEE Advanced', count: 'New', icon: Award },
-  { name: 'CA Foundation', count: 'New', icon: Briefcase },
-  { name: 'Law / CLAT', count: 'New', icon: Scale },
-  { name: 'SSC CGL', count: 'New', icon: Award },
-  { name: 'Medical PG', count: 'New', icon: Microscope },
-  { name: 'MBA Entrance', count: 'New', icon: GraduationCap },
-  { name: 'GATE / PSU', count: 'New', icon: Award },
-  { name: 'Class 10', count: 'New', icon: Book },
-];
-
-const FeatureBlock = memo(({ feature }) => {
-  const blockRef = useRef(null);
-  const lineRef = useRef(null);
-  const mediaRef = useRef(null);
-
-  useGSAP(() => {
-    const el = blockRef.current;
-    if (!el) return;
-
-    const items = el.querySelectorAll('[data-anim]');
-
-    gsap.set(items, { opacity: 0, y: 24 });
-    if (lineRef.current) gsap.set(lineRef.current, { scaleX: 0, transformOrigin: 'left center' });
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 78%',
-        toggleActions: 'play none none none',
-        once: true,
-      },
-    });
-
-    if (lineRef.current) {
-      tl.to(lineRef.current, { scaleX: 1, duration: 0.6, ease: 'power3.inOut' });
-    }
-
-    tl.to(items, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      stagger: 0.09,
-      ease: 'power3.out',
-    }, lineRef.current ? '-=0.3' : '0');
-
-    // Tilt Effect
-    const media = mediaRef.current;
-    if (media) {
-      const frame = media.querySelector('.feat-block__frame');
-      if (frame) {
-        media.addEventListener('mousemove', (e) => {
-          const rect = media.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          gsap.to(frame, {
-            rotationY: x * 0.04,
-            rotationX: -y * 0.04,
-            transformPerspective: 1000,
-            duration: 0.5,
-            ease: 'power2.out'
-          });
-        });
-
-        media.addEventListener('mouseleave', () => {
-          gsap.to(frame, { rotationY: 0, rotationX: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
-        });
-      }
-    }
-
-  }, { scope: blockRef });
-
-  const Icon = feature.icon;
-
-  return (
-    <div
-      ref={blockRef}
-      className={`feat-block ${feature.flip ? 'feat-block--flip' : ''}`}
-      id={`feature-${feature.id}`}
-    >
-      <div className="feat-block__rule" ref={lineRef} />
-
-      <div className="container feat-block__inner">
-
-
-        {/* ── Media side ── */}
-        <div className="feat-block__media" data-anim ref={mediaRef}>
-          <div className="feat-block__frame">
-            <video
-              src={feature.video}
-              autoPlay muted loop playsInline preload="none"
-              className="feat-block__video"
-            />
-            <div className="feat-block__scrim" />
-
-            {/* Stat pills */}
-
-            <div className="feat-pill feat-pill--tl">
-
-              <span className="feat-pill__label">{feature.stat.label}</span>
-              <span className="feat-pill__val">{feature.stat.value}</span>
-            </div>
-            <div className="feat-pill feat-pill--br">
-              <span className="feat-pill__label">{feature.stat2.label}</span>
-              <span className="feat-pill__val">{feature.stat2.value}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Text side ── */}
-        <div className="feat-block__text">
-          <div className="feat-tag" data-anim>
-            <Icon size={32} strokeWidth={2.5} />
-            <span className='iconText'>{feature.tag}</span>
-          </div>
-
-          <h2 className="feat-title" data-anim>
-            {feature.title.split('\n').map((line, i) => (
-              <span key={i}>{line}<br /></span>
-            ))}
-          </h2>
-
-          {/* <p className="feat-desc" data-anim>{feature.desc}</p> */}
-
-          <ul className="feat-bullets" data-anim>
-            {feature.bullets.map((b, i) => (
-              <li key={i} className="feat-bullet">
-                <CheckCircle2 size={24} strokeWidth={2.5} />
-                <span className='bulletText'>{b}</span>
-              </li>
-            ))}
-          </ul>
-
-          <a href="#download" className="feat-cta" data-anim>
-            Get started free →
-          </a>
-        </div>
-
-      </div>
-    </div>
-  );
-});
-
-
 const Features = () => {
-  const headRef = useRef(null);
+  const sectionRef = useRef(null);
 
   useGSAP(() => {
-    const el = headRef.current;
+    const el = sectionRef.current;
     if (!el) return;
-    const items = el.querySelectorAll('[data-anim]');
-    gsap.set(items, { opacity: 0, y: 20 });
-    gsap.to(items, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      stagger: 0.1,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 80%', once: true },
-    });
 
-    // Small scroll-triggered pop-up animation for belt chips
-    gsap.set('.belt-chip', { opacity: 0, scale: 0.8, y: 10 });
-    ScrollTrigger.batch('.belt-chip', {
-      interval: 0.1, // time window to batch triggers
-      batchMax: 3,   // max elements per batch
-      onEnter: batch => gsap.to(batch, {
+    // Entrance animation for grid items
+    const items = el.querySelectorAll('.bento-item');
+    gsap.fromTo(items, 
+      { opacity: 0, y: 30 },
+      {
         opacity: 1,
-        scale: 1,
         y: 0,
-        stagger: 0.05,
-        duration: 0.5,
-        ease: 'back.out(1.5)',
-        overwrite: true
-      }),
-      start: "top 90%",
-      once: true
-    });
-  }, { scope: headRef });
-
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 75%',
+          once: true,
+        }
+      }
+    );
+  }, { scope: sectionRef });
 
   return (
-    <section id="features" className="features">
-      {features.map((f, i) => <FeatureBlock key={f.id} feature={f} index={i} />)}
+    <section id="features" className="features-bento" ref={sectionRef}>
+      <div className="container" style={{ height: '100%' }}>
+        <div className="bento-grid">
+          
+          {/* ── Left Column ── */}
+          <div className="bento-left-col">
+            <div className="bento-circle-wrapper bento-item">
+              <svg className="bento-circle-svg" viewBox="0 0 200 200">
+                <path id="circlePath" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" fill="none" />
+                <text className="bento-circle-text">
+                  <textPath href="#circlePath" startOffset="0%">
+                    STUDIVA MARKETPLACE · INNOVATIVE ALTERNATIVE · STUDIVA MARKETPLACE · INNOVATIVE ALTERNATIVE · 
+                  </textPath>
+                </text>
+              </svg>
+              <div className="bento-circle-center">
+                <span>START<br />NOW</span>
+                <div className="orbit orbit-1"></div>
+                <div className="orbit orbit-2"></div>
+              </div>
+            </div>
+            
+            <div className="bento-left-actions bento-item">
+              <div className="bento-icon-btn"><Search size={20} /></div>
+              <div className="bento-icon-btn"><Layers size={20} /></div>
+              <div className="bento-icon-btn"><TrendingUp size={20} /></div>
+            </div>
 
-      {/* ── Ecosystem belt ── */}
-      <div className="feat-cats" ref={headRef}>
-        <div className="container feat-cats__head">
-          <p className="feat-cats__eyebrow" data-anim>Ecosystem</p>
-          <h2 className="feat-cats__title" data-anim>Built for every aspirant.</h2>
-          <p className="feat-cats__sub" data-anim>
-            From Class 10 to postgraduate — a growing library across every major exam.
-          </p>
-        </div>
-
-        <div className="feat-belt">
-          <div className="feat-belt__track feat-belt__track--left">
-            {[...catRow1, ...catRow1, ...catRow1].map((c, i) => {
-              const Icon = c.icon;
-              return (
-                <div key={`c1-${i}`} className="belt-chip">
-                  <Icon size={15} strokeWidth={2} className="belt-chip__icon" />
-                  <span className="belt-chip__name">{c.name}</span>
-                  <span className="belt-chip__count">{c.count}</span>
+            {/* Box 3: Virtual Training (Moved to Left Column) */}
+            <div className="bento-item bento-card bento-card-outline virtual-training-card">
+              <div className="bento-badge bento-badge-gray">VIRTUAL TRAINING</div>
+              <p>Set a price or use rewarded ads. You keep 60% of every sale from learners globally.</p>
+              <div className="bento-footer">
+                <div className="bento-mentors">
+                  <div className="bento-mentors-avatars">
+                    <img src="https://ui-avatars.com/api/?name=A" alt="Avatar 1" />
+                    <img src="https://ui-avatars.com/api/?name=B" alt="Avatar 2" />
+                    <img src="https://ui-avatars.com/api/?name=C" alt="Avatar 3" />
+                  </div>
+                  <span className="bento-mentors-text">OUR<br/>MENTORS</span>
                 </div>
-              );
-            })}
+                <button className="bento-btn">START NOW <ArrowRight size={16} /></button>
+              </div>
+            </div>
           </div>
 
-          <div className="feat-belt__track feat-belt__track--right">
-            {[...catRow2, ...catRow2, ...catRow2].map((c, i) => {
-              const Icon = c.icon;
-              return (
-                <div key={`c2-${i}`} className="belt-chip">
-                  <Icon size={15} strokeWidth={2} className="belt-chip__icon" />
-                  <span className="belt-chip__name">{c.name}</span>
-                  <span className="belt-chip__count">{c.count}</span>
+          {/* ── Right Column ── */}
+          <div className="bento-right-col">
+            
+            {/* Box 1: Discover */}
+            <div className="bento-item bento-card bento-card-white train-card">
+              <div className="bento-card-header">
+                <div className="bento-badge">HOW IT WORKS</div>
+                <div className="bento-stats">
+                  <span className="pill">360°</span>
+                  <div className="stat-text">
+                    <strong>200 thousand +</strong>
+                    <span>The world's largest notes library</span>
+                  </div>
                 </div>
-              );
-            })}
+              </div>
+              <div className="bento-card-body train-body">
+                <div className="train-text-col">
+                  <h2>FIND WHAT YOU NEED INSTANTLY</h2>
+                </div>
+                <div className="train-avatar-col">
+                   <img src="https://ui-avatars.com/api/?name=Student&background=B0E454&color=0D0D0D&rounded=true" alt="Man avatar placeholder" className="bento-avatar" />
+                </div>
+              </div>
+            </div>
+
+            {/* Box 2: Upload */}
+            <div className="bento-item bento-card bento-card-lime">
+              <div className="bento-card-header">
+                <div className="bento-badge-outline"><CheckCircle2 size={14} /> PROVEN RESULTS</div>
+                <Sparkles size={20} />
+              </div>
+              <div className="bento-card-body bento-split">
+                <h2>SHARE NOTES<br />EFFORTLESSLY</h2>
+                <div className="bento-avatar-large-wrapper">
+                   {/* Lady avatar placeholder */}
+                   <img src="https://ui-avatars.com/api/?name=Creator&background=ffffff&color=0D0D0D" alt="Lady avatar placeholder" className="bento-avatar-large" />
+                   <div className="bento-check-badge"><CheckCircle2 size={16} color="var(--jet-black)" /></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Box 4 Container */}
+            <div className="bento-bottom-row">
+              {/* Box 4: Seamless Learning (Generated) */}
+              <div className="bento-item bento-card bento-card-black logotype-card">
+                <div className="bento-logo-center">
+                  <div className="logo-half-moon"></div>
+                  <h2>STUDIVA™</h2>
+                </div>
+                <div className="bento-badge bento-badge-lime bento-abs-bl">●● LOGOTYPE</div>
+              </div>
+
+              {/* Small Customer Box */}
+              <div className="bento-item bento-card bento-card-white customers-card">
+                 <div className="bento-badge bento-badge-lime">14 k Customers</div>
+              </div>
+            </div>
+            
           </div>
+
         </div>
       </div>
     </section>

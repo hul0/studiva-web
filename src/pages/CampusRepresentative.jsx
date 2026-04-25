@@ -11,22 +11,26 @@ const BENEFITS = [
   {
     title: 'Complimentary Premium Access',
     desc: 'Experience the full power of Studiva, unlocked exclusively for you.',
-    icon: 'star'
+    icon: 'star',
+    layout: 'tall'
   },
   {
     title: 'Signature Campus Representative Badge',
     desc: 'A customized identity icon that sets you apart and represents your college.',
-    icon: 'badge'
+    icon: 'badge',
+    layout: 'wide'
   },
   {
     title: 'Personalized Banner Feature',
     desc: 'Your identity, your presence — showcased with style.',
-    icon: 'banner'
+    icon: 'banner',
+    layout: 'standard'
   },
   {
     title: 'Community Leadership Access',
     desc: 'Take charge as the admin of your college’s community section and lead engagement on campus.',
-    icon: 'users'
+    icon: 'users',
+    layout: 'standard'
   },
   {
     title: 'Elite WhatsApp Circle',
@@ -35,7 +39,8 @@ const BENEFITS = [
       'Connect with fellow campus representatives across colleges',
       'Direct access to the core team of Studiva'
     ],
-    icon: 'message'
+    icon: 'message',
+    layout: 'wide'
   }
 ];
 
@@ -73,13 +78,13 @@ const CampusRepresentative = () => {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  // GSAP entrance animations
-  useGSAP(() => {
+  // GSAP entrance animations & context safety
+  const { contextSafe } = useGSAP(() => {
     // Hero entrance
     const heroTl = gsap.timeline();
-    heroTl.from('.cr-hero__badge', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' })
-      .from('.cr-hero__title', { y: 30, opacity: 0, duration: 0.7, ease: 'power2.out' }, '-=0.4')
-      .from('.cr-hero__sub', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
+    heroTl.from('.cr-hero__badge', { y: 30, opacity: 0, duration: 0.8, ease: 'back.out(1.5)' })
+      .from('.cr-hero__title', { y: 40, opacity: 0, duration: 0.9, ease: 'back.out(1.2)' }, '-=0.5')
+      .from('.cr-hero__sub', { y: 30, opacity: 0, duration: 0.8, ease: 'back.out(1.2)' }, '-=0.6');
 
     // Benefits Scroll Entrance
     gsap.from('.cr-benefit', {
@@ -87,11 +92,11 @@ const CampusRepresentative = () => {
         trigger: '.cr-benefits__grid',
         start: 'top 85%',
       },
-      y: 40,
+      y: 50,
       opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'power3.out',
+      duration: 0.9,
+      stagger: 0.1,
+      ease: 'back.out(1.2)',
     });
 
     // Form Scroll Entrance
@@ -100,12 +105,91 @@ const CampusRepresentative = () => {
         trigger: '.cr-form-section',
         start: 'top 80%',
       },
-      y: 50,
+      y: 60,
       opacity: 0,
-      duration: 1,
+      duration: 1.2,
       ease: 'power3.out',
     });
   }, { scope: pageRef });
+
+  // GSAP Interactive Hover Handlers
+  const handleBenefitMouseMove = contextSafe((e) => {
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+    
+    gsap.to(target, {
+      rotationX: rotateX,
+      rotationY: rotateY,
+      scale: 1.02,
+      transformPerspective: 1000,
+      duration: 0.4,
+      ease: 'power2.out',
+      overwrite: 'auto'
+    });
+    
+    const icon = target.querySelector('.cr-benefit__icon');
+    if (icon) {
+      gsap.to(icon, {
+        x: ((x - centerX) / centerX) * 8,
+        y: ((y - centerY) / centerY) * 8,
+        duration: 0.4,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    }
+  });
+
+  const handleBenefitMouseLeave = contextSafe((e) => {
+    const target = e.currentTarget;
+    gsap.to(target, {
+      rotationX: 0,
+      rotationY: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: 'elastic.out(1, 0.4)',
+      overwrite: 'auto'
+    });
+    
+    const icon = target.querySelector('.cr-benefit__icon');
+    if (icon) {
+      gsap.to(icon, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+    }
+  });
+
+  const handleBtnMouseMove = contextSafe((e) => {
+    if (submitting) return;
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const x = (e.clientX - rect.left) - rect.width / 2;
+    const y = (e.clientY - rect.top) - rect.height / 2;
+    
+    gsap.to(target, {
+      x: x * 0.2,
+      y: y * 0.2,
+      duration: 0.3,
+      ease: 'power2.out',
+      overwrite: 'auto'
+    });
+  });
+
+  const handleBtnMouseLeave = contextSafe((e) => {
+    if (submitting) return;
+    const target = e.currentTarget;
+    gsap.to(target, {
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      ease: 'elastic.out(1, 0.4)',
+      overwrite: 'auto'
+    });
+  });
 
   // Handlers
   const handleChange = (e) => {
@@ -157,6 +241,7 @@ const CampusRepresentative = () => {
 
   return (
     <div className="cr-page" ref={pageRef}>
+      
       <Navbar />
 
       {/* ── Hero ──────────────────────────────────── */}
@@ -172,7 +257,7 @@ const CampusRepresentative = () => {
         </div>
 
         <h1 className="cr-hero__title">
-          Lead the <span className="accent-gradient">Campus Movement</span>
+          Lead the <span className="accent-text">Campus Movement</span>
         </h1>
 
         <p className="cr-hero__sub">
@@ -190,7 +275,12 @@ const CampusRepresentative = () => {
         </div>
         <div className="cr-benefits__grid">
           {BENEFITS.map((b, i) => (
-            <div className="cr-benefit" key={i}>
+            <div 
+              className={`cr-benefit cr-benefit--${b.layout}`} 
+              key={i}
+              onMouseMove={handleBenefitMouseMove}
+              onMouseLeave={handleBenefitMouseLeave}
+            >
               <div className="cr-benefit__icon">
                 <BenefitIcon type={b.icon} />
               </div>
@@ -358,6 +448,8 @@ const CampusRepresentative = () => {
                   type="submit"
                   className="cr-form__submit"
                   disabled={submitting}
+                  onMouseMove={handleBtnMouseMove}
+                  onMouseLeave={handleBtnMouseLeave}
                 >
                   {submitting ? (
                     <>

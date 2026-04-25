@@ -2,7 +2,7 @@ import { Suspense, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Rocket, Users } from 'lucide-react';
-import HeroVisual from '../../components/ui/HeroVisual';
+
 import './Hero.css';
 
 const Hero = () => {
@@ -62,10 +62,7 @@ const Hero = () => {
         <section className="hero" ref={containerRef}>
             <div className="grid-bg" />
 
-            {/* Visual Container - Lightweight replacement for Spline */}
-            <div className="hero__visual-container">
-                <HeroVisual />
-            </div>
+
 
             {/* Main Content Container */}
             <div className="container hero__inner">

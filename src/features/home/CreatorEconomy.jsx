@@ -1,168 +1,153 @@
-import { useEffect, useRef, useState, memo } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CreditCard, PlayCircle, Rocket, Sparkles, TrendingUp, Users, FileText, Wallet } from 'lucide-react';
 import './CreatorEconomy.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const modes = [
+const statsData = [
     {
-        id: 'paid',
-        icon: <CreditCard size={32} strokeWidth={1.5} />,
-        title: 'Paid Access',
-        badge: 'Highest earners',
-        desc: 'Set a one-time price for your academic mastery. Learners pay to access your full notes. You earn 70% of every sale.',
-        earn: 'Potential top earner',
+        desc: 'Revenue share we provide our creators on every sale.',
+        value: 60,
+        suffix: '%',
+        prefix: ''
     },
     {
-        id: 'rewarded',
-        icon: <PlayCircle size={32} strokeWidth={1.5} />,
-        title: 'Rewarded Ads',
-        badge: 'Best reach',
-        desc: 'Notes are free — learners watch a 30-second ad to unlock. You earn from ad revenue automatically with zero friction.',
-        earn: 'Passive income stream',
+        desc: 'Different monetization modes available for your notes.',
+        value: 3,
+        suffix: '+',
+        prefix: ''
     },
     {
-        id: 'free',
-        icon: <Rocket size={32} strokeWidth={1.5} />,
-        title: 'Lead Magnet',
-        badge: 'Build reputation',
-        desc: 'Share freely to grow your follower base and rank in search. Lead Magnet notes drive higher conversion for your paid content.',
-        earn: 'Reputation + discovery',
+        desc: 'Supported content types including PDFs and scans.',
+        value: 4,
+        suffix: '+',
+        prefix: ''
     },
+    {
+        desc: 'Minimum withdrawal threshold for instant UPI transfer.',
+        value: 100,
+        suffix: '',
+        prefix: '₹'
+    },
+    {
+        desc: 'Average activity of learners who stay with our platform.',
+        value: 85,
+        suffix: '%',
+        prefix: ''
+    }
 ];
 
-const stats = [
-    { label: 'Creator revenue share', value: 60, prefix: '', suffix: '%' },
-    { label: 'Monetization modes', value: 3, prefix: '', suffix: '' },
-    { label: 'Content types supported', value: 3, prefix: '', suffix: '+' },
-    { label: 'Withdrawal threshold', value: 100, prefix: '₹', suffix: '' },
-];
+// Removed custom useCounter hook since we'll use GSAP
+const StatSquare = ({ stat }) => {
+    const cardRef = useRef(null);
+    const numRef = useRef(null);
 
-function useCounter(target, duration = 1.0, start = false) {
-    const [count, setCount] = useState(0);
-    useEffect(() => {
-        if (!start) return;
-        let startTime = null;
-        const step = (ts) => {
-            if (!startTime) startTime = ts;
-            const progress = Math.min((ts - startTime) / (duration * 1000), 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.round(eased * target));
-            if (progress < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-    }, [start, target, duration]);
-    return count;
-}
+    useGSAP(() => {
+        if (!numRef.current) return;
+        
+        gsap.fromTo(numRef.current, {
+            innerHTML: 0
+        }, {
+            innerHTML: stat.value,
+            duration: 2,
+            ease: "power2.out",
+            snap: { innerHTML: 1 },
+            scrollTrigger: {
+                trigger: cardRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none" // Play once when entering
+            }
+        });
+    }, { scope: cardRef });
 
-const StatItem = memo(({ stat, animate }) => {
-    const count = useCounter(stat.value, 1.2, animate);
     return (
-        <div className="creator-stat">
-            <span className="creator-stat__val">{stat.prefix}{count}{stat.suffix}</span>
-            <span className="creator-stat__label">{stat.label}</span>
+        <div className="ce-square-card" ref={cardRef}>
+            {/* Corner brackets */}
+            <div className="ce-bracket ce-tl"></div>
+            <div className="ce-bracket ce-tr"></div>
+            <div className="ce-bracket ce-bl"></div>
+            <div className="ce-bracket ce-br"></div>
+            
+            <p className="ce-square-desc">{stat.desc}</p>
+            <div className="ce-square-val">
+                {stat.prefix}<span ref={numRef}>0</span>{stat.suffix}
+            </div>
         </div>
     );
-});
+};
 
 const CreatorEconomy = () => {
     const sectionRef = useRef(null);
-    const [animateStats, setAnimateStats] = useState(false);
 
     useGSAP(() => {
-        // Header Animation (Ultra Fast)
-        gsap.fromTo(".creator__head > *", {
-            y: 20,
-            opacity: 0,
+        const el = sectionRef.current;
+        if (!el) return;
+
+        // Headline animation
+        gsap.fromTo(".ce-big-text", {
+            y: 50, opacity: 0
         }, {
-            y: 0,
-            opacity: 1,
-            stagger: 0.05,
-            duration: 0.6,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: ".creator__head",
-                start: "top 95%",
+            y: 0, opacity: 1, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: ".ce-big-text", start: "top 80%" }
+        });
+
+        // Cards stagger animation
+        gsap.fromTo(".ce-square-card", {
+            scale: 0.8, opacity: 0, rotation: 5
+        }, {
+            scale: 1, opacity: 1, rotation: 0, duration: 0.8, stagger: 0.1, ease: "back.out(1.2)",
+            scrollTrigger: { 
+                trigger: ".ce-squares-grid", 
+                start: "top 75%"
             }
         });
 
-        // Plates Animation (Force Visible Stack)
-        gsap.fromTo(".mode-plate", {
-            x: -30,
-            opacity: 0,
-        }, {
-            x: 0,
-            opacity: 1,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".creator__modes",
-                start: "top 90%",
-                once: true,
-                onEnter: () => ScrollTrigger.refresh()
-            }
-        });
-
-        // Stats row reveal
-        gsap.fromTo(".creator__stats", {
-            opacity: 0,
-            y: 20,
-        }, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: ".creator__stats",
-                start: "top 100%",
-                onEnter: () => setAnimateStats(true),
-            }
-        });
     }, { scope: sectionRef });
 
     return (
-        <section className="creator" id="creators" ref={sectionRef}>
-            <div className="container">
-                {/* Header Section */}
-                <div className="creator__head">
-                    <span className="creator__badge">Monetization Engine</span>
-                    <h2 className="creator__title">Earn from what<br />you already know.</h2>
-                    <p className="creator__desc">
-                        Our marketplace transforms your academic hard work into a sustainable income stream through unique monetization paths.
-                    </p>
+        <section className="creator-economy-squares" id="creators" ref={sectionRef}>
+            {/* Background wireframe graphic simulated via CSS or SVG */}
+            <div className="ce-bg-graphic">
+                <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="400" cy="400" r="300" stroke="rgba(255,255,255,0.05)" strokeWidth="1" fill="none" />
+                    <circle cx="400" cy="400" r="200" stroke="rgba(255,255,255,0.05)" strokeWidth="1" fill="none" />
+                    <circle cx="400" cy="400" r="100" stroke="rgba(255,255,255,0.05)" strokeWidth="1" fill="none" />
+                    <path d="M 100 400 Q 400 100 700 400 T 100 400" stroke="rgba(255,255,255,0.05)" strokeWidth="1" fill="none" />
+                    <path d="M 400 100 Q 700 400 400 700 T 400 100" stroke="rgba(255,255,255,0.05)" strokeWidth="1" fill="none" />
+                </svg>
+            </div>
+
+            <div className="container ce-squares-container">
+                <div className="ce-top-row">
+                    <h2 className="ce-big-text">
+                        MONETIZATION IS<br/>
+                        A LONG-TERM<br/>
+                        STRATEGY
+                    </h2>
+                    
                 </div>
 
-                {/* 💠 Modes: Horizontal Stack Plates (NON-GRID) */}
-                <div className="creator__modes">
-                    {modes.map((m) => (
-                        <div key={m.id} className="mode-plate">
-                            <div className="mode-plate__icon-box">
-                                {m.icon}
-                            </div>
-                            <div className="mode-plate__content">
-                                <div className="mode-plate__title">
-                                    {m.title}
-                                    <span className="mode-plate__badge">{m.badge}</span>
-                                </div>
-                                <p className="mode-plate__desc">{m.desc}</p>
-                            </div>
-                            <div className="mode-plate__earn-block">
-                                <span className="mode-plate__earn-label">Earning Potential</span>
-                                <div className="mode-plate__earn-val">{m.earn}</div>
-                            </div>
+                <div className="ce-squares-grid">
+                    <div className="ce-grid-col ce-col-1">
+                        <StatSquare stat={statsData[0]} />
+                        <StatSquare stat={statsData[3]} />
+                    </div>
+                    
+                    <div className="ce-grid-col ce-col-2">
+                        <StatSquare stat={statsData[1]} />
+                        <div className="ce-mid-text">
+                            WE DON'T JUST HOST<br/>
+                            FILES - WE IMPLEMENT<br/>
+                            SOLUTIONS
                         </div>
-                    ))}
-                </div>
+                    </div>
 
-                {/* 📊 Animated Analytics Grid */}
-                <div className="creator__stats">
-                    {stats.map((s, i) => (
-                        <StatItem key={i} stat={s} animate={animateStats} />
-                    ))}
+                    <div className="ce-grid-col ce-col-3">
+                        <StatSquare stat={statsData[2]} />
+                        <StatSquare stat={statsData[4]} />
+                    </div>
                 </div>
             </div>
         </section>

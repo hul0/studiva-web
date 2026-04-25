@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Home from './pages/Home';
 import Lenis from '@studio-freight/lenis';
+import GooeyBackground from './components/ui/GooeyBackground';
 
 // Legal Pages (Lazy Loaded)
 const Privacy = lazy(() => import('./pages/legal/Privacy'));
@@ -103,6 +104,7 @@ function App() {
         return <DeleteAccount />;
       case '/team':
         return <Team />;
+      case '/campus-representatives':
       case '/campus-representative':
         return <CampusRepresentative />;
       case '/coming-soon':
