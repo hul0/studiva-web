@@ -15,13 +15,38 @@ const Footer = () => {
     };
 
     const categories = [
-        { id: 'product', title: 'PRODUCT', links: ['Features', 'How it works', 'Creator Tools', 'Suggest a Feature', 'Release Notes'] },
-        { id: 'subjects', title: 'SUBJECTS', links: ['JEE Mains', 'NEET UG', 'CBSE Class 12', 'UPSC Prelims', 'Engineering'] },
-        { id: 'company', title: 'COMPANY', links: ['About Studyvia', 'Development Team', 'Career', 'Newsroom', 'Contact Us'] },
-        { id: 'legal', title: 'LEGAL', links: ['Privacy Policy', 'Terms of Service', 'Account Deletion'] },
+        {
+            id: 'product',
+            title: 'PRODUCT',
+            links: [
+                { name: 'Features', url: '#features' },
+                { name: 'How it works', url: '#how-it-works' },
+                { name: 'Creator Tools', url: '/revenue-calc' },
+                { name: 'Suggest a Feature', url: '/suggest-feature' }
+            ]
+        },
+        {
+            id: 'company',
+            title: 'COMPANY',
+            links: [
+                { name: 'Team', url: '/team' },
+                { name: 'Support', url: '/support' }
+            ]
+        },
+        {
+            id: 'legal',
+            title: 'LEGAL',
+            links: [
+                { name: 'Privacy Policy', url: '/privacy' },
+                { name: 'Terms of Service', url: '/tos' },
+                { name: 'Account Deletion', url: '/delete-account' }
+            ]
+        },
     ];
 
-    const socials = ['INSTAGRAM', 'FACEBOOK', 'TWITTER', 'LINKEDIN'];
+    const socials = [
+        { name: 'INSTAGRAM', url: 'https://instagram.com/studiva.hq' }
+    ];
     const massiveTextRef = useRef(null);
     const footerRef = useRef(null);
 
@@ -91,14 +116,11 @@ const Footer = () => {
                                         <span className={`footer-b__arrow ${openDropdown === cat.id ? 'open' : ''}`}>↘</span>
                                     </button>
                                     <div className={`footer-b__dropdown-content ${openDropdown === cat.id ? 'open' : ''}`}>
-                                        {cat.links.map(link => {
-                                            let href = '#';
-                                            if (link === 'Development Team') href = '/team';
-                                            if (link === 'Suggest a Feature') href = '/suggest-feature';
-                                            return (
-                                                <a href={href} key={link} className="footer-b__link">{link}</a>
-                                            );
-                                        })}
+                                        {cat.links.map(link => (
+                                            <a href={link.url} key={link.name} className="footer-b__link">
+                                                {link.name}
+                                            </a>
+                                        ))}
                                     </div>
                                 </div>
                             ))}
@@ -121,8 +143,8 @@ const Footer = () => {
                         {/* Column 3: Socials */}
                         <div className="footer-b__col footer-b__socials">
                             {socials.map(social => (
-                                <a href="#" key={social} className="footer-b__social-btn">
-                                    {social} <ArrowUpRight size={14} color="#171717" strokeWidth={2.5} />
+                                <a href={social.url} key={social.name} className="footer-b__social-btn" target="_blank" rel="noopener noreferrer">
+                                    {social.name} <ArrowUpRight size={14} color="#171717" strokeWidth={2.5} />
                                 </a>
                             ))}
                         </div>

@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const statsData = [
     {
         desc: 'Revenue share we provide our creators on every sale.',
-        value: 60,
+        value: 90,
         suffix: '%',
         prefix: ''
     },
@@ -20,7 +20,7 @@ const statsData = [
         prefix: ''
     },
     {
-        desc: 'Supported content types including PDFs and scans.',
+        desc: 'Supported content types including PDFs and Quizzes.',
         value: 4,
         suffix: '+',
         prefix: ''
@@ -46,7 +46,7 @@ const StatSquare = ({ stat }) => {
 
     useGSAP(() => {
         if (!numRef.current) return;
-        
+
         gsap.fromTo(numRef.current, {
             innerHTML: 0
         }, {
@@ -69,7 +69,7 @@ const StatSquare = ({ stat }) => {
             <div className="ce-bracket ce-tr"></div>
             <div className="ce-bracket ce-bl"></div>
             <div className="ce-bracket ce-br"></div>
-            
+
             <p className="ce-square-desc">{stat.desc}</p>
             <div className="ce-square-val">
                 {stat.prefix}<span ref={numRef}>0</span>{stat.suffix}
@@ -98,8 +98,8 @@ const CreatorEconomy = () => {
             scale: 0.8, opacity: 0, rotation: 5
         }, {
             scale: 1, opacity: 1, rotation: 0, duration: 0.8, stagger: 0.1, ease: "back.out(1.2)",
-            scrollTrigger: { 
-                trigger: ".ce-squares-grid", 
+            scrollTrigger: {
+                trigger: ".ce-squares-grid",
                 start: "top 75%"
             }
         });
@@ -122,11 +122,11 @@ const CreatorEconomy = () => {
             <div className="container ce-squares-container">
                 <div className="ce-top-row">
                     <h2 className="ce-big-text">
-                        MONETIZATION IS<br/>
-                        A LONG-TERM<br/>
+                        MONETIZATION IS<br />
+                        A LONG-TERM<br />
                         STRATEGY
                     </h2>
-                    
+
                 </div>
 
                 <div className="ce-squares-grid">
@@ -134,12 +134,12 @@ const CreatorEconomy = () => {
                         <StatSquare stat={statsData[0]} />
                         <StatSquare stat={statsData[3]} />
                     </div>
-                    
+
                     <div className="ce-grid-col ce-col-2">
                         <StatSquare stat={statsData[1]} />
                         <div className="ce-mid-text">
-                            WE DON'T JUST HOST<br/>
-                            FILES - WE IMPLEMENT<br/>
+                            WE DON'T JUST HOST<br />
+                            FILES - WE PROVIDE<br />
                             SOLUTIONS
                         </div>
                     </div>

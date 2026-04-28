@@ -90,7 +90,7 @@ const ShareRedirect = () => {
         {/* Logo with pulse rings */}
         <div className="share-card__icon-wrap">
           <img
-            src="/favicon.svg"
+            src="/images/studiva-quill-icon.svg"
             alt="Studiva"
             className="share-card__icon"
           />

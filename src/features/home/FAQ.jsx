@@ -17,7 +17,7 @@ const faqsData = {
   funding: [
     {
       q: 'HOW QUICKLY CAN I ACCESS THE FUNDS?',
-      a: "Once your notes are unlocked by a student, the funds are instantly credited to your Studiva dashboard. You can withdraw them to your bank account via UPI within 24 hours.",
+      a: "Once your notes are unlocked by a student, the funds are instantly credited to your Studiva Wallet. You can withdraw them to your bank account via requesting us after 30-days",
     },
     {
       q: 'WHAT CAN I USE THE FUNDING FOR?',
@@ -35,7 +35,7 @@ const faqsData = {
   repayments: [
     {
       q: 'WHAT IS THE REVENUE SPLIT?',
-      a: 'You keep 70% of all direct sales. For rewarded ad unlocks, we split the ad revenue 50/50 to ensure fairness.',
+      a: 'You keep 90% of all direct sales. For rewarded ad unlocks, we split the ad revenue 50/50.',
     },
     {
       q: 'ARE THERE ANY HIDDEN FEES?',
@@ -49,7 +49,7 @@ const faqsData = {
     },
     {
       q: 'HOW DO YOU PREVENT PIRACY?',
-      a: 'Notes on Studiva are served in a secure viewer that prevents direct downloading. Each page is watermarked with the creator\'s username.',
+      a: 'Notes on Studiva are served in a secure viewer that prevents direct downloading and screenshots. Your content stays yours, always!',
     }
   ]
 };
@@ -83,19 +83,19 @@ const FAQItem = memo(({ faq, index }) => {
 
 const FAQ = () => {
   const sectionRef = useRef(null);
-  const [activeCategory, setActiveCategory] = useState('funding');
+  const [activeCategory, setActiveCategory] = useState('general');
 
   useGSAP(() => {
     const el = sectionRef.current;
     if (!el) return;
 
-    gsap.fromTo('.faq-row', 
+    gsap.fromTo('.faq-row',
       { opacity: 0, y: 20 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        stagger: 0.1, 
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: el,
@@ -109,14 +109,14 @@ const FAQ = () => {
   return (
     <section className="faq-section" id="faq" ref={sectionRef}>
       <div className="faq-container">
-        
+
         {/* Left Sidebar */}
         <div className="faq-sidebar">
           <h2 className="faq-main-title">FAQS</h2>
-          
+
           <div className="faq-categories">
             {faqCategories.map(cat => (
-              <button 
+              <button
                 key={cat.id}
                 className={`faq-cat-btn ${activeCategory === cat.id ? 'active' : ''}`}
                 onClick={() => setActiveCategory(cat.id)}

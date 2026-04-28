@@ -45,8 +45,8 @@ const BENEFITS = [
         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
     ),
-    title: '60% Revenue Share',
-    desc: 'Keep 60% of all revenue generated from your content.',
+    title: '90% Revenue Share',
+    desc: 'Keep 90% of all revenue generated from your content.',
   },
   {
     icon: (
@@ -95,18 +95,18 @@ const VerifiedCreator = () => {
     tl.from('.vc-hero__badge', {
       y: 20, opacity: 0, duration: 0.6, ease: 'power2.out',
     })
-    .from('.vc-hero__title', {
-      y: 30, opacity: 0, duration: 0.7, ease: 'power2.out',
-    }, '-=0.4')
-    .from('.vc-hero__sub', {
-      y: 20, opacity: 0, duration: 0.6, ease: 'power2.out',
-    }, '-=0.4')
-    .from('.vc-benefit', {
-      y: 30, opacity: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out',
-    }, '-=0.3')
-    .from('.vc-form-wrapper', {
-      y: 40, opacity: 0, duration: 0.7, ease: 'power2.out',
-    }, '-=0.3');
+      .from('.vc-hero__title', {
+        y: 30, opacity: 0, duration: 0.7, ease: 'power2.out',
+      }, '-=0.4')
+      .from('.vc-hero__sub', {
+        y: 20, opacity: 0, duration: 0.6, ease: 'power2.out',
+      }, '-=0.4')
+      .from('.vc-benefit', {
+        y: 30, opacity: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out',
+      }, '-=0.3')
+      .from('.vc-form-wrapper', {
+        y: 40, opacity: 0, duration: 0.7, ease: 'power2.out',
+      }, '-=0.3');
   }, { scope: pageRef });
 
   // Handlers

@@ -29,31 +29,19 @@ const testimonialsData = [
     text: 'I uploaded my 4 years of lab reports and assignment solutions. The tagging system makes everything instantly discoverable.',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
     color: '#e0f2fe', pinColor: '#3b82f6'
-  },
-  {
-    id: 't4', name: 'Priya R.', role: 'CBSE Board',
-    num: '04',
-    text: 'Love that I can either pay a small amount or watch a quick ad to access notes. No forced subscriptions!',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face',
-    color: '#dbeafe', pinColor: '#0ea5e9'
-  },
-  {
-    id: 't5', name: 'Aditya V.', role: 'JEE Aspirant',
-    num: '05',
-    text: 'The 70% revenue share is the best I\'ve seen. Plus the rewarded ads model means my notes reach everyone.',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face',
-    color: '#fef3c7', pinColor: '#eab308'
-  },
-  {
-    id: 't6', name: 'Megha T.', role: 'UPSC Prep',
-    num: '06',
-    text: 'Organized, searchable, and no content gets buried. This is exactly what academic resources should look like.',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face',
-    color: '#f3e8ff', pinColor: '#a855f7'
-  },
+  }
 ];
 
-const initialPositions = [
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+const initialPositions = isMobile ? [
+  { top: '5%', left: '5%', rotation: -4 },
+  { top: '15%', left: '45%', rotation: 3 },
+  { top: '35%', left: '10%', rotation: -6 },
+  { top: '45%', left: '50%', rotation: 5 },
+  { top: '65%', left: '5%', rotation: -3 },
+  { top: '75%', left: '45%', rotation: 4 },
+] : [
   { top: '10%', left: '5%', rotation: -4 },
   { top: '8%', left: '42%', rotation: 3 },
   { top: '12%', left: '75%', rotation: -6 },
@@ -83,37 +71,37 @@ const Testimonials = () => {
 
     tl.fromTo(chars,
       { opacity: 0, scale: 4, rotation: () => gsap.utils.random(-60, 60) },
-      { 
-        opacity: 1, 
-        scale: 1, 
-        rotation: 0, 
-        stagger: 0.1, 
+      {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        stagger: 0.1,
       }
     );
 
     // 2. Initial entrance "hanging" swing for cards
     const cards = el.querySelectorAll('.tcard-physics');
-    
+
     // Function to update the rope's bezier curve dynamically
-    const updateRope = function(target, xPos, yPos) {
+    const updateRope = function (target, xPos, yPos) {
       const path = target.querySelector('.rope-path');
       if (!path) return;
-      
+
       // Calculate the top anchor point to stay globally fixed
       const tx = 400 - xPos;
       const ty = -yPos;
-      
+
       // Control points for a realistic elastic curve (lagging behind the drag)
       const cx1 = 400 - (xPos * 0.6);
       const cy1 = ty + 400;
-      
+
       const cx2 = 400 - (xPos * 0.15);
       const cy2 = 800;
 
       path.setAttribute('d', `M${tx},${ty} C${cx1},${cy1} ${cx2},${cy2} 400,1200`);
     };
 
-    tl.fromTo(cards, 
+    tl.fromTo(cards,
       { opacity: 0, y: -600, rotation: (i) => initialPositions[i].rotation + 30 },
       {
         opacity: 1,
@@ -121,7 +109,7 @@ const Testimonials = () => {
         rotation: (i) => initialPositions[i].rotation,
         stagger: 0.1,
         ease: "back.out(1.2)",
-        onUpdate: function() {
+        onUpdate: function () {
           // Update ropes during entrance animation
           cards.forEach(card => {
             const yPos = gsap.getProperty(card, "y");
@@ -140,17 +128,17 @@ const Testimonials = () => {
       inertia: true,
       edgeResistance: 0.6, /* higher elasticity */
       bounce: 0.8,
-      onPress: function() {
+      onPress: function () {
         gsap.to(this.target, { scale: 1.05, boxShadow: "0 25px 50px rgba(0,0,0,0.15)", duration: 0.2 });
         this.target.style.zIndex = 100;
       },
-      onDrag: function() {
+      onDrag: function () {
         updateRope(this.target, this.x, this.y);
       },
-      onThrowUpdate: function() {
+      onThrowUpdate: function () {
         updateRope(this.target, this.x, this.y);
       },
-      onRelease: function() {
+      onRelease: function () {
         gsap.to(this.target, { scale: 1, boxShadow: "0 10px 30px rgba(0,0,0,0.08)", duration: 0.4, ease: "elastic.out(1, 0.4)" });
         this.target.style.zIndex = 10;
       }
@@ -160,7 +148,7 @@ const Testimonials = () => {
 
   return (
     <section className="testimonials-section" id="testimonials" ref={sectionRef}>
-      
+
       <div className="testimonials-bg-text">
         {"REVIEWS".split('').map((char, i) => (
           <span key={i} className="rev-char">{char}</span>
@@ -171,8 +159,8 @@ const Testimonials = () => {
         {testimonialsData.map((t, idx) => {
           const pos = initialPositions[idx];
           return (
-            <div 
-              key={t.id} 
+            <div
+              key={t.id}
               className="tcard-physics"
               style={{
                 top: pos.top,
@@ -181,22 +169,22 @@ const Testimonials = () => {
               }}
             >
               {/* Curvy Elastic Rope SVG (Counter-rotated to hang straight down) */}
-              <svg 
-                className="tcard-rope-svg" 
-                viewBox="0 0 800 1200" 
+              <svg
+                className="tcard-rope-svg"
+                viewBox="0 0 800 1200"
                 preserveAspectRatio="xMidYMax slice"
                 style={{ transform: `translateX(-50%) rotate(${-pos.rotation}deg)` }}
               >
-                <path 
+                <path
                   className="rope-path"
-                  d="M400,0 C400,400 400,800 400,1200" 
-                  fill="none" 
-                  stroke="#000000" 
-                  strokeWidth="10" 
+                  d="M400,0 C400,400 400,800 400,1200"
+                  fill="none"
+                  stroke="#000000"
+                  strokeWidth="10"
                   strokeLinecap="round"
                 />
               </svg>
-              
+
               {/* Pushpin */}
               <div className="tcard-pin" style={{ backgroundColor: t.pinColor }}></div>
 

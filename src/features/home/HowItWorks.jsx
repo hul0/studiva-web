@@ -28,7 +28,7 @@ const steps = [
     },
     {
         title: 'Instant Withdrawals',
-        desc: 'Withdraw earnings same-day directly to UPI.',
+        desc: 'Withdraw earnings directly to UPI.',
         icon: <FastForward size={32} strokeWidth={1.5} />,
         color: 'var(--surface-3)'
     },
@@ -83,16 +83,30 @@ const HowItWorks = () => {
         });
 
         // 4. Cards come flying in from different directions
+        const isMobile = window.innerWidth < 768;
+        const isTablet = window.innerWidth < 1024;
+
         tl.fromTo(".hiw-scatter-card", {
-            x: (i) => [-800, 800, -800, 800][i],
-            y: (i) => [-500, 500, 500, -500][i],
+            x: (i) => [-window.innerWidth, window.innerWidth, -window.innerWidth, window.innerWidth][i],
+            y: (i) => [-window.innerHeight, window.innerHeight, window.innerHeight, -window.innerHeight][i],
             rotation: (i) => [180, -180, 90, -90][i],
             scale: 0.2,
             opacity: 0
         }, {
-            x: (i) => [-420, -140, 140, 420][i],
-            y: (i) => [20, -10, 15, -5][i],
-            rotation: (i) => [-8, 5, -3, 6][i],
+            x: (i) => {
+                if (isMobile) return [-90, 90, -90, 90][i]; // 2x2 grid
+                if (isTablet) return [-220, -75, 75, 220][i];
+                return [-420, -140, 140, 420][i];
+            },
+            y: (i) => {
+                if (isMobile) return [-110, -110, 110, 110][i]; // 2x2 grid
+                if (isTablet) return [30, -20, 25, -15][i];
+                return [20, -10, 15, -5][i];
+            },
+            rotation: (i) => {
+                if (isMobile) return [-2, 2, -1, 3][i];
+                return [-8, 5, -3, 6][i];
+            },
             scale: 1,
             opacity: 1,
             duration: 2,
@@ -105,11 +119,12 @@ const HowItWorks = () => {
     return (
         <section className="how-it-works-scatter" id="how-it-works" ref={sectionRef}>
             <div className="hiw-container">
-                
+
                 <h2 className="hiw-hero-text">
-                    <span className="hiw-word" style={{display: 'inline-block', marginRight: '30px'}}>SIMPLICITY</span>
-                    <span className="hiw-word" style={{display: 'inline-block'}}>THAT</span><br/>
-                    <span className="hiw-word" style={{display: 'inline-block'}}>SCALES.</span>
+                    <span className="hiw-word" style={{ display: 'inline-block', marginRight: '30px' }}>Kaise</span>
+                    <span className="hiw-word" style={{ display: 'inline-block' }}>nahi hogi</span><br />
+                    <span className="hiw-word" style={{ display: 'inline-block' }}>padhai?</span>
+
                 </h2>
 
                 <div className="hiw-cards-wrapper">

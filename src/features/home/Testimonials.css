@@ -150,7 +150,51 @@
 
 @media (max-width: 1024px) {
   .testimonials-section {
+    padding: 60px 0;
+    min-height: 100vh;
     height: auto;
-    min-height: 1000px;
   }
 }
+
+@media (max-width: 768px) {
+  .testimonials-section {
+    height: 1000px; /* Keep some height for pinning if desired, or set to auto */
+  }
+
+  .tcard-physics {
+    width: 200px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .tcard-num-box {
+    font-size: 24px;
+  }
+
+  .tcard-name {
+    font-size: 16px;
+  }
+
+  .tcard-text {
+    font-size: 11px;
+  }
+
+  .tcard-pin {
+    width: 18px;
+    height: 18px;
+    top: -9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tcard-physics {
+    width: 160px;
+    padding: 12px;
+  }
+
+  .tcard-avatar-box {
+    width: 32px;
+    height: 32px;
+  }
+}
+

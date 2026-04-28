@@ -8,10 +8,10 @@ import './Comparison.css';
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const features = [
-  { text: '60% Creator Revenue Share', color: 'accent' },
+  { text: '90% Creator Revenue Share', color: 'accent' },
   { text: 'Rewarded Ad Support', color: 'light' },
   { text: '₹200 Withdrawal Threshold', color: 'light' },
-  { text: 'Watermarked Content Security', color: 'accent' },
+  { text: 'Content Security', color: 'accent' },
   { text: 'Powerful SEO Discoverability', color: 'accent' },
   { text: 'Fast Partner Approval', color: 'light' }
 ];
@@ -21,7 +21,7 @@ const Comparison = () => {
 
   useGSAP(() => {
     const el = sectionRef.current;
-    
+
     // Animate question mark
     gsap.to('.why-question-mark', {
       y: -10,
@@ -66,7 +66,7 @@ const Comparison = () => {
   return (
     <section className="why-section" id="compare" ref={sectionRef}>
       <div className="why-container">
-        
+
         {/* Top Text Area */}
         <div className="why-header">
           <div className="why-text-block">
@@ -75,7 +75,7 @@ const Comparison = () => {
             <div className="why-title-line why-us-line">
               <span className="why-arrow-circle">
                 <ArrowRight size={36} strokeWidth={3} color="#000" />
-              </span> 
+              </span>
               <span className="why-white">US</span>
             </div>
           </div>

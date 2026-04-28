@@ -185,30 +185,101 @@
     
     .ce-squares-container {
         height: auto;
+        padding: 0 24px;
     }
     
-    .ce-top-row, .ce-top-right-text, .ce-squares-grid, .ce-square-card, .ce-mid-text {
+    .ce-top-row, .ce-squares-grid, .ce-square-card, .ce-mid-text {
         position: relative;
         top: auto !important;
         left: auto !important;
         right: auto !important;
+        transform: none !important;
     }
-    
-    .ce-top-right-text {
-        text-align: left;
-        margin-top: 20px;
+
+    .ce-big-text {
+        text-align: center;
+        margin-bottom: 40px;
     }
     
     .ce-squares-grid {
         display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
         margin-top: 40px;
     }
     
-    .ce-col-1, .ce-col-2, .ce-col-3 {
+    .ce-grid-col {
         display: flex;
+        flex-direction: row;
+        justify-content: center;
         flex-wrap: wrap;
         gap: 20px;
+        width: 100%;
+    }
+
+    .ce-mid-text {
+        text-align: center;
+        margin: 20px auto;
+        max-width: 100%;
     }
 }
+
+@media (max-width: 640px) {
+    .ce-square-card {
+        width: 160px;
+        height: 160px;
+        padding: 16px;
+    }
+
+    .ce-square-val {
+        font-size: 32px;
+    }
+
+    .ce-square-desc {
+        font-size: 10px;
+    }
+
+    .ce-bracket {
+        width: 12px;
+        height: 12px;
+    }
+
+    .ce-grid-col {
+        gap: 12px;
+    }
+
+    .ce-mid-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ce-big-text {
+        font-size: 36px;
+    }
+    
+    .ce-grid-col {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ce-square-card {
+        width: 100%;
+        max-width: 280px;
+        height: 140px;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+    }
+
+    .ce-square-val {
+        align-self: center;
+        margin-left: auto;
+    }
+
+    .ce-square-desc {
+        max-width: 60%;
+    }
+}
+

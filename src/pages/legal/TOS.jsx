@@ -14,11 +14,11 @@ const TOS = () => {
                 <header className="legal-header">
                     <div className="legal-logo" onClick={handleGoHome}>Studiva</div>
                     <h1 className="legal-h1">Terms of Service</h1>
-                    <p className="last-updated">Last Updated: March 23, 2026</p>
+                    <p className="last-updated">Last Updated: April 28, 2026</p>
                 </header>
 
                 <section className="legal-content">
-                    <p className="legal-p">Welcome to Studiva! These Terms of Service ("Terms") govern your access to and use of the Studiva mobile application and services (the "Service"). By using the Service, you agree to be bound by these Terms.</p>
+                    <p className="legal-p">Welcome to Studiva! These Terms of Service ("Terms") govern your access to and use of the Studiva mobile application and services (the "Service"), provided by CRINE. By using the Service, you agree to be bound by these Terms.</p>
 
                     <hr className="legal-hr" />
 
@@ -41,14 +41,14 @@ const TOS = () => {
                     <h3 className="legal-h3">3.1 Your Content</h3>
                     <ul className="legal-ul">
                         <li className="legal-li"><strong>Ownership:</strong> You retain ownership of the study materials, messages, and other content you upload.</li>
-                        <li className="legal-li"><strong>License to Studiva:</strong> By posting content, you grant Studiva a worldwide, non-exclusive, royalty-free, sublicensable license to use, host, store, reproduce, modify, publish, and distribute your content for the purpose of operating and improving the Service.</li>
+                        <li className="legal-li"><strong>License to CRINE:</strong> By posting content, you grant CRINE a worldwide, non-exclusive, royalty-free, sublicensable license to use, host, store, reproduce, modify, publish, and distribute your content for the purpose of operating and improving the Service.</li>
                     </ul>
 
                     <h3 className="legal-h3">3.2 Our Content</h3>
-                    <p className="legal-p">Studiva and its logos, designs, and software are the intellectual property of Studiva. You may not use them without our prior written consent.</p>
+                    <p className="legal-p">Studiva and its logos, designs, and software are the intellectual property of CRINE. You may not use them without our prior written consent.</p>
 
                     <h3 className="legal-h3">3.3 Copyright Policy (DMCA)</h3>
-                    <p className="legal-p">We respect intellectual property rights. If you believe your copyright has been infringed, please contact us at <a className="legal-a" href="mailto:nmrupam@proton.me">nmrupam@proton.me</a> with a formal takedown request.</p>
+                    <p className="legal-p">We respect intellectual property rights. If you believe your copyright has been infringed, please contact us at <a className="legal-a" href="mailto:support@crine.in">support@crine.in</a> with a formal takedown request.</p>
 
                     <hr className="legal-hr" />
 
@@ -62,7 +62,6 @@ const TOS = () => {
                         <li className="legal-li"><strong>Nature:</strong> Emeralds are virtual platform points awarded as part of our revenue-sharing model.</li>
                         <li className="legal-li"><strong>No Monetary Value:</strong> Emeralds are not a legal currency. They have no value outside the Service's redemption framework.</li>
                         <li className="legal-li"><strong>Redemption:</strong> You may redeem Emeralds for "Studiva Gift Cards" or other rewards offered within the app, subject to our minimum withdrawal thresholds and verification.</li>
-                        <li className="legal-li"><strong>Expiration:</strong> Emeralds expire after 90 days of account inactivity.</li>
                     </ul>
 
                     <h3 className="legal-h3">4.3 Revenue Sharing</h3>
@@ -83,7 +82,7 @@ const TOS = () => {
 
                     <h2 className="legal-h2">6. Subscriptions and Payments</h2>
                     <ul className="legal-ul">
-                        <li className="legal-li"><strong>Tiers:</strong> We offer Free, Pro, and Elite tiers. Pricing and benefits are subject to change.</li>
+                        <li className="legal-li"><strong>Tiers:</strong> We offer Free and Pro Plans. Pricing, validity and benefits are subject to change.</li>
                         <li className="legal-li"><strong>Refunds:</strong> Payments for subscriptions or direct Emerald purchases are generally non-refundable, except as required by law.</li>
                     </ul>
 
@@ -97,22 +96,22 @@ const TOS = () => {
                     <h2 className="legal-h2">8. Disclaimers and Limitation of Liability</h2>
                     <ul className="legal-ul">
                         <li className="legal-li"><strong>As-Is Basis:</strong> The Service is provided "as is" and "as available" without warranties of any kind.</li>
-                        <li className="legal-li"><strong>Limitation of Liability:</strong> To the maximum extent permitted by law, Studiva shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service or loss of user-generated content.</li>
+                        <li className="legal-li"><strong>Limitation of Liability:</strong> To the maximum extent permitted by law, CRINE shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service or loss of user-generated content.</li>
                     </ul>
 
                     <hr className="legal-hr" />
 
                     <h2 className="legal-h2">9. Governing Law</h2>
-                    <p className="legal-p">These Terms are governed by the laws of India. Any disputes arising from these Terms will be subject to the exclusive jurisdiction of the courts in [Delhi/Your Jurisdiction].</p>
+                    <p className="legal-p">These Terms are governed by the laws of India. Any disputes arising from these Terms will be subject to the exclusive jurisdiction of the courts in India.</p>
 
                     <hr className="legal-hr" />
 
                     <h2 className="legal-h2">10. Contact Us</h2>
-                    <p className="legal-p">For any questions regarding these Terms, please contact <a className="legal-a" href="mailto:nmrupam@proton.me">nmrupam@proton.me</a></p>
+                    <p className="legal-p">For any questions regarding these Terms, please contact <a className="legal-a" href="mailto:support@crine.in">support@crine.in</a> or visit <a className="legal-a" href="https://crine.in" target="_blank" rel="noopener noreferrer">crine.in</a></p>
                 </section>
 
                 <footer className="legal-footer">
-                    <p>&copy; 2026 CRINE. All rights reserved.</p>
+                    <p>&copy; 2026 Studiva. All rights reserved.</p>
                 </footer>
             </div>
         </div>

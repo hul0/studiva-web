@@ -18,6 +18,7 @@ const ComingSoon = lazy(() => import('./pages/ComingSoon'));
 const ShareRedirect = lazy(() => import('./pages/ShareRedirect'));
 const VerifiedCreator = lazy(() => import('./pages/VerifiedCreator'));
 const SuggestFeature = lazy(() => import('./pages/SuggestFeature'));
+const RevenueCalc = lazy(() => import('./pages/RevenueCalc'));
 const Support = lazy(() => import('./pages/Support'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -113,6 +114,8 @@ function App() {
         return <VerifiedCreator />;
       case '/suggest-feature':
         return <SuggestFeature />;
+      case '/revenue-calc':
+        return <RevenueCalc />;
       case '/support':
         return <Support />;
       case '/admin':

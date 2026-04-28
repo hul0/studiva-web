@@ -60,7 +60,7 @@ const Hero = () => {
 
     return (
         <section className="hero" ref={containerRef}>
-            
+
 
 
 
@@ -70,15 +70,15 @@ const Hero = () => {
                 <div className="hero__text-layer">
                     <h1 className="hero__title">
                         <span className="gsap-title-word" style={{ display: 'inline-block' }}>
-                            Turn Your Notes
+                            Learn Together
                         </span>
                         <br />
                         <span className="accent-text gsap-title-word" style={{ display: 'inline-block' }}>
-                            Int<span className="super-o">o</span>
+                            Earn
                         </span>
                         {' '}
                         <span className="accent-text gsap-title-word" style={{ display: 'inline-block' }}>
-                            Inc<span className="super-o">o</span>me.
+                            Together.
                         </span>
                     </h1>
                 </div>
@@ -93,7 +93,7 @@ const Hero = () => {
                         <div className="hero__stats gsap-stats">
                             <div className="hero__stat">
                                 <Users size={18} />
-                                <span><strong>250+</strong> Early Adopters</span>
+                                <span><strong>300+</strong> Early Adopters</span>
                             </div>
                             <div className="hero__stat">
                                 <Rocket size={18} />

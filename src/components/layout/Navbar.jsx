@@ -5,6 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, ArrowRight, BookOpen, UserCircle, Layout, LayoutDashboard, Users } from 'lucide-react';
 import ThemeToggle from '../ui/ThemeToggle';
 import './Navbar.css';
+import { CreativeCommons } from 'lucide-react';
+import { PersonStanding } from 'lucide-react';
+import { DollarSign } from 'lucide-react';
+import { UserCheck2Icon } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -42,22 +46,22 @@ const Navbar = () => {
                 start: 'top -20',
                 onEnter: () => {
                     setScrolled(true);
-                    gsap.to(nav, { 
-                        maxWidth: '1200px', 
-                        top: '12px', 
-                        height: '60px', 
-                        duration: 0.4, 
+                    gsap.to(nav, {
+                        maxWidth: '1200px',
+                        top: '12px',
+                        height: '60px',
+                        duration: 0.4,
                         ease: 'power3.inOut',
                         overwrite: 'auto'
                     });
                 },
                 onLeaveBack: () => {
                     setScrolled(false);
-                    gsap.to(nav, { 
-                        maxWidth: '1380px', 
-                        top: '24px', 
-                        height: '64px', 
-                        duration: 0.4, 
+                    gsap.to(nav, {
+                        maxWidth: '1380px',
+                        top: '24px',
+                        height: '64px',
+                        duration: 0.4,
                         ease: 'power3.inOut',
                         overwrite: 'auto'
                     });
@@ -164,8 +168,10 @@ const Navbar = () => {
     const links = [
         { label: 'Home', href: '/', icon: <Layout size={14} /> },
         { label: 'Team', href: '/team', icon: <Users size={14} /> },
-        { label: 'Campus Rep', href: '/campus-representative', icon: <Users size={14} /> },
-        { label: 'Support', href: '/support', icon: <BookOpen size={14} /> },
+        { label: 'Campus Rep', href: '/campus-representative', icon: <UserCheck2Icon size={14} /> },
+        { label: 'Creator Tools', href: '/revenue-calc', icon: <DollarSign size={14} /> },
+        { label: 'Support', href: '/support', icon: <PersonStanding size={14} /> },
+
     ];
 
     return (
@@ -280,7 +286,7 @@ const Navbar = () => {
                     ))}
                     <div style={{ padding: '8px 4px 0' }}>
                         <a href="#download" className="btn-primary" style={{ display: 'flex', width: '100%', justifyContent: 'center', height: '48px', alignItems: 'center' }}>
-                            Join 200,000+ Learners
+                            Join 300+ Learners
                         </a>
                     </div>
                 </div>
