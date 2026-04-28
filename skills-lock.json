@@ -9,7 +9,7 @@
     "gsap-frameworks": {
       "source": "greensock/gsap-skills",
       "sourceType": "github",
-      "computedHash": "9fa6e640b4d702d2270b28f43b37eb50bcdcd562b6b88b27260cf8ce5831d74f"
+      "computedHash": "08b3917649997d53f94a9831b5db21afafafc89ee3a9a020d2471c69c336bdd6"
     },
     "gsap-performance": {
       "source": "greensock/gsap-skills",
@@ -19,7 +19,7 @@
     "gsap-plugins": {
       "source": "greensock/gsap-skills",
       "sourceType": "github",
-      "computedHash": "617b55bf453607f04901221a529e88d26e33365aea7df5857b48d1d77d5db2b1"
+      "computedHash": "50a320904c3053a1a7d01ea95235944814d18c0b5958f17e38046504aa6078a8"
     },
     "gsap-react": {
       "source": "greensock/gsap-skills",

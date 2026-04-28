@@ -331,13 +331,29 @@ section {
   background-repeat: repeat;
 }
 
+/* ── PIXEL TRAIL COLOURS ────────────────────── */
+.pixel-white {
+  background-color: #ffffff;
+}
+
+.pixel-black {
+  background-color: #000000;
+}
+
+.gooey-svg-hidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 /* ── GRID BACKGROUND ─────────────────────────── */
 .grid-bg {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  
+    
+    
   background-size: 72px 72px;
   mask-image: radial-gradient(
     ellipse 70% 70% at 50% 0%,

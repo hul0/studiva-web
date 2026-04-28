@@ -14,11 +14,11 @@ const Privacy = () => {
                 <header className="legal-header">
                     <div className="legal-logo" onClick={handleGoHome}>Studiva</div>
                     <h1 className="legal-h1">Privacy Policy</h1>
-                    <p className="last-updated">Last Updated: March 23, 2026</p>
+                    <p className="last-updated">Last Updated: April 28, 2026</p>
                 </header>
 
                 <section className="legal-content">
-                    <p className="legal-p">Studiva ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share information when you use the Studiva mobile application and services (collectively, the "Service").</p>
+                    <p className="legal-p">Studiva ("we," "our," or "us"), a product by CRINE, is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share information when you use the Studiva mobile application and services (collectively, the "Service").</p>
 
                     <hr className="legal-hr" />
 
@@ -74,7 +74,7 @@ const Privacy = () => {
                     <h3 className="legal-h3">3.2 Third-Party Service Providers</h3>
                     <p className="legal-p">We share information with third parties that help us provide the Service:</p>
                     <ul className="legal-ul">
-                        <li className="legal-li"><strong>Infrastructure & Authentication:</strong> Supabase (Storage), Cloudflare (CDN), Firebase(Auth), Turso(Database).</li>
+                        <li className="legal-li"><strong>Infrastructure & Authentication:</strong> Supabase & Cloudflare R2 (Storage), Cloudflare (CDN), Firebase (Auth), Turso (Database).</li>
                         <li className="legal-li"><strong>AI Services:</strong> Google Gemini (for Doubt Snap and study assistance).</li>
                     </ul>
 
@@ -126,7 +126,7 @@ const Privacy = () => {
                     <hr className="legal-hr" />
 
                     <h2 className="legal-h2">9. Contact Us</h2>
-                    <p className="legal-p">If you have any questions about this Privacy Policy, please contact us at <a className="legal-a" href="mailto:nmrupam@proton.me">nmrupam@proton.me</a></p>
+                    <p className="legal-p">If you have any questions about this Privacy Policy, please contact us at <a className="legal-a" href="mailto:support@crine.in">support@crine.in</a> or visit <a className="legal-a" href="https://crine.in" target="_blank" rel="noopener noreferrer">crine.in</a></p>
                 </section>
 
                 <footer className="legal-footer">

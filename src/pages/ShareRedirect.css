@@ -55,9 +55,9 @@
 .share-page__grid {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+
+    
+    
   background-size: 72px 72px;
   mask-image: radial-gradient(
     ellipse 60% 60% at 50% 50%,
@@ -328,7 +328,7 @@
 .share-card__footer {
   margin-top: 28px;
   padding-top: 20px;
-  border-top: 1px solid var(--border);
+  
 }
 
 .share-card__branding {

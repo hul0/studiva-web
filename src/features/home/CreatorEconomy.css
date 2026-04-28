@@ -1,230 +1,285 @@
-.creator {
-    padding: var(--section-py) 0;
-    background: var(--bg);
+.creator-economy-squares {
+    padding: 0;
+    background-color: #2b2826; /* Dark brownish-grey from the reference */
     position: relative;
-    border-top: 1px solid var(--border);
     overflow: hidden;
-    contain: paint;
-}
-
-/* 🎨 Decorative background glows */
-.creator::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.02) 0%, transparent 70%);
-    filter: blur(100px);
-    pointer-events: none;
-}
-
-.creator__head {
-    margin-bottom: var(--section-gap);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-}
-
-.creator__badge {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    letter-spacing: 3px;
-}
-
-.creator__title {
-    font-size: clamp(34px, 6vw, 56px);
-    font-weight: 950;
-    letter-spacing: -3px;
-    line-height: 1;
-    color: var(--text-1);
-    max-width: 800px;
-}
-
-.creator__desc {
-    font-size: 16px;
-    color: var(--text-2);
-    max-width: 520px;
-    line-height: 1.6;
-}
-
-/* 💠 Compact Wide "Stack" Plates Layout */
-.creator__modes {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 60px; /* Reduced from 80px */
-}
-
-.mode-plate {
-    display: grid;
-    grid-template-columns: 80px 1fr 200px;
-    align-items: center;
-    gap: 32px;
-    padding: 24px 32px; /* Reduced vertical from 32px to 24p */
-    border-radius: 12px;
-    background: var(--surface);
-    border: 1px solid var(--border-strong);
-    position: relative;
-    min-height: 100px; /* Reduced from 140px */
-}
-
-.mode-plate::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 30%;
-    bottom: 30%;
-    width: 2px;
-    background: var(--accent-light);
-    border-radius: 0 100px 100px 0;
-    opacity: 0.3;
-}
-
-.mode-plate__icon-box {
-    width: 44px;
-    height: 44px;
+    color: #ffffff;
+    height: 100vh;
+    min-height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--surface-2);
-    border: 1px solid var(--border-strong);
-    border-radius: 10px;
-    color: var(--accent-light);
 }
 
-.mode-plate__content {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.mode-plate__title {
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: -0.6px;
-    color: var(--text-1);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.mode-plate__badge {
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--accent-light);
-    background: rgba(124, 58, 237, 0.08);
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.mode-plate__desc {
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: var(--text-2);
-    max-width: 520px;
-}
-
-.mode-plate__earn-block {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.mode-plate__earn-label {
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--text-3);
-}
-
-.mode-plate__earn-val {
-    font-size: 17px;
-    font-weight: 950;
-    color: #fff;
-}
-
-/* 📊 Super-Compact Stats Strip */
-.creator__stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background: var(--surface-2);
-    border: 1px solid var(--border-strong);
-    border-radius: 12px;
-    padding: 28px 0; /* Reduced from 40px */
-    gap: 4px; /* Minimalist alignment gap */
-}
-
-.creator-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px; /* Reduced from 12px */
-    align-items: center;
-    text-align: center;
-    position: relative;
-}
-
-/* Minimalist Dividers */
-.creator-stat:not(:last-child)::after {
-    content: '';
+.ce-bg-graphic {
     position: absolute;
-    right: 0;
-    top: 25%;
-    bottom: 25%;
-    width: 1px;
-    background: var(--border-strong);
-    opacity: 0.5;
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%);
+    width: 800px;
+    height: 800px;
+    pointer-events: none;
+    z-index: 1;
 }
 
-.creator-stat__val {
-    font-size: 32px; /* Reduced from 42px */
-    font-weight: 950;
-    letter-spacing: -1.5px;
-    color: var(--text-1);
+.ce-squares-container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+    height: 600px;
+}
+
+.ce-top-row {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    z-index: 10;
+}
+
+.ce-big-text {
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 900;
     line-height: 1;
-}
-
-.creator-stat__label {
-    font-size: 10px; /* Reduced from 11px */
-    font-weight: 700;
-    color: var(--text-3);
+    color: #f25b38; /* Bright orange from the reference */
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: -1px;
+    margin: 0;
 }
 
-@media (max-width: 1100px) {
-    .mode-plate {
-        grid-template-columns: 50px 1fr;
-        padding: 20px;
-        gap: 16px;
+.ce-top-right-text {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #f25b38;
+    text-align: right;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    max-width: 200px;
+}
+
+/* We will use a relative layout grid for scattered absolute cards */
+.ce-squares-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ce-mid-text {
+    position: absolute;
+    top: 450px;
+    left: 550px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f25b38;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    max-width: 200px;
+}
+
+/* Absolute card positioning */
+.ce-square-card {
+    background-color: #d1cbb8; /* Beige from reference */
+    color: #1a1a1a;
+    width: 220px;
+    height: 220px;
+    padding: 20px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.ce-square-card:hover {
+    transform: scale(1.05) translateY(-5px) !important;
+    z-index: 20;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+/* Stagger positions "up down left right" */
+.ce-col-1 .ce-square-card:nth-child(1) {
+    top: 250px;
+    left: 40px;
+}
+
+.ce-col-1 .ce-square-card:nth-child(2) {
+    top: 420px;
+    left: 280px;
+}
+
+.ce-col-2 .ce-square-card:nth-child(1) {
+    top: 200px;
+    left: 500px;
+}
+
+/* Remove text from col-2 layout calculation since it's absolutely positioned too */
+
+.ce-col-3 .ce-square-card:nth-child(1) {
+    top: 380px;
+    right: 40px;
+}
+
+.ce-col-3 .ce-square-card:nth-child(2) {
+    top: 100px;
+    right: 150px;
+}
+
+.ce-square-desc {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    max-width: 90%;
+}
+
+.ce-square-val {
+    font-size: 48px;
+    font-weight: 900;
+    align-self: flex-end;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+/* Corner Brackets */
+.ce-bracket {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #1a1a1a;
+}
+
+.ce-tl {
+    top: 10px; left: 10px;
+    border-right: none; border-bottom: none;
+}
+
+.ce-tr {
+    top: 10px; right: 10px;
+    border-left: none; border-bottom: none;
+}
+
+.ce-bl {
+    bottom: 10px; left: 10px;
+    border-right: none; border-top: none;
+}
+
+.ce-br {
+    bottom: 10px; right: 10px;
+    border-left: none; border-top: none;
+}
+
+@media (max-width: 1024px) {
+    .creator-economy-squares {
+        height: auto;
+        min-height: auto;
+        padding: 80px 0;
     }
-    .mode-plate__earn-block {
-        grid-column: 2;
+    
+    .ce-squares-container {
+        height: auto;
+        padding: 0 24px;
+    }
+    
+    .ce-top-row, .ce-squares-grid, .ce-square-card, .ce-mid-text {
+        position: relative;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+    }
+
+    .ce-big-text {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .ce-squares-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        margin-top: 40px;
+    }
+    
+    .ce-grid-col {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .ce-mid-text {
+        text-align: center;
+        margin: 20px auto;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .ce-square-card {
+        width: 160px;
+        height: 160px;
+        padding: 16px;
+    }
+
+    .ce-square-val {
+        font-size: 32px;
+    }
+
+    .ce-square-desc {
+        font-size: 10px;
+    }
+
+    .ce-bracket {
+        width: 12px;
+        height: 12px;
+    }
+
+    .ce-grid-col {
+        gap: 12px;
+    }
+
+    .ce-mid-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ce-big-text {
+        font-size: 36px;
+    }
+    
+    .ce-grid-col {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ce-square-card {
+        width: 100%;
+        max-width: 280px;
+        height: 140px;
+        flex-direction: row;
+        align-items: center;
         text-align: left;
     }
+
+    .ce-square-val {
+        align-self: center;
+        margin-left: auto;
+    }
+
+    .ce-square-desc {
+        max-width: 60%;
+    }
 }
 
-@media (max-width: 800px) {
-    .creator__stats {
-        grid-template-columns: 1fr 1fr;
-        padding: 24px;
-        gap: 24px;
-    }
-    .creator-stat:nth-child(2)::after { display: none; }
-}
-
-@media (max-width: 500px) {
-    .creator__stats {
-        grid-template-columns: 1fr;
-    }
-    .creator-stat::after { display: none !important; }
-}

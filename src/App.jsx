@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Home from './pages/Home';
 import Lenis from '@studio-freight/lenis';
+import GooeyBackground from './components/ui/GooeyBackground';
 
 // Legal Pages (Lazy Loaded)
 const Privacy = lazy(() => import('./pages/legal/Privacy'));
@@ -17,6 +18,7 @@ const ComingSoon = lazy(() => import('./pages/ComingSoon'));
 const ShareRedirect = lazy(() => import('./pages/ShareRedirect'));
 const VerifiedCreator = lazy(() => import('./pages/VerifiedCreator'));
 const SuggestFeature = lazy(() => import('./pages/SuggestFeature'));
+const RevenueCalc = lazy(() => import('./pages/RevenueCalc'));
 const Support = lazy(() => import('./pages/Support'));
 const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -103,6 +105,7 @@ function App() {
         return <DeleteAccount />;
       case '/team':
         return <Team />;
+      case '/campus-representatives':
       case '/campus-representative':
         return <CampusRepresentative />;
       case '/coming-soon':
@@ -111,6 +114,8 @@ function App() {
         return <VerifiedCreator />;
       case '/suggest-feature':
         return <SuggestFeature />;
+      case '/revenue-calc':
+        return <RevenueCalc />;
       case '/support':
         return <Support />;
       case '/admin':

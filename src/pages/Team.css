@@ -26,9 +26,9 @@
 .tm-hero__grid {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+
+    
+    
   background-size: 80px 80px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 0%, black 20%, transparent 100%);
   pointer-events: none;
@@ -105,7 +105,7 @@
 /* ── Section ──────────────────────────────────────────── */
 .tm-section {
   padding: 80px 0;
-  border-top: 1px solid var(--border);
+  
 }
 
 .tm-section__header {
@@ -306,7 +306,7 @@
 /* ── Bottom CTA ───────────────────────────────────────── */
 .tm-cta {
   padding: 80px 0 100px;
-  border-top: 1px solid var(--border);
+  
 }
 
 .tm-cta__inner {
