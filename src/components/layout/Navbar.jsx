@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, ArrowRight, BookOpen, UserCircle, Layout, LayoutDashboard, Users } from 'lucide-react';
-import ThemeToggle from '../ui/ThemeToggle';
+
 import './Navbar.css';
 import { CreativeCommons } from 'lucide-react';
 import { PersonStanding } from 'lucide-react';
@@ -166,11 +166,11 @@ const Navbar = () => {
 
 
     const links = [
-        { label: 'Home', href: '/', icon: <Layout size={14} /> },
-        { label: 'Team', href: '/team', icon: <Users size={14} /> },
-        { label: 'Campus Rep', href: '/campus-representative', icon: <UserCheck2Icon size={14} /> },
-        { label: 'Creator Tools', href: '/revenue-calc', icon: <DollarSign size={14} /> },
-        { label: 'Support', href: '/support', icon: <PersonStanding size={14} /> },
+        { label: 'Home', href: '/', icon: <Layout size={20} /> },
+        { label: 'Team', href: '/team', icon: <Users size={20} /> },
+        { label: 'Campus Rep', href: '/campus-representative', icon: <UserCheck2Icon size={20} /> },
+        { label: 'Creator Tools', href: '/revenue-calc', icon: <DollarSign size={20} /> },
+        { label: 'Support', href: '/support', icon: <PersonStanding size={20} /> },
 
     ];
 
@@ -226,7 +226,7 @@ const Navbar = () => {
 
                     {/* Actions */}
                     <div className="nav__actions">
-                        <ThemeToggle />
+
                         {/* <a 
                         href="/dashboard" 
                         className="nav__link nav__link--dashboard"
@@ -238,15 +238,7 @@ const Navbar = () => {
                     >
                         Dashboard
                     </a> */}
-                        <a
-                            href="#download"
-                            className="btn-primary"
-                            id="nav-cta-download"
-                            onClick={(e) => scrollToSection(e, '#download')}
-                        >
-                            Get App
-                            <ArrowRight size={14} />
-                        </a>
+                        {/* Get App removed as per retro redesign */}
                         <button
                             className="nav__mobile-toggle"
                             onClick={() => setIsOpen(!isOpen)}
@@ -285,9 +277,7 @@ const Navbar = () => {
                         </a>
                     ))}
                     <div style={{ padding: '8px 4px 0' }}>
-                        <a href="#download" className="btn-primary" style={{ display: 'flex', width: '100%', justifyContent: 'center', height: '48px', alignItems: 'center' }}>
-                            Join 300+ Learners
-                        </a>
+                        {/* Get App removed */}
                     </div>
                 </div>
             </div>

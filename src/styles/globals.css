@@ -82,37 +82,37 @@
 
 :root {
   /* Background */
-  --bg: #DEDEDE;
+  --bg: #EAFFD0;
   --surface: #ffffff;
   --surface-2: #f5f5f5;
   --surface-3: #e8e8e8;
 
   /* Borders */
-  --border: rgba(23, 23, 23, 0.08);
-  --border-strong: rgba(23, 23, 23, 0.16);
+  --border: #0D0D0D;
+  --border-strong: #0D0D0D;
 
   /* Text */
-  --text-1: #171717;
-  --text-2: #4D4D4D;
-  --text-3: #7D7D7D;
+  --text-1: #0D0D0D;
+  --text-2: #224F10;
+  --text-3: #224F10;
 
-  /* Accent — solid orange, used sparingly */
-  --accent: #F25623;
-  --accent-light: #FF7B4D;
-  --accent-dim: rgba(242, 86, 35, 0.15);
+  /* Accent */
+  --accent: #B0E454;
+  --accent-light: #B0E454;
+  --accent-dim: rgba(176, 228, 84, 0.15);
 
-  --nav-bg: rgba(255, 255, 255, 0.75);
-  --nav-bg-scrolled: rgba(255, 255, 255, 0.85);
-  --nav-mobile-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(23, 23, 23, 0.08);
+  --nav-bg: #EAFFD0;
+  --nav-bg-scrolled: #EAFFD0;
+  --nav-mobile-bg: #EAFFD0;
+  --glass-border: #0D0D0D;
 
-  --footer-text-fade-start: rgba(23, 23, 23, 1);
-  --footer-text-fade-end: rgba(23, 23, 23, 0);
+  --footer-text-fade-start: rgba(13, 13, 13, 1);
+  --footer-text-fade-end: rgba(13, 13, 13, 0);
 
-  --btn-bg: #000000;
-  --btn-fg: #ffffff;
-  --btn-shadow: #A890FE;
-  --btn-shadow-alt: #787777;
+  --btn-bg: #0D0D0D;
+  --btn-fg: #EAFFD0;
+  --btn-shadow: #224F10;
+  --btn-shadow-alt: #224F10;
 
   /* Typography */
   --font: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -125,41 +125,6 @@
   /* Transitions */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-:root[data-theme='dark'] {
-  /* Background */
-  --bg: #121212;
-  --surface: #1E1E1E;
-  --surface-2: #252525;
-  --surface-3: #2C2C2C;
-
-  /* Borders */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-
-  /* Text */
-  --text-1: #E0E0E0;
-  --text-2: #A0A0A0;
-  --text-3: #757575;
-
-  /* Accent — solid orange, used sparingly */
-  --accent: #F25623;
-  --accent-light: #FF7B4D;
-  --accent-dim: rgba(242, 86, 35, 0.15);
-
-  --nav-bg: rgba(36, 36, 36, 0.75);
-  --nav-bg-scrolled: rgba(36, 36, 36, 0.85);
-  --nav-mobile-bg: rgba(36, 36, 36, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.08);
-
-  --footer-text-fade-start: rgba(255, 255, 255, 1);
-  --footer-text-fade-end: rgba(255, 255, 255, 0);
-
-  --btn-bg: #ffffff;
-  --btn-fg: #121212;
-  --btn-shadow: #A890FE;
-  --btn-shadow-alt: #A890FE;
 }
 
 html {

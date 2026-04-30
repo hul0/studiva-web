@@ -71,7 +71,7 @@ const Hero = () => {
             </div>
 
             {/* Main Content Container */}
-            <div className="container hero__inner" style={{ display: 'none' }}>
+            <div className="container hero__inner">
                 {/* Top: Big Title */}
                 <div className="hero__text-layer">
                     <h1 className="hero__title">
