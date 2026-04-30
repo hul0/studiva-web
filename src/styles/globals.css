@@ -319,8 +319,8 @@ section {
      full-page repaint on scroll. Add overflow: hidden only where explicitly needed. */
 }
 
-/* ── NOISE OVERLAY ───────────────────────────── */
-.noise {
+── NOISE OVERLAY ─────────────────────────────
+/* .noise {
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -329,7 +329,7 @@ section {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAElBMVEUAAAAAAAAAAAAAAAAAAAAAAADgKxmiAAAABnRSTlMFBgcICQpJMBMzAAAASklEQVQ4y2MYJoAVSjMwQGkmKM3AAKVZ4DQLlGZhgNIsUJqFgQFKs0BpFigN0cUCpVkYGKA0C5RmgdIsDFCaBUqzMEBpZigNAAAMfAmtOlTVwAAAAABJRU5ErkJggg==");
   background-size: 48px;
   background-repeat: repeat;
-}
+} */
 
 /* ── PIXEL TRAIL COLOURS ────────────────────── */
 .pixel-white {

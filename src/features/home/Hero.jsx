@@ -5,6 +5,8 @@ import { Rocket, Users } from 'lucide-react';
 
 import './Hero.css';
 
+import mockup from '../../assets/icons/mockup.png';
+
 const Hero = () => {
     const containerRef = useRef(null);
 
@@ -64,8 +66,12 @@ const Hero = () => {
 
 
 
+            <div className="clip">
+                <img src={mockup} alt="Studiva App Mockup" className="hero__mockup" />
+            </div>
+
             {/* Main Content Container */}
-            <div className="container hero__inner">
+            <div className="container hero__inner" style={{ display: 'none' }}>
                 {/* Top: Big Title */}
                 <div className="hero__text-layer">
                     <h1 className="hero__title">
