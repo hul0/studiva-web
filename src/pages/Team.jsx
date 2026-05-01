@@ -25,20 +25,20 @@ const engineering = [
 
 const creative = [
   { name: 'Satyaki Das', role: 'Creative Director', tag: 'Creative Director', seed: 'Jack' },
+  { name: 'Soham Singh', role: 'Creative Director', tag: 'Creative Director', seed: 'Alexander' },
+  { name: 'Freja Chandni', role: 'Creative Director', tag: 'Creative Director', seed: 'Adrian' },
+
 ];
 
 const prTeam = [
-  { name: 'Md. Shadman Shahnawaz', role: 'PR Lead', tag: 'PR Lead', seed: 'Jack', image: '/team_figures/shadman.jpeg' },
-  { name: 'Soham Singh', role: 'Outreach', seed: 'Alexander' },
-  { name: 'Freja Chandni', role: 'Outreach', seed: 'Adrian' },
+  { name: 'Md. Shadman Shahnawaz', role: 'PR Head', tag: 'PR Head', seed: 'Jack', image: '/team_figures/shadman.jpeg' },
   { name: 'Sk. Aqib', role: 'Outreach', seed: 'Alexander', image: '/team_figures/aqib.jpeg' },
   { name: 'Rohit Jha', role: 'Outreach', seed: 'Alexander' },
   { name: 'Anubhav Bishwakarma', role: 'Outreach', seed: 'Alexander' },
   { name: 'Swastika Das', role: 'Outreach', seed: 'Adrian' },
   { name: 'Subhamoy Sinha', role: 'Outreach', seed: 'Alexander' },
   { name: 'Aniruddha Mukherjee', role: 'Outreach', seed: 'Alexander' },
-  { name: 'Debipriya Ghosh', role: 'Outreach', seed: 'Adrian' },
-  { name: 'Aarav Raj', role: 'Outreach', seed: 'Alexander' },
+
 ];
 
 /* ── Section component ───────────────────────────────── */
