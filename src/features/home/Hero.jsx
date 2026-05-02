@@ -93,7 +93,7 @@ const Hero = () => {
                         <div className="hero__stats gsap-stats">
                             <div className="hero__stat">
                                 <Users size={18} />
-                                <span><strong>300+</strong> Early Adopters</span>
+                                <span><strong>400+</strong> Early Adopters</span>
                             </div>
                             <div className="hero__stat">
                                 <Rocket size={18} />

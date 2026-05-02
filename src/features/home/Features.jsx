@@ -133,7 +133,7 @@ const Features = () => {
 
               {/* Small Customer Box */}
               <div className="bento-item bento-card bento-card-white customers-card">
-                <div className="bento-badge bento-badge-lime">300+ Students</div>
+                <div className="bento-badge bento-badge-lime">400+ Students</div>
               </div>
             </div>
 

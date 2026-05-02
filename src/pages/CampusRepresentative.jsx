@@ -9,20 +9,20 @@ import './CampusRepresentative.css';
 /* ─── Benefit card data ───────────────────────────── */
 const BENEFITS = [
   {
+    title: 'Earn up to ₹1000 every month',
+    desc: 'Refer users and earn up to 2x per user',
+    icon: 'money',
+    layout: 'wide'
+  },
+  {
     title: 'Complimentary Premium Access',
     desc: 'Experience the full power of Studiva, unlocked exclusively for you.',
     icon: 'star',
     layout: 'tall'
   },
   {
-    title: 'Signature Campus Representative Badge',
+    title: 'Exclusive Badges',
     desc: 'A customized identity icon that sets you apart and represents your college.',
-    icon: 'badge',
-    layout: 'wide'
-  },
-  {
-    title: 'Personalized Banner Feature',
-    desc: 'Your identity, your presence — showcased with style.',
     icon: 'banner',
     layout: 'standard'
   },
@@ -33,10 +33,10 @@ const BENEFITS = [
     layout: 'standard'
   },
   {
-    title: 'Elite WhatsApp Circle',
-    desc: 'Not just a group, but a network:',
+    title: 'Elite Circle',
+    desc: 'Get into the biggest study network:',
     points: [
-      'Connect with fellow campus representatives across colleges',
+      'Connect with fellow campus representatives across 30+ colleges',
       'Direct access to the core team of Studiva'
     ],
     icon: 'message',
@@ -47,6 +47,40 @@ const BENEFITS = [
 // Icon mapping helper
 const BenefitIcon = ({ type }) => {
   switch (type) {
+    case 'money':
+      return <svg fill="#FFFFFF" height="400px" width="400px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 488.4 488.4" >
+        <g>
+          <path d="M201,406.3L201,406.3L201,406.3c0,4.1-0.1,9.2-0.8,14.3l-2.7,48.9c0,3.6-2.9,6.5-6.5,6.5l-76.6-0.4c-3.6,0-6.5-2.9-6.5-6.5
+		l-1.4-40.4l-72.7-87.6c-10.7-11.4-18-24.2-20.3-39.6l-0.7-4.5L0.1,174.1c-0.6-6.1,1.5-12.3,6.2-16.1c5.7-4.6,14.7-6.3,21.4,1.3
+		c4.7,5.4,7,22.2,7.8,26.7c2.7,16.1,5.4,39.1,5.8,55.3c0,1.1,0.1,2.6,0.2,3.7c0.4,7.1,2.1,13.7,5.1,20.2
+		c16.4,35.6,49.3,80.6,49.3,80.6l1.8,2.7c1.4,2,4.1,2.7,6.3,1.5c2.4-1.3,3.2-4.4,1.8-6.7l-43.6-71.1c-4.7-7.9-2-19.1,6.5-24.3
+		c8.5-5.2,19.7-2.6,24.4,5.3l45.3,58.2c3,3.8,8.5,9.3,12.4,12.1c40.7,29.3,46.2,59.1,49.8,74.3C200.6,398,200.9,401.4,201,406.3z
+		 M46,167.9c1.3,4.3,2.2,8.7,2.9,12.9c2.3,13.9,5.8,39,6,52.3c0,1.4,0.1,2.7,0.1,4.1c1.5-1.3,3.1-2.6,4.9-3.7
+		c2.2-1.4,4.5-2.4,6.9-3.2c0.1-0.2,0.2-0.3,0.3-0.4c-1.7-12.7-6.2-36.7-9.5-49.1C55.9,174.5,52.3,169.9,46,167.9z M70.4,185.5
+		c2,9.2,7.2,26.1,8.4,35.1l0.8,6.1c0.1,0.6,0.1,1.2,0.1,1.8c3.7,0.1,7.4,0.9,10.9,2.2c-1.2-8.2-6.7-24.6-8.7-32.3
+		C80.1,192.1,76.5,187.6,70.4,185.5z M460.7,159.3c-4.7,5.4-7,22.2-7.8,26.7c-2.7,16.1-5.4,39.1-5.8,55.3c0,1.1-0.1,2.6-0.2,3.7
+		c-0.4,7.1-2.1,13.7-5.1,20.2c-16.4,35.6-49.3,80.6-49.3,80.6l-1.8,2.7c-1.4,2-4.1,2.7-6.3,1.5c-2.4-1.3-3.2-4.4-1.8-6.7l43.6-71.1
+		c4.7-7.9,2-19.1-6.5-24.3c-8.5-5.2-19.7-2.6-24.4,5.3L350,311.4c-3,3.8-8.5,9.3-12.4,12.1c-40.7,29.3-46.2,59.1-49.8,74.3
+		c0,0-0.3,3.4-0.4,8.3l0,0c0,4.1,0.1,9.2,0.8,14.3l2.7,48.9c0,3.6,2.9,6.5,6.5,6.5l76.6-0.4c3.6,0,6.5-2.9,6.5-6.5l1.4-40.4
+		l72.7-87.6c10.7-11.4,18-24.2,20.3-39.6l0.7-4.5l12.7-122.9c0.6-6.1-1.5-12.3-6.2-16.1C476.4,153.4,467.4,151.7,460.7,159.3z
+		 M433.5,237.1c0-1.4,0.1-2.7,0.1-4.1c0.3-13.3,3.7-38.4,6-52.3c0.7-4.2,1.5-8.5,2.9-12.9c-6.3,2.1-10,6.6-11.6,12.8
+		c-3.3,12.4-7.8,36.4-9.5,49.1c0.1,0.2,0.2,0.3,0.3,0.4c2.4,0.8,4.7,1.9,6.9,3.2C430.3,234.6,431.9,235.8,433.5,237.1z M409.6,220.5
+		c1.2-8.9,6.3-25.8,8.4-35.1c-6.2,2.1-9.8,6.6-11.4,12.8c-2,7.7-7.5,24.1-8.7,32.3c3.5-1.3,7.2-2,10.9-2.2c0-0.6,0-1.2,0.1-1.8
+		L409.6,220.5z M386.5,221c0-6-4.8-10.8-10.8-10.8H116.2c-6,0-10.8,4.8-10.8,10.8s4.8,10.8,10.8,10.8h259.5
+		C381.7,231.8,386.5,227,386.5,221z M347.8,260.1c0-6-4.8-10.8-10.8-10.8H135.4c-6,0-10.8,4.8-10.8,10.8s4.8,10.8,10.8,10.8H337
+		C343,270.9,347.8,266.1,347.8,260.1z M171.5,288.5c-6,0-10.8,4.8-10.8,10.8s4.8,10.8,10.8,10.8h129.3c6,0,10.8-4.8,10.8-10.8
+		s-4.8-10.8-10.8-10.8H171.5z M324.8,87.4c-8.5,0-15.3,6.9-15.3,15.3c0,8.5,6.9,15.3,15.3,15.3c8.5,0,15.3-6.9,15.3-15.3
+		C340.1,94.2,333.2,87.4,324.8,87.4z M163.6,87.4c-8.5,0-15.3,6.9-15.3,15.3c0,8.5,6.9,15.3,15.3,15.3c8.5,0,15.3-6.9,15.3-15.3
+		C179,94.2,172.1,87.4,163.6,87.4z M390.1,167.8c0,13.9-11.3,25.3-25.3,25.3H123.6c-13.9,0-25.3-11.3-25.3-25.3V37.7
+		c0-13.9,11.3-25.3,25.3-25.3h241.2c13.9,0,25.3,11.3,25.3,25.3L390.1,167.8L390.1,167.8z M368.5,65c-2,0.5-4.1,0.8-6.3,0.8
+		c-14.1,0-25.6-11.5-25.6-25.6c0-2.2,0.3-4.2,0.8-6.2H149.5c0.3,1.5,0.4,3.1,0.4,4.7c0,14.1-11.5,25.6-25.6,25.6
+		c-1.5,0-3-0.1-4.5-0.4v77.7c1.5-0.3,3-0.4,4.5-0.4c14.1,0,25.6,11.5,25.6,25.6c0,1.6-0.2,3.2-0.4,4.7h187.2c-0.1-1-0.2-2.1-0.2-3.2
+		c0-14.1,11.5-25.6,25.6-25.6c2.2,0,4.3,0.3,6.3,0.8V65H368.5z M299.6,102.7c0,30.5-24.8,55.4-55.4,55.4
+		c-30.5,0-55.4-24.8-55.4-55.4c0-30.5,24.8-55.4,55.4-55.4C274.7,47.3,299.6,72.2,299.6,102.7z M272.5,90.4l-10.7-10.8L237,104.2
+		l-10.4-10.4l-10.8,10.7l10.4,10.4l10.7,10.8l10.8-10.7L272.5,90.4z"/>
+        </g>
+      </svg>
     case 'star':
       return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>;
     case 'badge':
@@ -120,10 +154,10 @@ const CampusRepresentative = () => {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const rotateX = ((y - centerY) / centerY) * -10;
     const rotateY = ((x - centerX) / centerX) * 10;
-    
+
     gsap.to(target, {
       rotationX: rotateX,
       rotationY: rotateY,
@@ -133,7 +167,7 @@ const CampusRepresentative = () => {
       ease: 'power2.out',
       overwrite: 'auto'
     });
-    
+
     const icon = target.querySelector('.cr-benefit__icon');
     if (icon) {
       gsap.to(icon, {
@@ -156,7 +190,7 @@ const CampusRepresentative = () => {
       ease: 'elastic.out(1, 0.4)',
       overwrite: 'auto'
     });
-    
+
     const icon = target.querySelector('.cr-benefit__icon');
     if (icon) {
       gsap.to(icon, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
@@ -169,7 +203,7 @@ const CampusRepresentative = () => {
     const rect = target.getBoundingClientRect();
     const x = (e.clientX - rect.left) - rect.width / 2;
     const y = (e.clientY - rect.top) - rect.height / 2;
-    
+
     gsap.to(target, {
       x: x * 0.2,
       y: y * 0.2,
@@ -237,7 +271,7 @@ const CampusRepresentative = () => {
 
   return (
     <div className="cr-page" ref={pageRef}>
-      
+
       <Navbar />
 
       {/* ── Hero ──────────────────────────────────── */}
@@ -271,8 +305,8 @@ const CampusRepresentative = () => {
         </div>
         <div className="cr-benefits__grid">
           {BENEFITS.map((b, i) => (
-            <div 
-              className={`cr-benefit cr-benefit--${b.layout}`} 
+            <div
+              className={`cr-benefit cr-benefit--${b.layout}`}
               key={i}
               onMouseMove={handleBenefitMouseMove}
               onMouseLeave={handleBenefitMouseLeave}
