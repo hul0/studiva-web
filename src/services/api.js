@@ -76,5 +76,15 @@ export const api = {
       });
       return res.json();
     }
+  },
+  newsletter: {
+    subscribe: async (email) => {
+      const res = await fetch(`${API_BASE_URL}/newsletter`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ email })
+      });
+      return res.json();
+    }
   }
 };

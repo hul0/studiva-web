@@ -55,6 +55,7 @@ app.all('/api/support', validateAuth, (req, res) => handleTable('support_tickets
 app.all('/api/campus-reps', validateAuth, (req, res) => handleTable('campus_representative_applications', req, res));
 app.all('/api/creators', validateAuth, (req, res) => handleTable('verified_creator_applications', req, res));
 app.all('/api/material-requests', validateAuth, (req, res) => handleTable('material_requests', req, res));
+app.all('/api/newsletter', validateAuth, (req, res) => handleTable('newsletter_subscribers', req, res));
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));

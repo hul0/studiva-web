@@ -3,15 +3,40 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { api } from '../../services/api';
 import './Footer.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Footer = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [email, setEmail] = useState('');
+    const [status, setStatus] = useState('idle'); // idle, loading, success, error
+    const [message, setMessage] = useState('');
 
     const toggleDropdown = (id) => {
         setOpenDropdown(openDropdown === id ? null : id);
+    };
+
+    const handleNewsletterSubmit = async (e) => {
+        e.preventDefault();
+        if (!email) return;
+
+        setStatus('loading');
+        try {
+            const res = await api.newsletter.subscribe(email);
+            if (res.error) {
+                setStatus('error');
+                setMessage(res.error.includes('unique') ? 'ALREADY SUBSCRIBED!' : 'SOMETHING WENT WRONG');
+            } else {
+                setStatus('success');
+                setMessage('YOU ARE ON THE LIST!');
+                setEmail('');
+            }
+        } catch (err) {
+            setStatus('error');
+            setMessage('CONNECTION FAILED');
+        }
     };
 
     const categories = [
@@ -132,12 +157,33 @@ const Footer = () => {
                                 SIGN UP FOR THE LATEST RESOURCES,<br />
                                 NOTES & INSIGHTS
                             </p>
-                            <form className="footer-b__form">
-                                <input type="email" placeholder="EMAIL ADDRESS" className="footer-b__input" />
-                                <button type="button" className="footer-b__submit">
-                                    <ArrowRight size={16} color="#171717" strokeWidth={2.5} />
+                            <form className="footer-b__form" onSubmit={handleNewsletterSubmit}>
+                                <input
+                                    type="email"
+                                    placeholder={status === 'success' ? "THANK YOU!" : "EMAIL ADDRESS"}
+                                    className={`footer-b__input ${status}`}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    disabled={status === 'loading' || status === 'success'}
+                                    required
+                                />
+                                <button
+                                    type="submit"
+                                    className="footer-b__submit"
+                                    disabled={status === 'loading' || status === 'success'}
+                                >
+                                    {status === 'loading' ? (
+                                        <div className="footer-b__spinner" />
+                                    ) : (
+                                        <ArrowRight size={16} color="#171717" strokeWidth={2.5} />
+                                    )}
                                 </button>
                             </form>
+                            {message && (
+                                <p className={`footer-b__message ${status}`}>
+                                    {message}
+                                </p>
+                            )}
                         </div>
 
                         {/* Column 3: Socials */}
