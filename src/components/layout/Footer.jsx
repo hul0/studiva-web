@@ -57,7 +57,8 @@ const Footer = () => {
             title: 'COMPANY',
             links: [
                 { name: 'Team', url: '/team' },
-                { name: 'Support', url: '/support' }
+                { name: 'Support', url: '/support' },
+                { name: 'Sitemap', url: '/sitemap.xml' }
             ]
         },
         {

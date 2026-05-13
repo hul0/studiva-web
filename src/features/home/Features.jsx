@@ -90,7 +90,7 @@ const Features = () => {
                 <div className="bento-stats">
                   <span className="pill">24/7</span>
                   <div className="stat-text">
-                    <strong>250+</strong>
+                    <strong>900+</strong>
                     <span>Notes Available</span>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ const Features = () => {
 
               {/* Small Customer Box */}
               <div className="bento-item bento-card bento-card-white customers-card">
-                <div className="bento-badge bento-badge-lime">400+ Students</div>
+                <div className="bento-badge bento-badge-lime">650+ Students</div>
               </div>
             </div>
 

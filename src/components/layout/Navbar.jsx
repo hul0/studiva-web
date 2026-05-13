@@ -286,7 +286,7 @@ const Navbar = () => {
                     ))}
                     <div style={{ padding: '8px 4px 0' }}>
                         <a href="#download" className="btn-primary" style={{ display: 'flex', width: '100%', justifyContent: 'center', height: '48px', alignItems: 'center' }}>
-                            Join 400+ Learners
+                            Join 650+ Learners
                         </a>
                     </div>
                 </div>
