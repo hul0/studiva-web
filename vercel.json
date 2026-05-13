@@ -1,8 +1,8 @@
 {
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/api/sitemap-index.js" },
-    { "source": "/sitemaps/:file", "destination": "/api/sitemap.js?file=:file" },
-    { "source": "/share/(.*)", "destination": "/api/share.js" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap-index" },
+    { "source": "/sitemaps/:file", "destination": "/api/sitemap?file=:file" },
+    { "source": "/share/(.*)", "destination": "/api/share" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

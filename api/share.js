@@ -64,9 +64,9 @@ export default async function handler(req, res) {
       : `${title} (@${data.username}) · Studiva`;
 
     // Fetch the compiled index.html
-    // Note: By using VERCEL_URL we bypass Cloudflare proxy (which was returning a JS challenge)
-    const targetHost = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `https://${req.headers.host}`;
-    const htmlRes = await fetch(`${targetHost}/`);
+    // Note: In Vercel, the host header points to the current deployment.
+    // By fetching the root, we get the generated index.html with hashed assets.
+    const htmlRes = await fetch(`https://${req.headers.host}/`);
     if (!htmlRes.ok) {
       return res.status(500).send('Error fetching base HTML');
     }
@@ -106,8 +106,7 @@ export default async function handler(req, res) {
 // Fallback: Just fetch and return the base index.html
 async function serveIndexHtml(req, res) {
   try {
-    const targetHost = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `https://${req.headers.host}`;
-    const htmlRes = await fetch(`${targetHost}/`);
+    const htmlRes = await fetch(`https://${req.headers.host}/`);
     const html = await htmlRes.text();
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.status(200).send(html);
